@@ -10,6 +10,7 @@ import UIKit
 
 class DSDA_VC: Base_VC {
 
+    @IBOutlet weak var btn_abc: UIButton!
     @IBOutlet weak var lblName: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
