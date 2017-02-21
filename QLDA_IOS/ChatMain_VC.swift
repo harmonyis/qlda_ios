@@ -12,8 +12,10 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
 
     @IBOutlet weak var tblListContact: UITableView!
     @IBOutlet weak var txtText: UITextField!
+    var service = ApiService()
     
     var arrayMenu = [Dictionary<String,String>]()
+    var listContact = [UserContact]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +29,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateArrayMenuOptions()
+        getContacts()
     }
 
     @IBAction func goToChat(_ sender: Any) {
@@ -36,39 +38,75 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         //vc.passData = "122"
     }
     
-    func updateArrayMenuOptions(){
-        arrayMenu = [Dictionary<String,String>]()
-        arrayMenu.append(["title":"Danh sách dự án", "name":"menuDSDA"])
-        arrayMenu.append(["title":"Biểu đồ tổng mức đầu tư", "name":"menuTMDT"])
-        arrayMenu.append(["title":"Biểu đồ nguồn vốn đầu tư", "name":"menuNVDT"])
-        arrayMenu.append(["title":"Biểu đồ giải ngân", "name":"menuGiaiNgan"])
-        arrayMenu.append(["title":"Cảnh báo", "name":"menuCanhBao"])
-        arrayMenu.append(["title":"Quản lý hình ảnh", "name":"menuQLHA"])
-        arrayMenu.append(["title":"Lịch", "name":"menuLich"])
-        arrayMenu.append(["title":"Thông tin cá nhân", "name":"menuTTCN"])
-        arrayMenu.append(["title":"Thoát", "name":"menuThoat"])
-        tblListContact.reloadData()
+    func getContacts(){
+        listContact = [UserContact]()
+        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_Getcontacts/58"
+        service.Get(url: apiUrl, callback: alert, errorCallBack: alertError)
+    }
+    
+    
+    func alert(data : Data) {
+        //let result = String(data: data, encoding: String.Encoding.utf8)
+        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        
+        if let dic = json as? [[String:Any]] {
+            for item in dic{
+                let contact = UserContact()
+                contact.ContactID =  item["ContactID"] as? Int
+                //contact.TimeOfLatestMessage = item["TimeOfLatestMessage"] as! Date
+                contact.LatestMessage = item["LatestMessage"] as? String
+                contact.LatestMessageID = item["LatestMessageID"] as? Int64
+                contact.LoginName = item["LoginName"] as? String
+                contact.Name = item["Name"] as? String
+                contact.NumberOfNewMessage = item["NumberOfNewMessage"] as? Int
+                contact.Online = item["Online"] as? Bool
+                contact.PictureUrl = item["PictureUrl"] as? String
+                contact.ReceiverOfMessage = item["ReceiverOfMessage"] as? Int
+                contact.SenderOfMessage = item["SenderOfMessage"] as? Int
+                contact.TypeOfContact = item["TypeOfContact"] as? Int
+                contact.TypeOfMessage = item["TypeOfMessage"] as? Int
+                
+                listContact.append(contact)
+            }
+        }
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async {
+                self.tblListContact.reloadData()
+            }
+        }
+    }
+    
+    func alertError(error : Error) {
+        let message = error.localizedDescription
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cellMenu")!
-        
+        let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cellContact")!
+        cell.textLabel?.text = listContact[indexPath.row].Name
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let index = Int32(indexPath.row)
+    var valueToPass:String!
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {        
+        let indexPath = tableView.indexPathForSelectedRow!
+        let currentCell = tableView.cellForRow(at: indexPath)! as UITableViewCell
+        
+        valueToPass = currentCell.textLabel?.text
+        performSegue(withIdentifier: "GoToChat", sender: self)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayMenu.count
+        return listContact.count
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "GoToChat"{
+        if (segue.identifier == "GoToChat") {
             if let gtChat = segue.destination as? Chat_VC{
-                gtChat.passData = txtText.text
+                gtChat.passData = valueToPass
             }
+
         }
     }
 
