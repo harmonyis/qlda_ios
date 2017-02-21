@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		246015431E5BF3DF000DD658 /* UrlPreFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246015421E5BF3DF000DD658 /* UrlPreFix.swift */; };
 		BA4E53821E5A832400AF270E /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4E53811E5A832400AF270E /* View.xib */; };
 		BA4E53871E5A9DCF00AF270E /* DSDA_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E53861E5A9DCF00AF270E /* DSDA_View.swift */; };
 		BA4E53891E5A9E4C00AF270E /* DSDA_View.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4E53881E5A9E4C00AF270E /* DSDA_View.xib */; };
@@ -57,6 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		246015421E5BF3DF000DD658 /* UrlPreFix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlPreFix.swift; sourceTree = "<group>"; };
 		BA4E53811E5A832400AF270E /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		BA4E53861E5A9DCF00AF270E /* DSDA_View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSDA_View.swift; sourceTree = "<group>"; };
 		BA4E53881E5A9E4C00AF270E /* DSDA_View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSDA_View.xib; sourceTree = "<group>"; };
@@ -122,6 +124,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		246015411E5BF2A7000DD658 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				246015421E5BF3DF000DD658 /* UrlPreFix.swift */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
 		BA4E53831E5A9D7300AF270E /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +172,7 @@
 		BA54E1861E545C9600F83B91 /* QLDA_IOS */ = {
 			isa = PBXGroup;
 			children = (
+				246015411E5BF2A7000DD658 /* Config */,
 				BAE41E0F1E5AEC6500B89A8D /* Test */,
 				BAE41E0A1E5AEAC900B89A8D /* Supporting Files */,
 				BA4E53C81E5ACF7800AF270E /* Extension */,
@@ -394,6 +405,7 @@
 				BA54E1B71E545CA500F83B91 /* BaseViewController.swift in Sources */,
 				BAE41E0E1E5AEAE600B89A8D /* SWRevealViewController.m in Sources */,
 				BAE41E211E5B3A8200B89A8D /* ThongTinCaNhan_VC.swift in Sources */,
+				246015431E5BF3DF000DD658 /* UrlPreFix.swift in Sources */,
 				BA778AE21E558F90000F934B /* DSDA_VC.swift in Sources */,
 				BAE41E1F1E5B3A5900B89A8D /* Lich_VC.swift in Sources */,
 				BA55B3151E56D84300E011B7 /* Chat_VC.swift in Sources */,
