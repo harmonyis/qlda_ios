@@ -9,18 +9,56 @@
 import UIKit
 class Login_VC: UIViewController {
     
+    @IBOutlet weak var lblMesage: UILabel!
+    @IBOutlet weak var lblMatKhau: UITextField!
+    @IBOutlet weak var lblTenDangNhap: UITextField!
+     var service = ApiService()
     override func viewDidLoad() {
         super.viewDidLoad()
+      
         
-        
-        // Do any additional setup after loading the view.
     }
     @IBAction func Login(_ sender: Any) {
-        //let st = UIStoryboard(name : "Main", bundle: nil)
-        //let vc = st.instantiateViewController(withIdentifier: "DSDA") as! DSDA_VC
-        let vc = storyboard?.instantiateViewController(withIdentifier: "DSDA") as! DSDA_VC
-        self.navigationController?.pushViewController(vc, animated: true)
+                let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/CheckUser"
+        //let szUser=lblName.
+        let szMatKhau : String = (lblMatKhau.text)!
+        let szTenDangNhap : String = (lblTenDangNhap.text)!
+                let params : String = "{\"szUsername\" : \""+szTenDangNhap+"\", \"szPassword\": \""+szMatKhau+"\"}"
+    
+       service.Post(url: ApiUrl, params: params, callback: Alert, errorCallBack: AlertError)
+    
     }
+    func Alert(data : Data) {
+            let json = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let dic = json as? [String:Any] {
+                       if let idUser = dic["CheckUserResult"] as? String {
+                        let nIdUser:Int = Int(idUser)!
+                        if nIdUser > 0 {
+                        DispatchQueue.global(qos: .userInitiated).async {
+                                DispatchQueue.main.async {
+                                let vc = self.storyboard?.instantiateViewController(withIdentifier: "DSDA") as! DSDA_VC
+                                self.navigationController?.pushViewController(vc, animated: true)
+                                }
+                        }
+                            }
+                        else {
+                            DispatchQueue.global(qos: .userInitiated).async {
+                                DispatchQueue.main.async {
+                        self.lblMesage.text="Sai tên tài khoản hoặc mật khẩu"
+                                }
+                            }
+
+                        }
+                }
+        }
+    }
+    func AlertError(error : Error) {
+        let message = error.localizedDescription
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
