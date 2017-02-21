@@ -23,6 +23,7 @@
 		BA55B30F1E56B1B100E011B7 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55B30E1E56B1B100E011B7 /* Config.swift */; };
 		BA55B3131E56D52000E011B7 /* ChatMain_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55B3121E56D52000E011B7 /* ChatMain_VC.swift */; };
 		BA55B3151E56D84300E011B7 /* Chat_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55B3141E56D84300E011B7 /* Chat_VC.swift */; };
+		BA760BB71E5BEE50000A4694 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA760BB61E5BEE50000A4694 /* ApiService.swift */; };
 		BA778AE21E558F90000F934B /* DSDA_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA778AE11E558F90000F934B /* DSDA_VC.swift */; };
 		BA778AE81E559454000F934B /* BDNVDT_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA778AE71E559454000F934B /* BDNVDT_VC.swift */; };
 		BA778AEC1E559C2C000F934B /* Login_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA778AEB1E559C2C000F934B /* Login_VC.swift */; };
@@ -78,6 +79,7 @@
 		BA55B30E1E56B1B100E011B7 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		BA55B3121E56D52000E011B7 /* ChatMain_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMain_VC.swift; sourceTree = "<group>"; };
 		BA55B3141E56D84300E011B7 /* Chat_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat_VC.swift; sourceTree = "<group>"; };
+		BA760BB61E5BEE50000A4694 /* ApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		BA778AE11E558F90000F934B /* DSDA_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSDA_VC.swift; sourceTree = "<group>"; };
 		BA778AE71E559454000F934B /* BDNVDT_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDNVDT_VC.swift; sourceTree = "<group>"; };
 		BA778AEB1E559C2C000F934B /* Login_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login_VC.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 		BA55B30D1E56B19900E011B7 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BA760BB61E5BEE50000A4694 /* ApiService.swift */,
 				BA55B30E1E56B1B100E011B7 /* Config.swift */,
 			);
 			name = Common;
@@ -398,6 +401,7 @@
 				BAE41E111E5AEC8E00B89A8D /* VC_DSDA.swift in Sources */,
 				BA4E53CA1E5ACFA100AF270E /* UIColor.swift in Sources */,
 				BAE41E171E5B231300B89A8D /* MenuLeft_VC.swift in Sources */,
+				BA760BB71E5BEE50000A4694 /* ApiService.swift in Sources */,
 				BA778AEC1E559C2C000F934B /* Login_VC.swift in Sources */,
 				BA778AE81E559454000F934B /* BDNVDT_VC.swift in Sources */,
 				BAE41E1D1E5B3A2700B89A8D /* QLHinhAnh_VC.swift in Sources */,
