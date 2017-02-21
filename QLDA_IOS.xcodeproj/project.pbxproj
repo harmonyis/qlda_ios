@@ -30,8 +30,6 @@
 		BA778AEC1E559C2C000F934B /* Login_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA778AEB1E559C2C000F934B /* Login_VC.swift */; };
 		BA778AEE1E559E19000F934B /* BDGiaiNgan_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA778AED1E559E19000F934B /* BDGiaiNgan_VC.swift */; };
 		BAE41E0E1E5AEAE600B89A8D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE41E0D1E5AEAE600B89A8D /* SWRevealViewController.m */; };
-		BAE41E111E5AEC8E00B89A8D /* VC_DSDA.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE41E101E5AEC8E00B89A8D /* VC_DSDA.swift */; };
-		BAE41E131E5AECF500B89A8D /* VC_BackMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE41E121E5AECF500B89A8D /* VC_BackMenu.swift */; };
 		BAE41E171E5B231300B89A8D /* MenuLeft_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE41E161E5B231300B89A8D /* MenuLeft_VC.swift */; };
 		BAE41E191E5B26F800B89A8D /* Base_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE41E181E5B26F800B89A8D /* Base_VC.swift */; };
 		BAE41E1B1E5B39ED00B89A8D /* CanhBao_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE41E1A1E5B39ED00B89A8D /* CanhBao_VC.swift */; };
@@ -89,8 +87,6 @@
 		BAE41E0B1E5AEAE500B89A8D /* QLDA_IOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QLDA_IOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		BAE41E0C1E5AEAE600B89A8D /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		BAE41E0D1E5AEAE600B89A8D /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
-		BAE41E101E5AEC8E00B89A8D /* VC_DSDA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VC_DSDA.swift; sourceTree = "<group>"; };
-		BAE41E121E5AECF500B89A8D /* VC_BackMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VC_BackMenu.swift; sourceTree = "<group>"; };
 		BAE41E161E5B231300B89A8D /* MenuLeft_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuLeft_VC.swift; sourceTree = "<group>"; };
 		BAE41E181E5B26F800B89A8D /* Base_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base_VC.swift; sourceTree = "<group>"; };
 		BAE41E1A1E5B39ED00B89A8D /* CanhBao_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanhBao_VC.swift; sourceTree = "<group>"; };
@@ -173,7 +169,6 @@
 			isa = PBXGroup;
 			children = (
 				246015411E5BF2A7000DD658 /* Config */,
-				BAE41E0F1E5AEC6500B89A8D /* Test */,
 				BAE41E0A1E5AEAC900B89A8D /* Supporting Files */,
 				BA4E53C81E5ACF7800AF270E /* Extension */,
 				BA4E53831E5A9D7300AF270E /* View */,
@@ -246,15 +241,6 @@
 				BAE41E0B1E5AEAE500B89A8D /* QLDA_IOS-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		BAE41E0F1E5AEC6500B89A8D /* Test */ = {
-			isa = PBXGroup;
-			children = (
-				BAE41E101E5AEC8E00B89A8D /* VC_DSDA.swift */,
-				BAE41E121E5AECF500B89A8D /* VC_BackMenu.swift */,
-			);
-			name = Test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -409,8 +395,6 @@
 				BA778AE21E558F90000F934B /* DSDA_VC.swift in Sources */,
 				BAE41E1F1E5B3A5900B89A8D /* Lich_VC.swift in Sources */,
 				BA55B3151E56D84300E011B7 /* Chat_VC.swift in Sources */,
-				BAE41E131E5AECF500B89A8D /* VC_BackMenu.swift in Sources */,
-				BAE41E111E5AEC8E00B89A8D /* VC_DSDA.swift in Sources */,
 				BA4E53CA1E5ACFA100AF270E /* UIColor.swift in Sources */,
 				BAE41E171E5B231300B89A8D /* MenuLeft_VC.swift in Sources */,
 				BA760BB71E5BEE50000A4694 /* ApiService.swift in Sources */,
