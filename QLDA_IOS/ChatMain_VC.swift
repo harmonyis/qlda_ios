@@ -10,7 +10,8 @@ import UIKit
 import SwiftR
 
 class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
-
+    
+    @IBOutlet weak var imgOnline: UIImageView!
     @IBOutlet weak var aivLoad: UIActivityIndicatorView!
     @IBOutlet weak var tblListContact: UITableView!
     @IBOutlet weak var txtText: UITextField!
@@ -19,13 +20,16 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
     var arrayMenu = [Dictionary<String,String>]()
     var listContact = [UserContact]()
     
+    var passContactID:Int!
+    var passContactType:Int!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ChatHub.initChatHub()
         initEnvetChatHub()
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -36,7 +40,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         tblListContact.isHidden = true
         getContacts()
     }
-
+    
     @IBAction func goToChat(_ sender: Any) {
         //let vc = storyboard?.instantiateViewController(withIdentifier: "Chat") as! Chat_VC
         //self.navigationController?.pushViewController(vc, animated: true)
@@ -77,9 +81,9 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
             }
         }
         //DispatchQueue.global(qos: .userInitiated).async {
-            //DispatchQueue.main.async {
-                //self.tblListContact.reloadData()
-            //}
+        //DispatchQueue.main.async {
+        //self.tblListContact.reloadData()
+        //}
         //}
         
         DispatchQueue.main.async() { () -> Void in
@@ -95,7 +99,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-
+    
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -112,16 +116,13 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         lblLastMessage.text = contact.LatestMessage
         return cell
     }
-    var valueToPass:String!
-    var valueToPass2:String!
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let index = Int(indexPath.row)
+        let contact : UserContact = listContact[indexPath.row]
         
-        let indexPath = tableView.indexPathForSelectedRow!
-        let currentCell = tableView.cellForRow(at: indexPath)! as UITableViewCell
+        passContactID = contact.ContactID
+        passContactType = contact.TypeOfContact
         
-        valueToPass = currentCell.textLabel?.text
-        valueToPass2 = listContact[index].PictureUrl
         performSegue(withIdentifier: "GoToChat", sender: self)
     }
     
@@ -131,14 +132,13 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "GoToChat") {
-            if let gtChat = segue.destination as? Chat_VC{
-                gtChat.passData = valueToPass
-                gtChat.pictureUrl = valueToPass2
+            if let chatVC = segue.destination as? Chat_VC{
+                chatVC.contactID = passContactID
+                chatVC.contactType = passContactType
             }
-
         }
     }
-
+    
     
     // Chat hub
     
@@ -146,7 +146,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         ChatHub.chatHub.on("receivePrivateMessage") {args in
             var sender = args?[0] as? [Any]
             let receiver = args?[1] as? [Any]
-            let inbox = args?[2] as? [Any]           
+            let inbox = args?[2] as? [Any]
             
             let senderID = (sender![0] as? Int)!
             let senderName = (sender![1] as? String)!
