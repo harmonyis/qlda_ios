@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftR
 
 class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
 
@@ -30,6 +31,8 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getContacts()
+        
+        ChatHub.initChatHub()
     }
 
     @IBAction func goToChat(_ sender: Any) {
@@ -40,7 +43,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
     
     func getContacts(){
         listContact = [UserContact]()
-        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_Getcontacts/58"
+        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_Getcontacts/59"
         service.Get(url: apiUrl, callback: alert, errorCallBack: alertError)
     }
     
@@ -69,10 +72,14 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
                 listContact.append(contact)
             }
         }
-        DispatchQueue.global(qos: .userInitiated).async {
-            DispatchQueue.main.async {
-                self.tblListContact.reloadData()
-            }
+        //DispatchQueue.global(qos: .userInitiated).async {
+            //DispatchQueue.main.async {
+                //self.tblListContact.reloadData()
+            //}
+        //}
+        
+        DispatchQueue.main.async() { () -> Void in
+            self.tblListContact.reloadData()
         }
     }
     
@@ -89,11 +96,15 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         return cell
     }
     var valueToPass:String!
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {        
+    var valueToPass2:String!
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let index = Int(indexPath.row)
+        
         let indexPath = tableView.indexPathForSelectedRow!
         let currentCell = tableView.cellForRow(at: indexPath)! as UITableViewCell
         
         valueToPass = currentCell.textLabel?.text
+        valueToPass2 = listContact[index].PictureUrl
         performSegue(withIdentifier: "GoToChat", sender: self)
     }
     
@@ -105,9 +116,15 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         if (segue.identifier == "GoToChat") {
             if let gtChat = segue.destination as? Chat_VC{
                 gtChat.passData = valueToPass
+                gtChat.pictureUrl = valueToPass2
             }
 
         }
     }
 
+    
+    // Chat hub
+    
+
+    
 }
