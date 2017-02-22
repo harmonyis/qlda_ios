@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class DuAn
+class DuAn{
     
     init() {
         TenDA = ""
