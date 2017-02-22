@@ -63,7 +63,7 @@ class UserContact{
             }
         }
         else{
-            setImageDefault()
+            setImageDefault() 
         }
     }
     
