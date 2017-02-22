@@ -20,7 +20,8 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        ChatHub.initChatHub()
+        initEnvetChatHub()
         // Do any additional setup after loading the view.
     }
 
@@ -31,8 +32,6 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getContacts()
-        
-        ChatHub.initChatHub()
     }
 
     @IBAction func goToChat(_ sender: Any) {
@@ -43,7 +42,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
     
     func getContacts(){
         listContact = [UserContact]()
-        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_Getcontacts/59"
+        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_Getcontacts/\(ChatHub.userID)"
         service.Get(url: apiUrl, callback: alert, errorCallBack: alertError)
     }
     
@@ -64,6 +63,8 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
                 contact.NumberOfNewMessage = item["NumberOfNewMessage"] as? Int
                 contact.Online = item["Online"] as? Bool
                 contact.PictureUrl = item["PictureUrl"] as? String
+                contact.setPicture()
+                //contact.Picture = Common.setImageFromURl(url: contact.PictureUrl!)
                 contact.ReceiverOfMessage = item["ReceiverOfMessage"] as? Int
                 contact.SenderOfMessage = item["SenderOfMessage"] as? Int
                 contact.TypeOfContact = item["TypeOfContact"] as? Int
@@ -89,10 +90,21 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cellContact")!
-        cell.textLabel?.text = listContact[indexPath.row].Name
+        let contact : UserContact = listContact[indexPath.row]
+        //cell.textLabel?.text = listContact[indexPath.row].Name
+        
+        let imgContact : UIImageView = cell.contentView.viewWithTag(100) as! UIImageView
+        let lblContactName : UILabel = cell.contentView.viewWithTag(101) as! UILabel
+        let lblLastMessage : UILabel = cell.contentView.viewWithTag(102) as! UILabel
+        
+        imgContact.image = contact.Picture
+        lblContactName.text = contact.Name
+        lblLastMessage.text = contact.LatestMessage
         return cell
     }
     var valueToPass:String!
@@ -125,6 +137,20 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
     
     // Chat hub
     
-
+    func initEnvetChatHub(){
+        ChatHub.chatHub.on("receivePrivateMessage") {args in
+            var sender = args?[0] as? [Any]
+            let receiver = args?[1] as? [Any]
+            let inbox = args?[2] as? [Any]           
+            
+            let senderID = (sender![0] as? Int)!
+            let senderName = (sender![1] as? String)!
+            let receiverID = (receiver![0] as? Int)!
+            let receiverName = (receiver![1] as? String)
+            let msg = (inbox![0] as? String)!
+            let msgType = (inbox![1] as? Int)!
+            let inboxID = (inbox![2] as? Int64)
+        }
+    }
     
 }

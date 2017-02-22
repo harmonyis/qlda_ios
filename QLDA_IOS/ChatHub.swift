@@ -12,6 +12,7 @@ import SwiftR
 class ChatHub {
     static var chatHub: Hub!
     static var connection: SignalR!
+    static var userID = 59
     
     static func initChatHub(){
         connection = SignalR("http://harmonysoft.vn:8089/QLDA_Services/")
@@ -30,29 +31,31 @@ class ChatHub {
         // SignalR events
         
         connection.starting = {
-            print("Connection ID")
+            //print("Connection ID")
         }
         
         connection.reconnecting = {
-            print("Connection ID")
+            //print("Connection ID")
         }
         
         connection.connected = {
-            print("Connection ID")
+            //print("Connection ID")
             //DispatchQueue.main.async() { () -> Void in
             ChatHub.conect()
             //}
         }
         
         connection.reconnected = {
-            print("Connection ID")
+            //print("Connection ID")
         }
         
         connection.disconnected = {
-            print("Connection ID")
+            //print("Connection ID")
         }
         
-        connection.connectionSlow = { print("Connection slow...") }
+        connection.connectionSlow = {
+            print("Connection slow...")
+        }
         
 
         
@@ -62,9 +65,9 @@ class ChatHub {
     static func conect(){
         if let hub = chatHub {
             do {
-                try hub.invoke("Connect", arguments: [59, "demo2"])
+                try hub.invoke("Connect", arguments: [userID, "demo2"])
             } catch {
-                print(error)
+                //print(error)
             }
         }
     }

@@ -10,10 +10,12 @@ import Foundation
 class UserContact{
     
     init() {
+        
         ContactID = 0
         Name = ""
         LoginName = ""
         PictureUrl = ""
+        Picture = UIImage()
         LatestMessage = ""
         LatestMessageID = 0
         TimeOfLatestMessage = Date()
@@ -23,12 +25,14 @@ class UserContact{
         SenderOfMessage = 0
         ReceiverOfMessage = 0
         NumberOfNewMessage = 0
+ 
     }
     
     var ContactID : Int?
     var Name : String?
     var LoginName : String?
     var PictureUrl : String?
+    var Picture : UIImage?
     var LatestMessage : String?
     var LatestMessageID : Int64?
     var TimeOfLatestMessage : Date?
@@ -38,4 +42,37 @@ class UserContact{
     var SenderOfMessage : Int?
     var ReceiverOfMessage : Int?
     var NumberOfNewMessage: Int?
+    
+    func setPicture(){
+        if let path : String = PictureUrl{
+            if let url = NSURL(string: path) {
+                if let data = NSData(contentsOf: url as URL) {
+                    if let pic : UIImage =  UIImage(data: data as Data){
+                        Picture = pic
+                    }
+                    else{
+                        setImageDefault()
+                    }
+                }
+                else{
+                    setImageDefault()
+                }
+            }
+            else{
+                setImageDefault()
+            }
+        }
+        else{
+            setImageDefault()
+        }
+    }
+    
+    func setImageDefault(){
+        if(TypeOfContact == 1){
+            Picture = #imageLiteral(resourceName: "CameraIcon")
+        }
+        else{
+            Picture = #imageLiteral(resourceName: "HomeIcon")
+        }
+    }
 }
