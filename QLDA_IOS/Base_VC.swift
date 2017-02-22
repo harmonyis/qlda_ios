@@ -7,6 +7,7 @@ class Base_VC: UIViewController {
         // Do any additional setup after loading the view.
         self.addLeftBarButton()
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        self.view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
         self.addRightBarButton()
     }
     

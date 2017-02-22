@@ -9,14 +9,15 @@
 import UIKit
 import SwiftR
 
-class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
+class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
+    @IBOutlet weak var btnCreateGroup: UIButton!
     
-    @IBOutlet weak var imgOnline: UIImageView!
     @IBOutlet weak var aivLoad: UIActivityIndicatorView!
     @IBOutlet weak var tblListContact: UITableView!
     @IBOutlet weak var txtText: UITextField!
     var service = ApiService()
     
+    @IBOutlet weak var searchContact: UISearchBar!
     var arrayMenu = [Dictionary<String,String>]()
     var listContact = [UserContact]()
     
@@ -38,6 +39,12 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         super.viewWillAppear(animated)
         aivLoad.startAnimating()
         tblListContact.isHidden = true
+        self.searchContact.isUserInteractionEnabled = false
+        btnCreateGroup.layer.cornerRadius = 25
+        //var img : UIImage = #imageLiteral(resourceName: "ic_createGroup")
+        //img.resizingMode
+        btnCreateGroup.setImage(#imageLiteral(resourceName: "ic_createGroup"), for: UIControlState.normal)
+        btnCreateGroup.imageEdgeInsets = UIEdgeInsetsMake(40,40,40,40)
         getContacts()
     }
     
@@ -90,6 +97,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
             self.aivLoad.isHidden = true
             self.tblListContact.isHidden = false
             self.tblListContact.reloadData()
+            self.searchContact.isUserInteractionEnabled = true
         }
     }
     
@@ -100,20 +108,76 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         self.present(alert, animated: true, completion: nil)
     }
     
+    var searchActive : Bool = false
+    var data = ["San Francisco","New York","San Jose","Chicago","Los Angeles","Austin","Seattle"]
+    var filtered = [UserContact]()
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchActive = true;
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        /*filtered = data.filter({ (text) -> Bool in
+            let tmp: NSString = text
+            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
+            return range.location != NSNotFound
+        })*/
+        filtered = listContact.filter() {
+            if let name = ($0 as UserContact).Name?.lowercased() as String! {
+                return name.contains(searchText.lowercased())
+            } else {
+                return false
+            }
+        }
+        if(filtered.count == 0){
+            searchActive = false;
+        } else {
+            searchActive = true;
+        }
+        self.tblListContact.reloadData()
+    }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cellContact")!
-        let contact : UserContact = listContact[indexPath.row]
+        
+        //cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        
+        var contact : UserContact
+        if(searchActive){
+            contact = filtered[indexPath.row]
+        }
+        else{
+            contact = listContact[indexPath.row]
+        }
+        
         //cell.textLabel?.text = listContact[indexPath.row].Name
         
         let imgContact : UIImageView = cell.contentView.viewWithTag(100) as! UIImageView
         let lblContactName : UILabel = cell.contentView.viewWithTag(101) as! UILabel
         let lblLastMessage : UILabel = cell.contentView.viewWithTag(102) as! UILabel
+        let imgOnline : UIImageView = cell.contentView.viewWithTag(103) as! UIImageView
         
-        imgContact.image = contact.Picture
+ 
+        imgContact.maskCircle(anyImage: contact.Picture!)
         lblContactName.text = contact.Name
         lblLastMessage.text = contact.LatestMessage
+        if(!contact.Online!){
+            imgOnline.isHidden = true
+        }
         return cell
     }
     
@@ -126,7 +190,14 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         performSegue(withIdentifier: "GoToChat", sender: self)
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if(searchActive){
+            return filtered.count
+        }
         return listContact.count
     }
     
