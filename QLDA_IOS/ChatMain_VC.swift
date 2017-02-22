@@ -11,6 +11,7 @@ import SwiftR
 
 class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
 
+    @IBOutlet weak var aivLoad: UIActivityIndicatorView!
     @IBOutlet weak var tblListContact: UITableView!
     @IBOutlet weak var txtText: UITextField!
     var service = ApiService()
@@ -31,6 +32,8 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        aivLoad.startAnimating()
+        tblListContact.isHidden = true
         getContacts()
     }
 
@@ -80,6 +83,8 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         //}
         
         DispatchQueue.main.async() { () -> Void in
+            self.aivLoad.isHidden = true
+            self.tblListContact.isHidden = false
             self.tblListContact.reloadData()
         }
     }
