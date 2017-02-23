@@ -15,7 +15,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     @IBOutlet weak var aivLoad: UIActivityIndicatorView!
     @IBOutlet weak var tblListContact: UITableView!
     @IBOutlet weak var txtText: UITextField!
-    var service = ApiService()
+    //var service = ApiService()
     
     @IBOutlet weak var searchContact: UISearchBar!
     var arrayMenu = [Dictionary<String,String>]()
@@ -39,13 +39,24 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         super.viewWillAppear(animated)
         aivLoad.startAnimating()
         tblListContact.isHidden = true
+        //Remove empty cell
+        tblListContact.tableFooterView = UIView(frame: .zero)
         self.searchContact.isUserInteractionEnabled = false
         btnCreateGroup.layer.cornerRadius = 25
         //var img : UIImage = #imageLiteral(resourceName: "ic_createGroup")
         //img.resizingMode
         btnCreateGroup.setImage(#imageLiteral(resourceName: "ic_createGroup"), for: UIControlState.normal)
         btnCreateGroup.imageEdgeInsets = UIEdgeInsetsMake(40,40,40,40)
-        getContacts()
+        if(ChatCommon.listContact.count == 0){
+              getContacts()
+        }
+        else{
+            self.listContact = ChatCommon.listContact
+            self.aivLoad.isHidden = true
+            self.tblListContact.isHidden = false
+            self.tblListContact.reloadData()
+            self.searchContact.isUserInteractionEnabled = true
+        }
     }
     
     @IBAction func goToChat(_ sender: Any) {
@@ -57,7 +68,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     func getContacts(){
         listContact = [UserContact]()
         let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_Getcontacts/\(ChatHub.userID)"
-        service.Get(url: apiUrl, callback: alert, errorCallBack: alertError)
+        ApiService.Get(url: apiUrl, callback: alert, errorCallBack: alertError)
     }
     
     
@@ -78,7 +89,6 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
                 contact.Online = item["Online"] as? Bool
                 contact.PictureUrl = item["PictureUrl"] as? String
                 contact.setPicture()
-                //contact.Picture = Common.setImageFromURl(url: contact.PictureUrl!)
                 contact.ReceiverOfMessage = item["ReceiverOfMessage"] as? Int
                 contact.SenderOfMessage = item["SenderOfMessage"] as? Int
                 contact.TypeOfContact = item["TypeOfContact"] as? Int
@@ -87,6 +97,8 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
                 listContact.append(contact)
             }
         }
+        
+        ChatCommon.listContact = listContact
         //DispatchQueue.global(qos: .userInitiated).async {
         //DispatchQueue.main.async {
         //self.tblListContact.reloadData()

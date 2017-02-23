@@ -10,7 +10,7 @@ import UIKit
 
 class DSDA_VC: Base_VC {
     
-    var service = ApiService()
+    //var service = ApiService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +19,7 @@ class DSDA_VC: Base_VC {
         //let szUser=lblName.
         let params : String = "{\"szUsername\" : \"demo1\", \"szPassword\": \"abc@123\"}"
         
-        service.Post(url: ApiUrl, params: params, callback: Alert, errorCallBack: AlertError)
+        ApiService.Post(url: ApiUrl, params: params, callback: Alert, errorCallBack: AlertError)
         
         
         //self.addSlideMenuButton()

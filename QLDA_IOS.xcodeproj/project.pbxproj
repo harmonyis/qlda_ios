@@ -33,7 +33,7 @@
 		BA778AE81E559454000F934B /* BDNVDT_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA778AE71E559454000F934B /* BDNVDT_VC.swift */; };
 		BA778AEC1E559C2C000F934B /* Login_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA778AEB1E559C2C000F934B /* Login_VC.swift */; };
 		BA778AEE1E559E19000F934B /* BDGiaiNgan_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA778AED1E559E19000F934B /* BDGiaiNgan_VC.swift */; };
-		BA979F561E5D3EAD00FC6FA8 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979F551E5D3EAD00FC6FA8 /* Common.swift */; };
+		BA979F561E5D3EAD00FC6FA8 /* ChatCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979F551E5D3EAD00FC6FA8 /* ChatCommon.swift */; };
 		BA979F6D1E5D845E00FC6FA8 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979F6C1E5D845E00FC6FA8 /* UIImageView.swift */; };
 		BA979F6F1E5D980D00FC6FA8 /* ChatCreateGroup_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979F6E1E5D980D00FC6FA8 /* ChatCreateGroup_VC.swift */; };
 		BAE41E0E1E5AEAE600B89A8D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE41E0D1E5AEAE600B89A8D /* SWRevealViewController.m */; };
@@ -137,7 +137,7 @@
 		BA778AE71E559454000F934B /* BDNVDT_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDNVDT_VC.swift; sourceTree = "<group>"; };
 		BA778AEB1E559C2C000F934B /* Login_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login_VC.swift; sourceTree = "<group>"; };
 		BA778AED1E559E19000F934B /* BDGiaiNgan_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDGiaiNgan_VC.swift; sourceTree = "<group>"; };
-		BA979F551E5D3EAD00FC6FA8 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		BA979F551E5D3EAD00FC6FA8 /* ChatCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCommon.swift; sourceTree = "<group>"; };
 		BA979F571E5D4C0A00FC6FA8 /* SwiftR.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftR.xcodeproj; path = "SwiftR-master/SwiftR.xcodeproj"; sourceTree = "<group>"; };
 		BA979F6C1E5D845E00FC6FA8 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		BA979F6E1E5D980D00FC6FA8 /* ChatCreateGroup_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCreateGroup_VC.swift; sourceTree = "<group>"; };
@@ -303,7 +303,7 @@
 			children = (
 				BA760BC31E5C2E6F000A4694 /* Entity */,
 				BA760BDD1E5C48ED000A4694 /* ChatHub.swift */,
-				BA979F551E5D3EAD00FC6FA8 /* Common.swift */,
+				BA979F551E5D3EAD00FC6FA8 /* ChatCommon.swift */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -571,7 +571,7 @@
 				BAE41E0E1E5AEAE600B89A8D /* SWRevealViewController.m in Sources */,
 				BAE41E211E5B3A8200B89A8D /* ThongTinCaNhan_VC.swift in Sources */,
 				246015431E5BF3DF000DD658 /* UrlPreFix.swift in Sources */,
-				BA979F561E5D3EAD00FC6FA8 /* Common.swift in Sources */,
+				BA979F561E5D3EAD00FC6FA8 /* ChatCommon.swift in Sources */,
 				BA760BC51E5C2ECA000A4694 /* UserContact.swift in Sources */,
 				BA979F6D1E5D845E00FC6FA8 /* UIImageView.swift in Sources */,
 				BA979F6F1E5D980D00FC6FA8 /* ChatCreateGroup_VC.swift in Sources */,

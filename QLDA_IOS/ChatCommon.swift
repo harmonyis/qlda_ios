@@ -7,7 +7,11 @@
 //
 
 import Foundation
-class Common{
+class ChatCommon{
+    static var listContact : [UserContact] = [UserContact]()
+
+    
+    /*
     static func setImageFromURl(url: String) -> UIImage{
 
         if let url = NSURL(string: url) {
@@ -21,5 +25,5 @@ class Common{
         else{
             return UIImage()
         }
-    }
+    }*/
 }

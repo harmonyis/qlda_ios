@@ -13,8 +13,8 @@ class ApiService {
         
     }
     //typealias MethodHandler1 = (dataResult : String)  -> Void
-    func Get (url : String,callback:@escaping (_ dataResult : Data) -> Void,
-              errorCallBack:@escaping (_ error : Error) -> Void) -> Void {
+    static func Get (url : String,callback:@escaping (_ dataResult : Data) -> Void,
+                     errorCallBack:@escaping (_ error : Error) -> Void) -> Void {
         //var resultJson : String
         //resultJson = ""
         
@@ -25,7 +25,7 @@ class ApiService {
         let url = URL(string: url)!
         
         //let postString = params
-        //let theRequest = NSMutableURLRequest(url: url as URL		)
+        //let theRequest = NSMutableURLRequest(url: url as URL  )
         //theRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         //theRequest.httpMethod = "GET"
         //theRequest.httpBody = postString.data(using: .utf8)
@@ -52,8 +52,8 @@ class ApiService {
         //return resultJson
     }
     
-    func Post (url : String, params: String,callback:@escaping (_ dataResult : Data) -> Void,
-               errorCallBack:@escaping (_ error : Error) -> Void) -> Void {
+    static func Post (url : String, params: String,callback:@escaping (_ dataResult : Data) -> Void,
+                      errorCallBack:@escaping (_ error : Error) -> Void) -> Void {
         //var message :String  = ""
         
         let config = URLSessionConfiguration.default // Session Configuration

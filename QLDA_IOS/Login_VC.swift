@@ -12,7 +12,7 @@ class Login_VC: UIViewController {
     @IBOutlet weak var lblMesage: UILabel!
     @IBOutlet weak var lblMatKhau: UITextField!
     @IBOutlet weak var lblTenDangNhap: UITextField!
-     var service = ApiService()
+     //var service = ApiService()
     override func viewDidLoad() {
         super.viewDidLoad()
       
@@ -25,7 +25,7 @@ class Login_VC: UIViewController {
         let szTenDangNhap : String = (lblTenDangNhap.text)!
                 let params : String = "{\"szUsername\" : \""+szTenDangNhap+"\", \"szPassword\": \""+szMatKhau+"\"}"
     
-       service.Post(url: ApiUrl, params: params, callback: Alert, errorCallBack: AlertError)
+       ApiService.Post(url: ApiUrl, params: params, callback: Alert, errorCallBack: AlertError)
     
     }
     func Alert(data : Data) {
