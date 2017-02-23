@@ -13,7 +13,7 @@ class ApiService {
         
     }
     //typealias MethodHandler1 = (dataResult : String)  -> Void
-    func Get (url : String,callback:@escaping (_ dataResult : Data) -> Void,
+    static func Get (url : String,callback:@escaping (_ dataResult : Data) -> Void,
               errorCallBack:@escaping (_ error : Error) -> Void) -> Void {
         //var resultJson : String
         //resultJson = ""
@@ -52,7 +52,7 @@ class ApiService {
         //return resultJson
     }
     
-    func Post (url : String, params: String,callback:@escaping (_ dataResult : Data) -> Void,
+    static func Post (url : String, params: String,callback:@escaping (_ dataResult : Data) -> Void,
                errorCallBack:@escaping (_ error : Error) -> Void) -> Void {
         //var message :String  = ""
         
@@ -86,13 +86,13 @@ class ApiService {
         task.resume()
     }
     
-    func Put (url : String, params: String) -> String {
+    static func Put (url : String, params: String) -> String {
         var result : String
         result = ""
         return result
     }
     
-    func Delete (url : String, params: String) -> String {
+    static func Delete (url : String, params: String) -> String {
         var result : String
         result = ""
         return result

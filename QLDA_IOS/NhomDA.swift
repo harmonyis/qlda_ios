@@ -7,3 +7,23 @@
 //
 
 import Foundation
+class NhomDA{
+    
+    init() {
+        TenDA = ""
+        NhomDA = ""
+        GiaTriGiaiNgan = ""
+        TongMucDauTu = ""
+        ThoiGianThucHien = ""
+        GiaiDoan = ""
+        DuAnCon=[DuAn]()
+    }
+    
+    var TenDA : String?
+    var NhomDA : String?
+    var TongMucDauTu : String?
+    var GiaTriGiaiNgan : String?
+    var ThoiGianThucHien : String?
+    var GiaiDoan : String?
+    var DuAnCon : [DuAn]?
+}
