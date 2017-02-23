@@ -84,8 +84,53 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
     }
         
     @IBAction func btnCreateGroupTouchUpInside(_ sender: Any) {
+        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_CreateGroupChat/"
+        let params : String = "{\"groupName\" : \"tên nhóm\", \"imageData\":\"\", \"host\": \"59\", \"listUserID\": \"59,58,46\"}"
+
+        ApiService.Post(url: apiUrl, params: params, callback: callbackCreateGroup, errorCallBack: errorCreateGroup)
          print(listUserChecked)
     }
+    
+    func callbackCreateGroup(data : Data) {
+        let result = String(data: data, encoding: String.Encoding.utf8)
+        
+        
+        print(result)
+        /*
+        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        
+        if let dic = json as? [String:Any] {
+            if let dataResult = dic["GetAllFileUploadResult"] as? [String:Any] {
+                if let array = dataResult["DataResult"] as? [[String:Any]] {
+                    /*for obj in array {
+                     if let imgName = obj["ImageName"] as? String {
+                     print(imgName)
+                     }
+                     }*/
+                    
+                    //lblTenAnh.text = array[0]["ImageName"] as? String
+                    //self.lblTenAnh.text = "ádasdasd"
+                    let imageName = array[0]["ImageName"] as? String
+                    
+                    let alert = UIAlertController(title: "Sucess", message: imageName, preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+        }*/
+        
+        //print(json)
+        
+    }
+    
+    
+    func errorCreateGroup(error : Error) {
+        let message = error.localizedDescription
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func selectUser(sender: UIButton!)
     {
         let value = sender.tag;

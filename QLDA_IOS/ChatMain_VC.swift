@@ -99,6 +99,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         }
         
         ChatCommon.listContact = listContact
+        
         //DispatchQueue.global(qos: .userInitiated).async {
         //DispatchQueue.main.async {
         //self.tblListContact.reloadData()
