@@ -69,10 +69,10 @@ class UserContact{
     
     func setImageDefault(){
         if(TypeOfContact == 1){
-            Picture = #imageLiteral(resourceName: "CameraIcon")
+            Picture = #imageLiteral(resourceName: "ic_contactUser")
         }
         else{
-            Picture = #imageLiteral(resourceName: "HomeIcon")
+            Picture = #imageLiteral(resourceName: "ic_contactGroup")
         }
     }
 }
