@@ -84,42 +84,22 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
     }
         
     @IBAction func btnCreateGroupTouchUpInside(_ sender: Any) {
-        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_CreateGroupChat/"
-        let params : String = "{\"groupName\" : \"tên nhóm\", \"imageData\":\"\", \"host\": \"59\", \"listUserID\": \"59,58,46\"}"
+        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_CreateGroupChat"
 
+        let params : String = "{\"groupName\" : \""+getGroupName()+"\", \"host\": \""+String(59)+"\", \"listUserID\": \""+getListUserChecked()+"\"}"
         ApiService.Post(url: apiUrl, params: params, callback: callbackCreateGroup, errorCallBack: errorCreateGroup)
-         print(listUserChecked)
     }
     
     func callbackCreateGroup(data : Data) {
-        let result = String(data: data, encoding: String.Encoding.utf8)
-        
-        
-        print(result)
-        /*
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
-        
         if let dic = json as? [String:Any] {
-            if let dataResult = dic["GetAllFileUploadResult"] as? [String:Any] {
-                if let array = dataResult["DataResult"] as? [[String:Any]] {
-                    /*for obj in array {
-                     if let imgName = obj["ImageName"] as? String {
-                     print(imgName)
-                     }
-                     }*/
-                    
-                    //lblTenAnh.text = array[0]["ImageName"] as? String
-                    //self.lblTenAnh.text = "ádasdasd"
-                    let imageName = array[0]["ImageName"] as? String
-                    
-                    let alert = UIAlertController(title: "Sucess", message: imageName, preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+            if let groupID = dic["Chat_CreateGroupChatResult"] as? Int {
+                DispatchQueue.main.async() { () -> Void in
+                    self.navigationController?.popViewController(animated: true)
                 }
+                
             }
-        }*/
-        
-        //print(json)
+        }
         
     }
     
@@ -144,4 +124,51 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
         self.tblListContact.reloadData()
         
     }
+    
+    func getGroupName() -> String{
+        var groupName : String = (txtGroupName.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))!
+        if(groupName.isEmpty){
+            var i : Int = 0
+            for ctID in listUserChecked{
+                let user : UserContact = listContact.filter{
+                    $0.ContactID! == ctID
+                }.first!
+                groupName += user.Name!
+                if(i < listUserChecked.count - 1){
+                    groupName += ", "
+                }
+                i += 1
+            }
+            if(listUserChecked.count > 0){
+                groupName = ChatHub.userName + ", " + groupName
+            }
+            else{
+                groupName = ChatHub.userName
+            }
+        }
+        
+        return groupName
+    }
+    
+    func getListUserChecked() -> String{
+        var userIDs : String = ""
+        var i : Int = 0
+        for ctID in listUserChecked{
+            userIDs += String(ctID)
+            if(i < listUserChecked.count - 1){
+                userIDs += ","
+            }
+            i += 1
+        }
+        if(listUserChecked.count > 0){
+            userIDs = String(ChatHub.userID) + "," + userIDs
+        }
+        else{
+            userIDs = String(ChatHub.userID)
+        }
+        return userIDs
+    }
 }
+
+
+

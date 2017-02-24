@@ -27,6 +27,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     override func viewDidLoad() {
         super.viewDidLoad()
         ChatHub.initChatHub()
+        ChatHub.initEvent()
         initEnvetChatHub()
         // Do any additional setup after loading the view.
     }
@@ -68,11 +69,11 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     func getContacts(){
         listContact = [UserContact]()
         let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_Getcontacts/\(ChatHub.userID)"
-        ApiService.Get(url: apiUrl, callback: alert, errorCallBack: alertError)
+        ApiService.Get(url: apiUrl, callback: callbackGetContacts, errorCallBack: errorGetContacts)
     }
     
     
-    func alert(data : Data) {
+    func callbackGetContacts(data : Data) {
         //let result = String(data: data, encoding: String.Encoding.utf8)
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         
@@ -88,12 +89,12 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
                 contact.NumberOfNewMessage = item["NumberOfNewMessage"] as? Int
                 contact.Online = item["Online"] as? Bool
                 contact.PictureUrl = item["PictureUrl"] as? String
-                contact.setPicture()
                 contact.ReceiverOfMessage = item["ReceiverOfMessage"] as? Int
                 contact.SenderOfMessage = item["SenderOfMessage"] as? Int
                 contact.TypeOfContact = item["TypeOfContact"] as? Int
                 contact.TypeOfMessage = item["TypeOfMessage"] as? Int
                 
+                contact.setPicture()
                 listContact.append(contact)
             }
         }
@@ -114,7 +115,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         }
     }
     
-    func alertError(error : Error) {
+    func errorGetContacts(error : Error) {
         let message = error.localizedDescription
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))

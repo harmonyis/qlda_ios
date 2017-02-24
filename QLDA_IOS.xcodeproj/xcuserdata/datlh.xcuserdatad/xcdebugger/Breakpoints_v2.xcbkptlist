@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QLDA_IOS/ChatMain_VC.swift"
-            timestampString = "509511662.249089"
+            timestampString = "509602277.207376"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "goToChat(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -202,7 +202,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QLDA_IOS/UserContact.swift"
-            timestampString = "509430043.025594"
+            timestampString = "509596937.549875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "71"
@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QLDA_IOS/ChatMain_VC.swift"
-            timestampString = "509536629.473762"
+            timestampString = "509602277.207376"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QLDA_IOS/ChatMain_VC.swift"
-            timestampString = "509536629.473762"
+            timestampString = "509602277.207376"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
             landmarkName = "searchBar(_:textDidChange:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QLDA_IOS/ChatMain_VC.swift"
-            timestampString = "509536629.473762"
+            timestampString = "509602277.207376"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -282,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QLDA_IOS/ChatMain_VC.swift"
-            timestampString = "509536629.473762"
+            timestampString = "509602277.207376"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
             landmarkName = "searchBar(_:textDidChange:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -329,29 +329,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QLDA_IOS/ChatCreateGroup_VC.swift"
-            timestampString = "509535230.009215"
+            filePath = "QLDA_IOS/ApiService.swift"
+            timestampString = "509596393.706243"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
-            landmarkName = "selectUser(sender:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QLDA_IOS/ChatCreateGroup_VC.swift"
-            timestampString = "509535275.808569"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
-            landmarkName = "errorCreateGroup(error:)"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "Post(url:params:callback:errorCallBack:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -361,13 +345,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QLDA_IOS/ChatCreateGroup_VC.swift"
-            timestampString = "509535279.816365"
+            filePath = "QLDA_IOS/UserContact.swift"
+            timestampString = "509596849.950392"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "callbackCreateGroup(data:)"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "setImageDefault()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -377,13 +361,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QLDA_IOS/ChatCreateGroup_VC.swift"
-            timestampString = "509535493.14495"
+            filePath = "QLDA_IOS/ChatMain_VC.swift"
+            timestampString = "509602277.207376"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
-            landmarkName = "btnCreateGroupTouchUpInside(_:)"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "callbackGetContacts(data:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
