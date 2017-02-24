@@ -147,7 +147,7 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
             }
         }
         
-        return groupName
+        return groupName  
     }
     
     func getListUserChecked() -> String{
