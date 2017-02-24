@@ -99,7 +99,7 @@ class ChatHub {
                 pictureUrl = temp
             }
             print(groupID, groupName, host, pictureUrl)
-            var newContact : UserContact = UserContact()
+            var newContact : UserContact = UserContact() 
             newContact.ContactID = groupID
             newContact.LatestMessage = "Bạn vừa tạo nhóm"
             newContact.LatestMessageID = 0
