@@ -168,6 +168,8 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         cell.UiViewDetail.layer.borderColor = myColorBoder.cgColor
         cell.UiViewDetail.layer.borderWidth=1
         
+        
+        
         if (itemNhomDA.DuAnCon?.count)!>0 {
             
             if !self.indexGroupDuAnCon.contains(section)
