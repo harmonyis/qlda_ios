@@ -152,7 +152,7 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell") as! CustomCellDSDATableViewCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell") as! CustomCellDSDATableViewCell
         
         //  cell.scrollEnabled = false
         let itemNhomDA :NhomDA = self.DSDA[section]
@@ -172,13 +172,13 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
             
             if !self.indexGroupDuAnCon.contains(section)
             {
-                let image : UIImage = UIImage(named:"Group-Up")!
+                let image : UIImage = UIImage(named:"ic_Group-Up")!
                 cell.imgGroup.image = image
                 
             }
             else
             {
-                let image : UIImage = UIImage(named:"Group-Down")!
+                let image : UIImage = UIImage(named:"ic_Group-Down")!
                 cell.imgGroup.image = image
                 
             }
@@ -267,7 +267,7 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         //tableView.scrollToRow(at: indexPath, at: .top, animated: false)
         
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell", for: indexPath) as! CustomCellDSDATableViewCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell", for: indexPath) as! CustomCellDSDATableViewCell
         let itemNhomDA :NhomDA = self.DSDA[indexPath.section]
         let itemDuAnCon :[DuAn] = itemNhomDA.DuAnCon!
         cell.lblTenDuAn.text = itemDuAnCon[indexPath.row].TenDA!
