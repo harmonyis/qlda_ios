@@ -19,11 +19,12 @@ class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
     @IBOutlet weak var tblConversation: UITableView!
     var contactID : Int!
     var contactType : Int!
+    var contactName : String!
     var service = ApiService()
     var listMessage : [ChatMessage] = [ChatMessage]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.title = contactName
     }
     
     override func didReceiveMemoryWarning() {
