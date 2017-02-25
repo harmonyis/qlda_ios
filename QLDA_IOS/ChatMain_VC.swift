@@ -23,6 +23,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     
     var passContactID:Int!
     var passContactType:Int!
+    var passContactName:String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -204,6 +205,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         
         passContactID = contact.ContactID
         passContactType = contact.TypeOfContact
+        passContactName = contact.Name
         
         performSegue(withIdentifier: "GoToChat", sender: self)
     }
@@ -224,6 +226,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
             if let chatVC = segue.destination as? Chat_VC{
                 chatVC.contactID = passContactID
                 chatVC.contactType = passContactType
+                chatVC.contactName = passContactName
             }
         }
     }
