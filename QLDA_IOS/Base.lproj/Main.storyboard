@@ -49,7 +49,7 @@
                                                             <rect key="frame" x="277" y="0.0" width="40" height="40"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="detail" translatesAutoresizingMaskIntoConstraints="NO" id="IHf-Qy-sEG">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_detail" translatesAutoresizingMaskIntoConstraints="NO" id="IHf-Qy-sEG">
                                                                     <rect key="frame" x="12" y="12" width="16" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </imageView>
@@ -60,7 +60,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="minus" translatesAutoresizingMaskIntoConstraints="NO" id="OaZ-A6-PsD">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_minus" translatesAutoresizingMaskIntoConstraints="NO" id="OaZ-A6-PsD">
                                                                     <rect key="frame" x="12" y="9" width="16" height="22"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                                 </imageView>
@@ -83,7 +83,7 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r15-yf-yDM">
-                                                            <rect key="frame" x="0.0" y="0.0" width="40" height="151"/>
+                                                            <rect key="frame" x="0.0" y="2" width="40" height="149"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </view>
@@ -1335,7 +1335,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9aQ-Dx-Rjr">
-                                                    <rect key="frame" x="277" y="-1" width="43" height="44"/>
+                                                    <rect key="frame" x="276" y="-1" width="44" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 </button>
                                             </subviews>
@@ -1370,10 +1370,10 @@
     </scenes>
     <resources>
         <image name="AvatarIcon" width="128" height="128"/>
-        <image name="detail" width="8" height="8"/>
+        <image name="ic_detail" width="8" height="8"/>
         <image name="ic_logo" width="400" height="400"/>
+        <image name="ic_minus" width="8" height="8"/>
         <image name="ic_online" width="24" height="24"/>
-        <image name="minus" width="8" height="8"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
