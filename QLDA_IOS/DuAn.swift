@@ -10,6 +10,7 @@ import Foundation
 class DuAn{
     
     init() {
+        IdDA = ""
         TenDA = ""
         NhomDA = ""
         GiaTriGiaiNgan = ""
@@ -18,7 +19,7 @@ class DuAn{
         GiaiDoan = ""
         
     }
-    
+    var IdDA : String?
     var TenDA : String?
     var NhomDA : String?
     var TongMucDauTu : String?

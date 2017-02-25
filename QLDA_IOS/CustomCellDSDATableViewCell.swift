@@ -29,7 +29,12 @@ class CustomCellDSDATableViewCell: UITableViewCell {
     @IBOutlet weak var lblNhomDuAn: UILabel!
     @IBOutlet weak var lblTenDuAn: UILabel!
     @IBOutlet weak var imgDetail: UIImageView!
-    @IBOutlet weak var imgGroup: UIImageView!
+    @IBOutlet weak var imgGroup: UIImageView!{
+        didSet {
+            imgGroup.isHidden = false
+        }
+    }
+
     @IBOutlet weak var UiViewContent: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
