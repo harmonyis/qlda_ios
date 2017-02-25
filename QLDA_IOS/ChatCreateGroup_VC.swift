@@ -84,8 +84,33 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
     }
         
     @IBAction func btnCreateGroupTouchUpInside(_ sender: Any) {
-         print(listUserChecked)
+        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_CreateGroupChat"
+
+        let params : String = "{\"groupName\" : \""+getGroupName()+"\", \"host\": \""+String(59)+"\", \"listUserID\": \""+getListUserChecked()+"\"}"
+        ApiService.Post(url: apiUrl, params: params, callback: callbackCreateGroup, errorCallBack: errorCreateGroup)
     }
+    
+    func callbackCreateGroup(data : Data) {
+        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        if let dic = json as? [String:Any] {
+            if let groupID = dic["Chat_CreateGroupChatResult"] as? Int {
+                DispatchQueue.main.async() { () -> Void in
+                    self.navigationController?.popViewController(animated: true)
+                }
+                
+            }
+        }
+        
+    }
+    
+    
+    func errorCreateGroup(error : Error) {
+        let message = error.localizedDescription
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func selectUser(sender: UIButton!)
     {
         let value = sender.tag;
@@ -99,4 +124,51 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
         self.tblListContact.reloadData()
         
     }
+    
+    func getGroupName() -> String{
+        var groupName : String = (txtGroupName.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))!
+        if(groupName.isEmpty){
+            var i : Int = 0
+            for ctID in listUserChecked{
+                let user : UserContact = listContact.filter{
+                    $0.ContactID! == ctID
+                }.first!
+                groupName += user.Name!
+                if(i < listUserChecked.count - 1){
+                    groupName += ", "
+                }
+                i += 1
+            }
+            if(listUserChecked.count > 0){
+                groupName = ChatHub.userName + ", " + groupName
+            }
+            else{
+                groupName = ChatHub.userName
+            }
+        }
+        
+        return groupName
+    }
+    
+    func getListUserChecked() -> String{
+        var userIDs : String = ""
+        var i : Int = 0
+        for ctID in listUserChecked{
+            userIDs += String(ctID)
+            if(i < listUserChecked.count - 1){
+                userIDs += ","
+            }
+            i += 1
+        }
+        if(listUserChecked.count > 0){
+            userIDs = String(ChatHub.userID) + "," + userIDs
+        }
+        else{
+            userIDs = String(ChatHub.userID)
+        }
+        return userIDs
+    }
 }
+
+
+

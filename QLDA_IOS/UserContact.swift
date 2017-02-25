@@ -67,7 +67,7 @@ class UserContact{
         }
     }
     
-    func setImageDefault(){
+    private func setImageDefault(){
         if(TypeOfContact == 1){
             Picture = #imageLiteral(resourceName: "ic_contactUser")
         }
