@@ -339,6 +339,8 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         return cell
     }
     
+    
+    
     func duAnConClickDetail(sender: UITapGestureRecognizer)
     {
         //print(sender.view?.tag)
