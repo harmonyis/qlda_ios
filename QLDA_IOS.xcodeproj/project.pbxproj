@@ -38,6 +38,8 @@
 		BA979F561E5D3EAD00FC6FA8 /* ChatCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979F551E5D3EAD00FC6FA8 /* ChatCommon.swift */; };
 		BA979F6D1E5D845E00FC6FA8 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979F6C1E5D845E00FC6FA8 /* UIImageView.swift */; };
 		BA979F6F1E5D980D00FC6FA8 /* ChatCreateGroup_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979F6E1E5D980D00FC6FA8 /* ChatCreateGroup_VC.swift */; };
+		BA979FEE1E61200500FC6FA8 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979FED1E61200500FC6FA8 /* ChatMessage.swift */; };
+		BA979FF61E6127EB00FC6FA8 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979FF51E6127EB00FC6FA8 /* Date.swift */; };
 		BAE41E0E1E5AEAE600B89A8D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE41E0D1E5AEAE600B89A8D /* SWRevealViewController.m */; };
 		BAE41E171E5B231300B89A8D /* MenuLeft_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE41E161E5B231300B89A8D /* MenuLeft_VC.swift */; };
 		BAE41E191E5B26F800B89A8D /* Base_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE41E181E5B26F800B89A8D /* Base_VC.swift */; };
@@ -145,6 +147,8 @@
 		BA979F571E5D4C0A00FC6FA8 /* SwiftR.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftR.xcodeproj; path = "SwiftR-master/SwiftR.xcodeproj"; sourceTree = "<group>"; };
 		BA979F6C1E5D845E00FC6FA8 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		BA979F6E1E5D980D00FC6FA8 /* ChatCreateGroup_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCreateGroup_VC.swift; sourceTree = "<group>"; };
+		BA979FED1E61200500FC6FA8 /* ChatMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		BA979FF51E6127EB00FC6FA8 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		BAE41E0B1E5AEAE500B89A8D /* QLDA_IOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QLDA_IOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		BAE41E0C1E5AEAE600B89A8D /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		BAE41E0D1E5AEAE600B89A8D /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
@@ -221,6 +225,7 @@
 			children = (
 				BA4E53C91E5ACFA100AF270E /* UIColor.swift */,
 				BA979F6C1E5D845E00FC6FA8 /* UIImageView.swift */,
+				BA979FF51E6127EB00FC6FA8 /* Date.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -333,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				BA760BC41E5C2ECA000A4694 /* UserContact.swift */,
+				BA979FED1E61200500FC6FA8 /* ChatMessage.swift */,
 			);
 			name = Entity;
 			sourceTree = "<group>";
@@ -588,7 +594,9 @@
 				246015431E5BF3DF000DD658 /* UrlPreFix.swift in Sources */,
 				BA979F561E5D3EAD00FC6FA8 /* ChatCommon.swift in Sources */,
 				BA760BC51E5C2ECA000A4694 /* UserContact.swift in Sources */,
+				BA979FEE1E61200500FC6FA8 /* ChatMessage.swift in Sources */,
 				BA979F6D1E5D845E00FC6FA8 /* UIImageView.swift in Sources */,
+				BA979FF61E6127EB00FC6FA8 /* Date.swift in Sources */,
 				BA979F6F1E5D980D00FC6FA8 /* ChatCreateGroup_VC.swift in Sources */,
 				246015461E5D407C000DD658 /* DuAn.swift in Sources */,
 				BA778AE21E558F90000F934B /* DSDA_VC.swift in Sources */,
