@@ -25,8 +25,8 @@ class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = contactName
-    }
-    
+        //self.tblConversation.separatorStyle = UITableViewCellSeparatorStyle.none
+    }   
     
     
     override func didReceiveMemoryWarning() {
@@ -42,10 +42,14 @@ class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell : Chat_Cell = tableView.dequeueReusableCell(withIdentifier: "cellChat") as! Chat_Cell
+        /*let cell : Chat_Cell = tableView.dequeueReusableCell(withIdentifier: "cellChat") as! Chat_Cell
         let msg : ChatMessage = listMessage[indexPath.row]
         cell.lblContactName.text = msg.SenderName
-        cell.lblMessage.text = msg.Message
+        cell.lblMessage.text = msg.Message*/
+        
+        let msg : ChatMessage = listMessage[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellChat", for: indexPath)
+        cell.textLabel?.text = msg.Message
         return cell
     }
     
@@ -56,7 +60,13 @@ class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {        
         return listMessage.count;
     }
-    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+         return UITableViewAutomaticDimension
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
     func getMessage(){
         if contactType == 1 {
             let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_GetPrivateMessage?senderID=\(ChatHub.userID)&receiverID=\(String(contactID))"
