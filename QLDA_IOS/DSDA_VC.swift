@@ -189,6 +189,9 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         cell.lblTenDuAn.layer.borderWidth=1
         
         
+        
+        
+        
         let borderBottom = CALayer()
         let borderWidth = CGFloat(1.0)
         borderBottom.borderColor =  myColorBoder.cgColor
