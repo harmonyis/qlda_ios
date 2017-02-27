@@ -75,8 +75,22 @@ class ChatHub {
     
     static func initEvent(){
         chatHub.on("receivePrivateMessage") {args in
-            if let name = args?[0] as? String, let message = args?[1] as? String{
-                print("Connection ID\(name + message)")
+            var sender = args?[0] as? [Any]
+            let receiver = args?[1] as? [Any]
+            let inbox = args?[2] as? [Any]
+            
+            let senderID = (sender![0] as? Int)!
+            let senderName = (sender![1] as? String)!
+            let receiverID = (receiver![0] as? Int)!
+            let receiverName = (receiver![1] as? String)
+            let msg = (inbox![0] as? String)!
+            let msgType = (inbox![1] as? Int)!
+            let inboxID = (inbox![2] as? Int64)
+            
+            let contact : UserContact = UserContact()
+            contact.ContactID = senderID
+            if senderID == ChatHub.userID{
+                contact.ContactID = receiverID
             }
         }
         
@@ -99,7 +113,7 @@ class ChatHub {
                 pictureUrl = temp
             }
             print(groupID, groupName, host, pictureUrl)
-            var newContact : UserContact = UserContact()
+            let newContact : UserContact = UserContact()
             newContact.ContactID = groupID
             newContact.LatestMessage = "Bạn vừa tạo nhóm"
             newContact.LatestMessageID = 0
@@ -114,8 +128,56 @@ class ChatHub {
             newContact.TypeOfMessage = 0
             newContact.setPicture()
             ChatCommon.listContact.append(newContact)
+            //changeDataWhenReciveMessage(contact: newContact)
            // print(groupID, groupName, host, pictureUrl)
 
+        }
+    }
+    static func changeDataWhenReciveMessage(inboxID : Int64, message : String, messageType : Int, senderID : Int, senderName : String,  receiverID : Int, receiverName : Int, contactType : Int){
+        
+        var contactID : Int
+        contactID = senderID
+        if senderID == ChatHub.userID{
+            contactID = receiverID
+        }
+
+        let filter = ChatCommon.listContact.filter(){
+            if $0.ContactID == contactID{
+                return true
+            }
+            return false
+        }
+        var newContact : UserContact
+        if filter.count == 0{
+            newContact = UserContact()
+            newContact.ContactID = contactID
+            newContact.Name = senderName
+            newContact.LatestMessage = message
+            newContact.TypeOfContact = contactType
+            newContact.SenderOfMessage = senderID
+            newContact.ReceiverOfMessage = receiverID
+            newContact.TypeOfMessage = messageType
+            newContact.NumberOfNewMessage = 1
+            newContact.LatestMessageID = inboxID
+            ChatCommon.listContact.insert(newContact, at: 1)
+        }
+        else{
+            newContact = filter.first!
+            newContact.LatestMessage = message
+            newContact.SenderOfMessage = senderID;
+            newContact.ReceiverOfMessage = receiverID
+            newContact.TypeOfMessage = messageType;
+            if senderID == ChatHub.userID{
+                newContact.NumberOfNewMessage = 0;
+            }
+            else{
+                newContact.NumberOfNewMessage = 0;
+            }
+            
+            newContact.LatestMessageID = inboxID;
+            //ChatCommon.listContact.re
+            //Config.lstContact.Remove(currentContact);
+            //Config.lstContact.Insert(0, currentContact);
         }
     }
 }

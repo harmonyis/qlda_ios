@@ -236,6 +236,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     
     func initEnvetChatHub(){
         ChatHub.chatHub.on("receivePrivateMessage") {args in
+            /*
             var sender = args?[0] as? [Any]
             let receiver = args?[1] as? [Any]
             let inbox = args?[2] as? [Any]
@@ -247,6 +248,10 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
             let msg = (inbox![0] as? String)!
             let msgType = (inbox![1] as? Int)!
             let inboxID = (inbox![2] as? Int64)
+            */
+            DispatchQueue.main.async() { () -> Void in
+                self.tblListContact.reloadData()
+            }
         }
     }
     

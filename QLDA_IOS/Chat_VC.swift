@@ -20,7 +20,8 @@ class Chat_Cell: UITableViewCell{
 
 
 class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
-    
+    @IBOutlet weak var btnSend: UIButton!
+    @IBOutlet weak var txtMessage: UITextField!
     @IBOutlet weak var tblConversation: UITableView!
     var contactID : Int!
     var contactType : Int!
@@ -43,8 +44,24 @@ class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
         super.viewWillAppear(animated)
         getMessage()
         self.tblConversation.allowsSelection = false
-        self.tblConversation.reloadData()
+        //self.tblConversation.reloadData()
+        //self.scrollToBottom()
     }
+    
+    @IBAction func btnSendTouchUpInside(_ sender: UIButton) {
+        sendMessage()
+    }
+    
+    func sendMessage(){
+        if let hub = ChatHub.chatHub {
+            do {
+                try hub.invoke("SendPrivateMessage", arguments: [ChatHub.userID, ChatHub.userName, contactID, contactName, txtMessage.text!])
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : Chat_Cell = tableView.dequeueReusableCell(withIdentifier: "cellChat") as! Chat_Cell
@@ -156,6 +173,7 @@ class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
         
         DispatchQueue.main.async() { () -> Void in
             self.tblConversation.reloadData()
+            self.scrollToBottom()
         }
     }
     
@@ -164,5 +182,12 @@ class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func scrollToBottom(){
+        DispatchQueue.global(qos: .background).async {
+            let indexPath = IndexPath(row: self.listMessage.count-1, section: 0)
+            self.tblConversation.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        }
     }
 }

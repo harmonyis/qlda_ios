@@ -836,7 +836,10 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YM9-W0-mJN">
                                         <rect key="frame" x="266" y="38" width="46" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button"/>
+                                        <state key="normal" title="Send"/>
+                                        <connections>
+                                            <action selector="btnSendTouchUpInside:" destination="Y5V-aO-TNi" eventType="touchUpInside" id="M8G-jQ-aUf"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mtS-R4-5Pl">
                                         <rect key="frame" x="8" y="39" width="230" height="30"/>
@@ -846,7 +849,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0" green="0.52390272010000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="106" id="3ME-7I-ipV"/>
                                 </constraints>
@@ -866,12 +869,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="yTc-lI-Cfq"/>
                     <connections>
+                        <outlet property="btnSend" destination="YM9-W0-mJN" id="1z4-CJ-BBO"/>
                         <outlet property="tblConversation" destination="dpo-zz-fwJ" id="00T-a3-VOi"/>
+                        <outlet property="txtMessage" destination="mtS-R4-5Pl" id="MLJ-34-paX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RBq-2g-QN7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-575" y="1611"/>
+            <point key="canvasLocation" x="-558" y="1638"/>
         </scene>
         <!--BDTMDT_VC-->
         <scene sceneID="4Nx-pB-ZEK">
