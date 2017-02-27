@@ -192,6 +192,7 @@ class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
     }
     
     func initEnvetChatHub(){
+    
         ChatHub.chatHub.on("receivePrivateMessage") {args in
             
             let sender = args?[0] as? [Any]
@@ -209,7 +210,7 @@ class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
             let newChat : ChatMessage = ChatMessage()
             newChat.ContactType = 1
             newChat.ID = inboxID
-            //if(senderID == Hu)
+         
             newChat.IsMe = true
             newChat.Message = msg
             newChat.MessageType = msgType
