@@ -160,7 +160,7 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        var cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell") as! CustomCellDSDATableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell") as! CustomCellDSDATableViewCell
        // cell.ght = 60
         //  cell.scrollEnabled = false
         let itemNhomDA :NhomDA = self.DSDA[section]
@@ -225,6 +225,11 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         cell.imgGroup.addGestureRecognizer(eventClick)
         cell.imgGroup.isUserInteractionEnabled = true;
         
+        cell.UIViewTieuDe.autoresizingMask = UIViewAutoresizing.flexibleTopMargin
+        cell.UIViewTieuDe.autoresizingMask = UIViewAutoresizing.flexibleBottomMargin
+        
+        cell.UIViewTieuDe.autoresizesSubviews = true
+        
         cell.UiViewThongTinChiTiet.isHidden = !self.indexTrangThaiDuAnCha.contains(section)
         
         
@@ -260,8 +265,8 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
             self.indexTrangThaiDuAnCha.insert(value!)
             
         }
-        // self.tbDSDA.beginUpdates()
-        //    self.tbDSDA.endUpdates()
+         self.tbDSDA.beginUpdates()
+            self.tbDSDA.endUpdates()
         self.tbDSDA.reloadData()
     }
     
@@ -276,7 +281,7 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         //tableView.scrollToRow(at: indexPath, at: .top, animated: false)
         
         
-        var cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell", for: indexPath) as! CustomCellDSDATableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell", for: indexPath) as! CustomCellDSDATableViewCell
         let itemNhomDA :NhomDA = self.DSDA[indexPath.section]
         let itemDuAnCon :[DuAn] = itemNhomDA.DuAnCon!
         
@@ -365,8 +370,8 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
             self.indexTrangThaiDuAnCon.insert(value)
             
         }
-        // self.tbDSDA.beginUpdates()
-        //    self.tbDSDA.endUpdates()
+         self.tbDSDA.beginUpdates()
+            self.tbDSDA.endUpdates()
         self.tbDSDA.reloadData()
     }
 }
