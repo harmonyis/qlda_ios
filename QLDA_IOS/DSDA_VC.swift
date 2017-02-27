@@ -137,11 +137,19 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if !self.indexTrangThaiDuAnCon.contains((String)(indexPath.section)+"-"+(String)(indexPath.row)) {
+       if !self.indexTrangThaiDuAnCon.contains((String)(indexPath.section)+"-"+(String)(indexPath.row)) {
             return 40
         }
         return 190
+      //   return UITableViewAutomaticDimension
+
     }
+    /*
+     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+     */
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         if !self.indexTrangThaiDuAnCha.contains(section) {
@@ -153,22 +161,21 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         var cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell") as! CustomCellDSDATableViewCell
-        
+       // cell.ght = 60
         //  cell.scrollEnabled = false
         let itemNhomDA :NhomDA = self.DSDA[section]
         cell.lblTenDuAn.text = itemNhomDA.TenDA!
+         cell.lblTenDuAn.font = UIFont.boldSystemFont(ofSize: 13)
         cell.lblNhomDuAn.text = itemNhomDA.NhomDA!
         cell.lblGiaiDoan.text = itemNhomDA.GiaiDoan!
         cell.lblGiaTriGiaiNgan.text = itemNhomDA.GiaTriGiaiNgan!
         cell.lblTongDauTu.text = itemNhomDA.TongMucDauTu!
         cell.lblThoiGianThucHien.text = itemNhomDA.ThoiGianThucHien!
         cell.UiViewGroup.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewGroup.layer.borderWidth=1
-        
+        cell.UiViewGroup.layer.borderWidth = 0.5
+        cell.imgGroup.isHidden = false
         cell.UiViewDetail.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewDetail.layer.borderWidth=1
-        
-        
+        cell.UiViewDetail.layer.borderWidth = 0.5
         
         if (itemNhomDA.DuAnCon?.count)!>0 {
             
@@ -187,15 +194,12 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         }
         //  cell.UIViewTieuDe.layer.borderWidth=1
         
-        cell.lblTenDuAn.layer.borderColor = myColorBoder.cgColor
-        cell.lblTenDuAn.layer.borderWidth=1
-        
-        
-        
+        cell.UiViewTenDuAn.layer.borderColor = myColorBoder.cgColor
+        cell.UiViewTenDuAn.layer.borderWidth = 0.5
         
         
         let borderBottom = CALayer()
-        let borderWidth = CGFloat(1.0)
+        let borderWidth = CGFloat(1)
         borderBottom.borderColor =  myColorBoder.cgColor
         borderBottom.borderWidth = borderWidth
         borderBottom.frame = CGRect(x: 0, y: cell.UiViewBDThongTinCT.frame.height, width: cell.UiViewBDThongTinCT.frame.width, height: 1)
@@ -204,16 +208,16 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         
         
         cell.UiViewThongTinChiTiet.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewThongTinChiTiet.layer.borderWidth=1
+        cell.UiViewThongTinChiTiet.layer.borderWidth = 0.5
         cell.UiViewBDThongTin.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewBDThongTin.layer.borderWidth=1
+        cell.UiViewBDThongTin.layer.borderWidth = 0.5
         
         var eventClick = UITapGestureRecognizer()
         
-        cell.imgDetail.tag = section
+        cell.UiViewDetail.tag = section
         eventClick.addTarget(self, action:  #selector(DSDA_VC.duAnChaClickDetail(sender: )))
-        cell.imgDetail.addGestureRecognizer(eventClick)
-        cell.imgDetail.isUserInteractionEnabled = true;
+        cell.UiViewDetail.addGestureRecognizer(eventClick)
+        cell.UiViewDetail.isUserInteractionEnabled = true;
         
         eventClick = UITapGestureRecognizer()
         cell.imgGroup.tag = section
@@ -275,7 +279,15 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         var cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell", for: indexPath) as! CustomCellDSDATableViewCell
         let itemNhomDA :NhomDA = self.DSDA[indexPath.section]
         let itemDuAnCon :[DuAn] = itemNhomDA.DuAnCon!
+        
+        
+      //  let label =  UILabel(frame: CGRect(x: 0, y: 0, width: 240, height: 60))
+       // cell.lblTenDuAn=label
         cell.lblTenDuAn.text = itemDuAnCon[indexPath.row].TenDA!
+        cell.lblTenDuAn.numberOfLines = 0
+        cell.lblTenDuAn.font = UIFont.italicSystemFont(ofSize: 13)
+      //  cell.lblTenDuAn.lineBreakMode = wrap
+        
         cell.lblNhomDuAn.text = itemDuAnCon[indexPath.row].NhomDA!
         cell.lblGiaiDoan.text = itemDuAnCon[indexPath.row].GiaiDoan!
         cell.lblGiaTriGiaiNgan.text = itemDuAnCon[indexPath.row].GiaTriGiaiNgan!
@@ -283,21 +295,21 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         cell.lblThoiGianThucHien.text = itemDuAnCon[indexPath.row].ThoiGianThucHien!
         
         cell.UiViewGroup.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewGroup.layer.borderWidth=1
+        cell.UiViewGroup.layer.borderWidth = 0.5
         
         cell.UiViewDetail.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewDetail.layer.borderWidth=1
-        
+        cell.UiViewDetail.layer.borderWidth = 0.5
+       // if !cell.imgGroup.isHidden
         cell.imgGroup.isHidden=true
         
         //  cell.UIViewTieuDe.layer.borderWidth=1
         
-        cell.lblTenDuAn.layer.borderColor = myColorBoder.cgColor
-        cell.lblTenDuAn.layer.borderWidth=1
+        cell.UiViewTenDuAn.layer.borderColor = myColorBoder.cgColor
+        cell.UiViewTenDuAn.layer.borderWidth = 0.5
         
         
         let borderBottom = CALayer()
-        let borderWidth = CGFloat(1.0)
+        let borderWidth = CGFloat(1)
         borderBottom.borderColor =  myColorBoder.cgColor
         borderBottom.borderWidth = borderWidth
         borderBottom.frame = CGRect(x: 0, y: cell.UiViewBDThongTinCT.frame.height, width: cell.UiViewBDThongTinCT.frame.width, height: 1)
@@ -306,11 +318,11 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         
         
         cell.UiViewThongTinChiTiet.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewThongTinChiTiet.layer.borderWidth=1
+        cell.UiViewThongTinChiTiet.layer.borderWidth = 0.5
         //   cell.UiViewThongTinChiTiet.layer.masksToBounds=true
         
         cell.UiViewBDThongTin.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewBDThongTin.layer.borderWidth=1
+        cell.UiViewBDThongTin.layer.borderWidth = 0.5
         
         //  cell.UiViewContent.layer.borderWidth=1
         /* if let image = feedEntry.image {
@@ -327,19 +339,17 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         // cell.imgDetail.addTarget(self, action: #selector(DSDA_VC.tappedMe()))
         let eventClick = UITapGestureRecognizer()
         let value=(String)(indexPath.section)+"-"+(String)(indexPath.row)
-        cell.imgDetail.accessibilityLabel = value
+        cell.UiViewDetail.accessibilityLabel = value
         print(indexPath.row)
         eventClick.addTarget(self, action:  #selector(DSDA_VC.duAnConClickDetail(sender: )))
         
-        cell.imgDetail.addGestureRecognizer(eventClick)
-        cell.imgDetail.isUserInteractionEnabled = true;
+        cell.UiViewDetail.addGestureRecognizer(eventClick)
+        cell.UiViewDetail.isUserInteractionEnabled = true;
         
         cell.UiViewThongTinChiTiet.isHidden = !self.indexTrangThaiDuAnCon.contains(value)
         //  print("ssssss")
         return cell
     }
-    
-    
     
     func duAnConClickDetail(sender: UITapGestureRecognizer)
     {
