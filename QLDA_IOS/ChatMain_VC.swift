@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SwiftR
+
 
 class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
     @IBOutlet weak var btnCreateGroup: UIButton!
@@ -128,7 +128,6 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     }
     
     var searchActive : Bool = false
-    var data = ["San Francisco","New York","San Jose","Chicago","Los Angeles","Austin","Seattle"]
     var filtered = [UserContact]()
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -247,10 +246,19 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
             let receiverName = (receiver![1] as? String)
             let msg = (inbox![0] as? String)!
             let msgType = (inbox![1] as? Int)!
-            let inboxID = (inbox![2] as? Int64)
-            */
-            DispatchQueue.main.async() { () -> Void in
-                self.tblListContact.reloadData()
+            let inboxID = (inbox![2] as? Int64)*/
+            
+            DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.main.async {
+                     self.tblListContact.reloadData()
+                }
+            }
+        }
+        ChatHub.chatHub.on("receiveGroupMessage") {args in            
+            DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.main.async {
+                    self.tblListContact.reloadData()
+                }
             }
         }
     }
