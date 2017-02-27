@@ -9,8 +9,13 @@
 import UIKit
 
 class Chat_Cell: UITableViewCell{
+    @IBOutlet weak var viewLeft: UIView!
+    @IBOutlet weak var viewRight: UIView!
     @IBOutlet weak var lblContactName: UILabel!
     @IBOutlet weak var lblMessage: UILabel!
+    
+    @IBOutlet weak var lblContactNameRight: UILabel!
+    @IBOutlet weak var lblMessageRight: UILabel!
 }
 
 
@@ -42,14 +47,22 @@ class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        /*let cell : Chat_Cell = tableView.dequeueReusableCell(withIdentifier: "cellChat") as! Chat_Cell
+        let cell : Chat_Cell = tableView.dequeueReusableCell(withIdentifier: "cellChat") as! Chat_Cell
         let msg : ChatMessage = listMessage[indexPath.row]
-        cell.lblContactName.text = msg.SenderName
-        cell.lblMessage.text = msg.Message*/
-        
-        let msg : ChatMessage = listMessage[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellChat", for: indexPath)
-        cell.textLabel?.text = msg.Message
+
+        if(msg.IsMe!){
+            cell.viewLeft.isHidden = true
+            cell.viewRight.isHidden = false
+            cell.lblContactNameRight.text = msg.SenderName
+            cell.lblMessageRight.text = msg.Message
+            //cell.lblMessageRight.sizeToFit()
+        }else{
+            cell.viewLeft.isHidden = false
+            cell.viewRight.isHidden = true
+            cell.lblContactName.text = msg.SenderName
+            cell.lblMessage.text = msg.Message
+            //cell.lblMessage.sizeToFit()
+        }
         return cell
     }
     
@@ -60,13 +73,46 @@ class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {        
         return listMessage.count;
     }
+    /*
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
          return UITableViewAutomaticDimension
-    }
+    }*/
 
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        
+        //return UITableViewAutomaticDimension
+        
+        let cell : Chat_Cell = tableView.dequeueReusableCell(withIdentifier: "cellChat") as! Chat_Cell
+        let msg : ChatMessage = listMessage[indexPath.row]
+        let stringSizeAsText: CGSize = getStringSizeForFont(font: UIFont.systemFont(ofSize: 16), myText: msg.Message!)
+        
+        var labelWidth: CGFloat
+        if(msg.IsMe!){
+            labelWidth = cell.lblMessageRight.frame.width
+        }
+        else{
+            labelWidth = cell.lblMessage.frame.width
+        }        
+        
+        //let originalLabelHeight: CGFloat = cell.lblMessage.frame.height
+        
+        let labelLines: CGFloat = CGFloat(ceil(Float(stringSizeAsText.width/labelWidth)))
+        
+        //let height =  tableView.rowHeight - originalLabelHeight + CGFloat(labelLines*stringSizeAsText.height)
+        let height = CGFloat(labelLines * (stringSizeAsText.height + 3))
+        return height + 17
+ 
     }
+ 
+    func getStringSizeForFont(font: UIFont, myText: String) -> CGSize {
+        let fontAttributes = [NSFontAttributeName: font]
+        let size = (myText as NSString).size(attributes: fontAttributes)
+        
+        return size
+        
+    }
+    
     func getMessage(){
         if contactType == 1 {
             let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_GetPrivateMessage?senderID=\(ChatHub.userID)&receiverID=\(String(contactID))"
