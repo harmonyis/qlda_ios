@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftR
 
 class Chat_Cell: UITableViewCell{
     @IBOutlet weak var viewLeft: UIView!
@@ -31,6 +32,9 @@ class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = contactName
+        initEnvetChatHub()
+        
+        
         //self.tblConversation.separatorStyle = UITableViewCellSeparatorStyle.none
     }   
     
@@ -55,7 +59,11 @@ class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
     func sendMessage(){
         if let hub = ChatHub.chatHub {
             do {
-                try hub.invoke("SendPrivateMessage", arguments: [ChatHub.userID, ChatHub.userName, contactID, contactName, txtMessage.text!])
+                var funcName = "SendPrivateMessage"
+                if(contactType == 2){
+                    funcName = "SendGroupMessage"
+                }
+                try hub.invoke(funcName, arguments: [ChatHub.userID, ChatHub.userName, contactID, contactName, txtMessage.text!])
             } catch {
                 print(error)
             }
@@ -131,13 +139,14 @@ class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
     }
     
     func getMessage(){
+        //print("data: ", contactID, contactName, contactType)
         if contactType == 1 {
             let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_GetPrivateMessage?senderID=\(ChatHub.userID)&receiverID=\(String(contactID))"
-            print(apiUrl)
             ApiService.Get(url: apiUrl, callback: callbackGetMsg, errorCallBack: errorGetMsg)
         }
         else{
-            
+            let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_GetGroupMessage/\(String(contactID))"
+            ApiService.Get(url: apiUrl, callback: callbackGetMsg, errorCallBack: errorGetMsg)
         }
     }
     func callbackGetMsg(data : Data) {
@@ -173,7 +182,7 @@ class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
         
         DispatchQueue.main.async() { () -> Void in
             self.tblConversation.reloadData()
-            //self.scrollToBottom()
+            self.scrollToBottom()
         }
     }
     
@@ -186,38 +195,51 @@ class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
     func scrollToBottom(){
         DispatchQueue.global(qos: .background).async {
-            let indexPath = IndexPath(row: self.listMessage.count-1, section: 0)
-            self.tblConversation.scrollToRow(at: indexPath, at: .bottom, animated: true)
+            if(self.listMessage.count > 0){
+                let indexPath = IndexPath(row: self.listMessage.count-1, section: 0)
+                self.tblConversation.scrollToRow(at: indexPath, at: .bottom, animated: true)
+            }
+            
         }
     }
     
     func initEnvetChatHub(){
-        ChatHub.chatHub.on("receivePrivateMessage") {args in
-            
+        ChatHub.chatHub.on("receivePrivateMessage") { args in
             let sender = args?[0] as? [Any]
             let receiver = args?[1] as? [Any]
             let inbox = args?[2] as? [Any]
-            
-            var senderID = (sender![0] as? Int)!
+            /*
+            let senderID = (sender![0] as? Int)!
             let senderName = (sender![1] as? String)!
             let receiverID = (receiver![0] as? Int)!
-            let receiverName = (receiver![1] as? String)
+            let receiverName = (receiver![1] as? String)!
             let msg = (inbox![0] as? String)!
             let msgType = (inbox![1] as? Int)!
-            let inboxID = (inbox![2] as? Int64)
+            let inboxID = (inbox![2] as? Int64)!
             
-            let newChat : ChatMessage = ChatMessage()
-            newChat.ContactType = 1
-            newChat.ID = inboxID
-            //if(senderID == Hu)
-            newChat.IsMe = true
-            newChat.Message = msg
-            newChat.MessageType = msgType
-            newChat.SenderID = senderID
-            newChat.SenderName = senderName
+            self?.receiveMessage(senderID: senderID, senderName: senderName, receiverID: receiverID, receiverName: receiverName, message: msg, messageType: msgType, inboxID: inboxID, contactType: 1)
+            
             DispatchQueue.main.async() { () -> Void in
                 
-            }
+                self?.tblConversation.reloadData()
+            }*/
         }
+    }
+    
+    func receiveMessage(senderID : Int, senderName : String, receiverID : Int, receiverName : String, message : String, messageType : Int, inboxID : Int64, contactType : Int){
+        let newChat : ChatMessage = ChatMessage()
+        newChat.ContactType = contactType
+        newChat.ID = inboxID
+        if ChatHub.userID == senderID{
+            newChat.IsMe = true
+        }
+        else {
+           newChat.IsMe = false
+        }
+        newChat.Message = message
+        newChat.MessageType = messageType
+        newChat.SenderID = senderID
+        newChat.SenderName = senderName
+        listMessage.append(newChat)
     }
 }

@@ -74,6 +74,7 @@ class ChatHub {
     }
     
     static func initEvent(){
+        
         chatHub.on("receivePrivateMessage") {args in
             let sender = args?[0] as? [Any]
             let receiver = args?[1] as? [Any]
@@ -88,6 +89,23 @@ class ChatHub {
             let inboxID = (inbox![2] as? Int64)!
             
             changeDataWhenReciveMessage(inboxID: inboxID, message: msg, messageType: msgType, senderID: senderID, senderName: senderName, receiverID: receiverID, receiverName: receiverName, contactType: 1)
+        }
+        
+        chatHub.on("receiveGroupMessage") {args in
+            
+            let sender = args?[0] as? [Any]
+            let receiver = args?[1] as? [Any]
+            let inbox = args?[2] as? [Any]
+            
+            let senderID = (sender![0] as? Int)!
+            let senderName = (sender![1] as? String)!
+            let receiverID = (receiver![0] as? Int)!
+            let receiverName = (receiver![1] as? String)!
+            let msg = (inbox![0] as? String)!
+            let msgType = (inbox![1] as? Int)!
+            let inboxID = (inbox![2] as? Int64)!
+            
+            changeDataWhenReciveMessage(inboxID: inboxID, message: msg, messageType: msgType, senderID: senderID, senderName: senderName, receiverID: receiverID, receiverName: receiverName, contactType: 2)
         }
         
         chatHub.on("receiveChatGroup") {args in
@@ -130,9 +148,14 @@ class ChatHub {
     static func changeDataWhenReciveMessage(inboxID : Int64, message : String, messageType : Int, senderID : Int, senderName : String,  receiverID : Int, receiverName : String, contactType : Int){
         
         var contactID : Int
-        contactID = senderID
-        if senderID == ChatHub.userID{
+        if(contactType == 2){
             contactID = receiverID
+        }
+        else{
+            contactID = senderID
+            if senderID == ChatHub.userID{
+                contactID = receiverID
+            }
         }
 
         let filter = ChatCommon.listContact.filter(){
