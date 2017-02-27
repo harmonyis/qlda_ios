@@ -173,7 +173,7 @@ class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
         
         DispatchQueue.main.async() { () -> Void in
             self.tblConversation.reloadData()
-            self.scrollToBottom()
+            //self.scrollToBottom()
         }
     }
     
@@ -188,6 +188,36 @@ class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
         DispatchQueue.global(qos: .background).async {
             let indexPath = IndexPath(row: self.listMessage.count-1, section: 0)
             self.tblConversation.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        }
+    }
+    
+    func initEnvetChatHub(){
+        ChatHub.chatHub.on("receivePrivateMessage") {args in
+            
+            let sender = args?[0] as? [Any]
+            let receiver = args?[1] as? [Any]
+            let inbox = args?[2] as? [Any]
+            
+            var senderID = (sender![0] as? Int)!
+            let senderName = (sender![1] as? String)!
+            let receiverID = (receiver![0] as? Int)!
+            let receiverName = (receiver![1] as? String)
+            let msg = (inbox![0] as? String)!
+            let msgType = (inbox![1] as? Int)!
+            let inboxID = (inbox![2] as? Int64)
+            
+            let newChat : ChatMessage = ChatMessage()
+            newChat.ContactType = 1
+            newChat.ID = inboxID
+            //if(senderID == Hu)
+            newChat.IsMe = true
+            newChat.Message = msg
+            newChat.MessageType = msgType
+            newChat.SenderID = senderID
+            newChat.SenderName = senderName
+            DispatchQueue.main.async() { () -> Void in
+                
+            }
         }
     }
 }
