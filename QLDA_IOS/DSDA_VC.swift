@@ -165,16 +165,17 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         //  cell.scrollEnabled = false
         let itemNhomDA :NhomDA = self.DSDA[section]
         cell.lblTenDuAn.text = itemNhomDA.TenDA!
+         cell.lblTenDuAn.font = UIFont.boldSystemFont(ofSize: 13)
         cell.lblNhomDuAn.text = itemNhomDA.NhomDA!
         cell.lblGiaiDoan.text = itemNhomDA.GiaiDoan!
         cell.lblGiaTriGiaiNgan.text = itemNhomDA.GiaTriGiaiNgan!
         cell.lblTongDauTu.text = itemNhomDA.TongMucDauTu!
         cell.lblThoiGianThucHien.text = itemNhomDA.ThoiGianThucHien!
         cell.UiViewGroup.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewGroup.layer.borderWidth=1
+        cell.UiViewGroup.layer.borderWidth = 0.5
         cell.imgGroup.isHidden = false
         cell.UiViewDetail.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewDetail.layer.borderWidth=1
+        cell.UiViewDetail.layer.borderWidth = 0.5
         
         if (itemNhomDA.DuAnCon?.count)!>0 {
             
@@ -193,12 +194,12 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         }
         //  cell.UIViewTieuDe.layer.borderWidth=1
         
-        cell.lblTenDuAn.layer.borderColor = myColorBoder.cgColor
-        cell.lblTenDuAn.layer.borderWidth=1
+        cell.UiViewTenDuAn.layer.borderColor = myColorBoder.cgColor
+        cell.UiViewTenDuAn.layer.borderWidth = 0.5
         
         
         let borderBottom = CALayer()
-        let borderWidth = CGFloat(1.0)
+        let borderWidth = CGFloat(1)
         borderBottom.borderColor =  myColorBoder.cgColor
         borderBottom.borderWidth = borderWidth
         borderBottom.frame = CGRect(x: 0, y: cell.UiViewBDThongTinCT.frame.height, width: cell.UiViewBDThongTinCT.frame.width, height: 1)
@@ -207,9 +208,9 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         
         
         cell.UiViewThongTinChiTiet.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewThongTinChiTiet.layer.borderWidth=1
+        cell.UiViewThongTinChiTiet.layer.borderWidth = 0.5
         cell.UiViewBDThongTin.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewBDThongTin.layer.borderWidth=1
+        cell.UiViewBDThongTin.layer.borderWidth = 0.5
         
         var eventClick = UITapGestureRecognizer()
         
@@ -284,6 +285,7 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
        // cell.lblTenDuAn=label
         cell.lblTenDuAn.text = itemDuAnCon[indexPath.row].TenDA!
         cell.lblTenDuAn.numberOfLines = 0
+        cell.lblTenDuAn.font = UIFont.italicSystemFont(ofSize: 13)
       //  cell.lblTenDuAn.lineBreakMode = wrap
         
         cell.lblNhomDuAn.text = itemDuAnCon[indexPath.row].NhomDA!
@@ -293,21 +295,21 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         cell.lblThoiGianThucHien.text = itemDuAnCon[indexPath.row].ThoiGianThucHien!
         
         cell.UiViewGroup.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewGroup.layer.borderWidth=1
+        cell.UiViewGroup.layer.borderWidth = 0.5
         
         cell.UiViewDetail.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewDetail.layer.borderWidth=1
+        cell.UiViewDetail.layer.borderWidth = 0.5
        // if !cell.imgGroup.isHidden
         cell.imgGroup.isHidden=true
         
         //  cell.UIViewTieuDe.layer.borderWidth=1
         
-        cell.lblTenDuAn.layer.borderColor = myColorBoder.cgColor
-        cell.lblTenDuAn.layer.borderWidth=1
+        cell.UiViewTenDuAn.layer.borderColor = myColorBoder.cgColor
+        cell.UiViewTenDuAn.layer.borderWidth = 0.5
         
         
         let borderBottom = CALayer()
-        let borderWidth = CGFloat(1.0)
+        let borderWidth = CGFloat(1)
         borderBottom.borderColor =  myColorBoder.cgColor
         borderBottom.borderWidth = borderWidth
         borderBottom.frame = CGRect(x: 0, y: cell.UiViewBDThongTinCT.frame.height, width: cell.UiViewBDThongTinCT.frame.width, height: 1)
@@ -316,11 +318,11 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         
         
         cell.UiViewThongTinChiTiet.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewThongTinChiTiet.layer.borderWidth=1
+        cell.UiViewThongTinChiTiet.layer.borderWidth = 0.5
         //   cell.UiViewThongTinChiTiet.layer.masksToBounds=true
         
         cell.UiViewBDThongTin.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewBDThongTin.layer.borderWidth=1
+        cell.UiViewBDThongTin.layer.borderWidth = 0.5
         
         //  cell.UiViewContent.layer.borderWidth=1
         /* if let image = feedEntry.image {

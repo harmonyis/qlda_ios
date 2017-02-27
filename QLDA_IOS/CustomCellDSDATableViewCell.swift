@@ -18,6 +18,7 @@ class CustomCellDSDATableViewCell: UITableViewCell {
         }
     }
 
+    @IBOutlet weak var UiViewTenDuAn: UIView!
     @IBOutlet weak var UiViewGroup: UIView!
     @IBOutlet weak var UiViewDetail: UIView!
      @IBOutlet weak var lblThoiGianThucHien: UILabel!
