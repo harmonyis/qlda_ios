@@ -44,6 +44,7 @@ class UserContact{
     var NumberOfNewMessage: Int?
     
     func setPicture(){
+        
         if let path : String = PictureUrl{
             if let url = NSURL(string: path) {
                 if let data = NSData(contentsOf: url as URL) {
@@ -75,4 +76,6 @@ class UserContact{
             Picture = #imageLiteral(resourceName: "ic_contactGroup")
         }
     }
+    
+    
 }

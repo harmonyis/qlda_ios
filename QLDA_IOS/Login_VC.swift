@@ -12,44 +12,47 @@ class Login_VC: UIViewController {
     @IBOutlet weak var lblMesage: UILabel!
     @IBOutlet weak var lblMatKhau: UITextField!
     @IBOutlet weak var lblTenDangNhap: UITextField!
-     //var service = ApiService()
+    //var service = ApiService()
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        
         
     }
     @IBAction func Login(_ sender: Any) {
-                let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/CheckUser"
+        let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/CheckUser"
         //let szUser=lblName.
         let szMatKhau : String = (lblMatKhau.text)!
         let szTenDangNhap : String = (lblTenDangNhap.text)!
-                let params : String = "{\"szUsername\" : \""+szTenDangNhap+"\", \"szPassword\": \""+szMatKhau+"\"}"
-    
-       ApiService.Post(url: ApiUrl, params: params, callback: Alert, errorCallBack: AlertError)
-    
+        let params : String = "{\"szUsername\" : \""+szTenDangNhap+"\", \"szPassword\": \""+szMatKhau+"\"}"
+        
+        ApiService.Post(url: ApiUrl, params: params, callback: Alert, errorCallBack: AlertError)
+        
     }
     func Alert(data : Data) {
-            let json = try? JSONSerialization.jsonObject(with: data, options: [])
-            if let dic = json as? [String:Any] {
-                       if let idUser = dic["CheckUserResult"] as? String {
-                        let nIdUser:Int = Int(idUser)!
-                        if nIdUser > 0 {
-                        DispatchQueue.global(qos: .userInitiated).async {
-                                DispatchQueue.main.async {
-                                let vc = self.storyboard?.instantiateViewController(withIdentifier: "DSDA") as! DSDA_VC
-                                self.navigationController?.pushViewController(vc, animated: true)
-                                }
+        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        if let dic = json as? [String:Any] {
+            if let idUser = dic["CheckUserResult"] as? String {
+                let nIdUser:Int = Int(idUser)!
+                if nIdUser > 0 {
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        DispatchQueue.main.async {
+                            ChatHub.initChatHub()
+                            ChatHub.initEvent()
+                            ChatCommon.getContacts()
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "DSDA") as! DSDA_VC
+                            self.navigationController?.pushViewController(vc, animated: true)
                         }
-                            }
-                        else {
-                            DispatchQueue.global(qos: .userInitiated).async {
-                                DispatchQueue.main.async {
-                        self.lblMesage.text="Sai tên tài khoản hoặc mật khẩu"
-                                }
-                            }
-
-                        }
+                    }
                 }
+                else {
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        DispatchQueue.main.async {
+                            self.lblMesage.text="Sai tên tài khoản hoặc mật khẩu"
+                        }
+                    }
+                    
+                }
+            }
         }
     }
     func AlertError(error : Error) {
@@ -58,7 +61,7 @@ class Login_VC: UIViewController {
         alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

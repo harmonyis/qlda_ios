@@ -12,6 +12,7 @@
 		246015481E5D40C3000DD658 /* NhomDA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246015471E5D40C3000DD658 /* NhomDA.swift */; };
 		246015521E5D76AA000DD658 /* CustomCellDSDATableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246015511E5D76AA000DD658 /* CustomCellDSDATableViewCell.swift */; };
 		246015581E5D804C000DD658 /* ExtendtionUItableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246015571E5D804C000DD658 /* ExtendtionUItableViewCell.swift */; };
+		BA0DC4C91E657B03009DD019 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0DC4C81E657B03009DD019 /* PaddingLabel.swift */; };
 		BA4E53821E5A832400AF270E /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4E53811E5A832400AF270E /* View.xib */; };
 		BA4E53871E5A9DCF00AF270E /* DSDA_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E53861E5A9DCF00AF270E /* DSDA_View.swift */; };
 		BA4E53891E5A9E4C00AF270E /* DSDA_View.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4E53881E5A9E4C00AF270E /* DSDA_View.xib */; };
@@ -114,6 +115,7 @@
 		246015471E5D40C3000DD658 /* NhomDA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NhomDA.swift; sourceTree = "<group>"; };
 		246015511E5D76AA000DD658 /* CustomCellDSDATableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellDSDATableViewCell.swift; sourceTree = "<group>"; };
 		246015571E5D804C000DD658 /* ExtendtionUItableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendtionUItableViewCell.swift; sourceTree = "<group>"; };
+		BA0DC4C81E657B03009DD019 /* PaddingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		BA4E53811E5A832400AF270E /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		BA4E53861E5A9DCF00AF270E /* DSDA_View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSDA_View.swift; sourceTree = "<group>"; };
 		BA4E53881E5A9E4C00AF270E /* DSDA_View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSDA_View.xib; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				BA4E53C91E5ACFA100AF270E /* UIColor.swift */,
 				BA979F6C1E5D845E00FC6FA8 /* UIImageView.swift */,
 				BA979FF51E6127EB00FC6FA8 /* Date.swift */,
+				BA0DC4C81E657B03009DD019 /* PaddingLabel.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -607,6 +610,7 @@
 				BAE41E171E5B231300B89A8D /* MenuLeft_VC.swift in Sources */,
 				BA760BB71E5BEE50000A4694 /* ApiService.swift in Sources */,
 				BA778AEC1E559C2C000F934B /* Login_VC.swift in Sources */,
+				BA0DC4C91E657B03009DD019 /* PaddingLabel.swift in Sources */,
 				BA778AE81E559454000F934B /* BDNVDT_VC.swift in Sources */,
 				BAE41E1D1E5B3A2700B89A8D /* QLHinhAnh_VC.swift in Sources */,
 				BA54E1B81E545CA500F83B91 /* MenuViewController.swift in Sources */,

@@ -21,7 +21,7 @@ class ChatMessage{
         MessageType = 0
         ContactType = 1
     }
-    
+    //var Myclass : _myclass?
     var ID : Int64?
     var IsMe : Bool?
     var Message : String?
@@ -30,4 +30,8 @@ class ChatMessage{
     var SenderName : String?
     var MessageType : Int?
     var ContactType : Int?
+    
+    deinit{        
+        print("Thông báo deinit")
+    }
 }

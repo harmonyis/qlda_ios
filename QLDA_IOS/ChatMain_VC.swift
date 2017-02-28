@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SwiftR
 
 class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
     @IBOutlet weak var btnCreateGroup: UIButton!
@@ -25,17 +25,14 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     var passContactType:Int!
     var passContactName:String!
     
+    //var chatHub: Hub = Hub("chatHub")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        DispatchQueue.main.async() { () -> Void in
-            if ChatHub.connection == nil
-            {
-                ChatHub.initChatHub()
-                ChatHub.initEvent()
-                self.initEnvetChatHub()
-            }
-        }
-        // Do any additional setup after loading the view.
+        self.initEnvetChatHub()
+        btnCreateGroup.layer.cornerRadius = 25
+        btnCreateGroup.setImage(#imageLiteral(resourceName: "ic_createGroup"), for: UIControlState.normal)
+        btnCreateGroup.imageEdgeInsets = UIEdgeInsetsMake(40,40,40,40)
     }
     
     override func didReceiveMemoryWarning() {
@@ -46,85 +43,18 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         super.viewWillAppear(animated)
         aivLoad.startAnimating()
         tblListContact.isHidden = true
-        //Remove empty cell
         tblListContact.tableFooterView = UIView(frame: .zero)
-        self.searchContact.isUserInteractionEnabled = false
-        btnCreateGroup.layer.cornerRadius = 25
-        //var img : UIImage = #imageLiteral(resourceName: "ic_createGroup")
-        //img.resizingMode
-        btnCreateGroup.setImage(#imageLiteral(resourceName: "ic_createGroup"), for: UIControlState.normal)
-        btnCreateGroup.imageEdgeInsets = UIEdgeInsetsMake(40,40,40,40)
-        if(ChatCommon.listContact.count == 0){
-              getContacts()
-        }
-        else{
-            self.listContact = ChatCommon.listContact
-            self.aivLoad.isHidden = true
-            self.tblListContact.isHidden = false
-            self.tblListContact.reloadData()
-            self.searchContact.isUserInteractionEnabled = true
-        }
+
+        self.listContact = ChatCommon.listContact
+        self.aivLoad.isHidden = true
+        self.tblListContact.isHidden = false
+        self.reloadData()
     }
     
     @IBAction func goToChat(_ sender: Any) {
         //let vc = storyboard?.instantiateViewController(withIdentifier: "Chat") as! Chat_VC
         //self.navigationController?.pushViewController(vc, animated: true)
         //vc.passData = "122"
-    }
-    
-    func getContacts(){
-        listContact = [UserContact]()
-        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_Getcontacts/\(ChatHub.userID)"
-        ApiService.Get(url: apiUrl, callback: callbackGetContacts, errorCallBack: errorGetContacts)
-    }
-    
-    
-    func callbackGetContacts(data : Data) {
-        //let result = String(data: data, encoding: String.Encoding.utf8)
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
-        
-        if let dic = json as? [[String:Any]] {
-            for item in dic{
-                let contact = UserContact()
-                contact.ContactID =  item["ContactID"] as? Int
-                contact.TimeOfLatestMessage = Date(jsonDate: item["TimeOfLatestMessage"] as! String)
-                contact.LatestMessage = item["LatestMessage"] as? String
-                contact.LatestMessageID = item["LatestMessageID"] as? Int64
-                contact.LoginName = item["LoginName"] as? String
-                contact.Name = item["Name"] as? String
-                contact.NumberOfNewMessage = item["NumberOfNewMessage"] as? Int
-                contact.Online = item["Online"] as? Bool
-                contact.PictureUrl = item["PictureUrl"] as? String
-                contact.ReceiverOfMessage = item["ReceiverOfMessage"] as? Int
-                contact.SenderOfMessage = item["SenderOfMessage"] as? Int
-                contact.TypeOfContact = item["TypeOfContact"] as? Int
-                contact.TypeOfMessage = item["TypeOfMessage"] as? Int
-                
-                contact.setPicture()
-                listContact.append(contact)
-            }
-        }
-        ChatCommon.listContact = listContact
-        
-        //DispatchQueue.global(qos: .userInitiated).async {
-        //DispatchQueue.main.async {
-        //self.tblListContact.reloadData()
-        //}
-        //}
-        
-        DispatchQueue.main.async() { () -> Void in
-            self.aivLoad.isHidden = true
-            self.tblListContact.isHidden = false
-            self.tblListContact.reloadData()
-            self.searchContact.isUserInteractionEnabled = true
-        }
-    }
-    
-    func errorGetContacts(error : Error) {
-        let message = error.localizedDescription
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
     }
     
     var searchActive : Bool = false
@@ -149,10 +79,10 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         /*filtered = data.filter({ (text) -> Bool in
-            let tmp: NSString = text
-            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
-            return range.location != NSNotFound
-        })*/
+         let tmp: NSString = text
+         let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
+         return range.location != NSNotFound
+         })*/
         filtered = listContact.filter() {
             if let name = ($0 as UserContact).Name?.lowercased() as String! {
                 return name.contains(searchText.lowercased())
@@ -189,7 +119,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         let lblLastMessage : UILabel = cell.contentView.viewWithTag(102) as! UILabel
         let imgOnline : UIImageView = cell.contentView.viewWithTag(103) as! UIImageView
         
- 
+        
         imgContact.maskCircle(anyImage: contact.Picture!)
         lblContactName.text = contact.Name
         lblLastMessage.text = contact.LatestMessage
@@ -234,104 +164,102 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     // Chat hub
     
     func initEnvetChatHub(){
-        ChatHub.chatHub.on("receivePrivateMessage") {args in
-            /*
-            var sender = args?[0] as? [Any]
-            let receiver = args?[1] as? [Any]
-            let inbox = args?[2] as? [Any]
-            
-            let senderID = (sender![0] as? Int)!
-            let senderName = (sender![1] as? String)!
-            let receiverID = (receiver![0] as? Int)!
-            let receiverName = (receiver![1] as? String)
-            let msg = (inbox![0] as? String)!
-            let msgType = (inbox![1] as? Int)!
-            let inboxID = (inbox![2] as? Int64)*/
-            
-            DispatchQueue.global(qos: .userInitiated).async {
-                DispatchQueue.main.async {
-                     self.tblListContact.reloadData()
-                }
-            }
+        ChatHub.addChatHub(hub:  ChatHub.chatHub)
+        ChatHub.chatHub.on("onConnected") {args in            
+            self.reloadData()
         }
-        ChatHub.chatHub.on("receiveGroupMessage") {args in            
-            DispatchQueue.global(qos: .userInitiated).async {
-                DispatchQueue.main.async {
-                    self.tblListContact.reloadData()
-                }
+        
+        ChatHub.chatHub.on("onDisconnected") {args in
+            self.reloadData()
+        }
+        ChatHub.chatHub.on("receivePrivateMessage") {args in
+            self.reloadData()
+        }
+        ChatHub.chatHub.on("receiveGroupMessage") {args in
+            self.reloadData()
+        }
+        ChatHub.chatHub.on("receiveChatGroup") {args in
+            self.reloadData()
+        }
+    }
+    
+    func reloadData(){
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async {
+                self.tblListContact.reloadData()
             }
         }
     }
     
     /*
-    func myEncrypt(encryptData:String) -> NSData?{
-        
-        var myKeyData : NSData = ("myEncryptionKey" as NSString).data(using: String.Encoding.utf8.rawValue)! as NSData
-        var myRawData : NSData = encryptData.data(using: String.Encoding.utf8)! as NSData
-        var iv : [UInt8] = [56, 101, 63, 23, 96, 182, 209, 205]  // I didn't use
-        var buffer_size : size_t = myRawData.length + kCCBlockSize3DES
-        var buffer = UnsafeMutablePointer<NSData>.alloc(buffer_size)
-        var num_bytes_encrypted : size_t = 0
-        
-        let operation: CCOperation = UInt32(kCCEncrypt)
-        let algoritm:  CCAlgorithm = UInt32(kCCAlgorithm3DES)
-        let options:   CCOptions   = UInt32(kCCOptionECBMode + kCCOptionPKCS7Padding)
-        let keyLength        = size_t(kCCKeySize3DES)
-        
-        var Crypto_status: CCCryptorStatus = CCCrypt(operation, algoritm, options, myKeyData.bytes, keyLength, nil, myRawData.bytes, myRawData.length, buffer, buffer_size, &num_bytes_encrypted)
-        
-        if UInt32(Crypto_status) == UInt32(kCCSuccess){
-            
-            var myResult: NSData = NSData(bytes: buffer, length: num_bytes_encrypted)
-            
-            free(buffer)
-            println("my result \(myResult)") //This just prints the data
-            
-            let keyData: NSData = myResult
-            let hexString = keyData.toHexString()
-            println("hex result \(hexString)") // I needed a hex string output
-            
-            
-            myDecrypt(myResult) // sent straight to the decryption function to test the data output is the same
-            return myResult
-        }else{
-            free(buffer)
-            return nil
-        }
-    }
-    
-    
-    func myDecrypt(decryptData : NSData) -> NSData?{
-        
-        var mydata_len : Int = decryptData.length
-        var keyData : NSData = ("myEncryptionKey" as NSString).dataUsingEncoding(NSUTF8StringEncoding)!
-        
-        var buffer_size : size_t = mydata_len+kCCBlockSizeAES128
-        var buffer = UnsafeMutablePointer<NSData>.alloc(buffer_size)
-        var num_bytes_encrypted : size_t = 0
-        
-        var iv : [UInt8] = [56, 101, 63, 23, 96, 182, 209, 205]  // I didn't use
-        
-        let operation: CCOperation = UInt32(kCCDecrypt)
-        let algoritm:  CCAlgorithm = UInt32(kCCAlgorithm3DES)
-        let options:   CCOptions   = UInt32(kCCOptionECBMode + kCCOptionPKCS7Padding)
-        let keyLength        = size_t(kCCKeySize3DES)
-        
-        var decrypt_status : CCCryptorStatus = CCCrypt(operation, algoritm, options, keyData.bytes, keyLength, nil, decryptData.bytes, mydata_len, buffer, buffer_size, &num_bytes_encrypted)
-        
-        if UInt32(decrypt_status) == UInt32(kCCSuccess){
-            
-            var myResult : NSData = NSData(bytes: buffer, length: num_bytes_encrypted)
-            free(buffer)
-            println("decrypt \(myResult)")
-            
-            var stringResult = NSString(data: myResult, encoding:NSUTF8StringEncoding)
-            println("my decrypt string \(stringResult!)")
-            return myResult
-        }else{
-            free(buffer)
-            return nil
-            
-        }
-    }*/
+     func myEncrypt(encryptData:String) -> NSData?{
+     
+     var myKeyData : NSData = ("myEncryptionKey" as NSString).data(using: String.Encoding.utf8.rawValue)! as NSData
+     var myRawData : NSData = encryptData.data(using: String.Encoding.utf8)! as NSData
+     var iv : [UInt8] = [56, 101, 63, 23, 96, 182, 209, 205]  // I didn't use
+     var buffer_size : size_t = myRawData.length + kCCBlockSize3DES
+     var buffer = UnsafeMutablePointer<NSData>.alloc(buffer_size)
+     var num_bytes_encrypted : size_t = 0
+     
+     let operation: CCOperation = UInt32(kCCEncrypt)
+     let algoritm:  CCAlgorithm = UInt32(kCCAlgorithm3DES)
+     let options:   CCOptions   = UInt32(kCCOptionECBMode + kCCOptionPKCS7Padding)
+     let keyLength        = size_t(kCCKeySize3DES)
+     
+     var Crypto_status: CCCryptorStatus = CCCrypt(operation, algoritm, options, myKeyData.bytes, keyLength, nil, myRawData.bytes, myRawData.length, buffer, buffer_size, &num_bytes_encrypted)
+     
+     if UInt32(Crypto_status) == UInt32(kCCSuccess){
+     
+     var myResult: NSData = NSData(bytes: buffer, length: num_bytes_encrypted)
+     
+     free(buffer)
+     println("my result \(myResult)") //This just prints the data
+     
+     let keyData: NSData = myResult
+     let hexString = keyData.toHexString()
+     println("hex result \(hexString)") // I needed a hex string output
+     
+     
+     myDecrypt(myResult) // sent straight to the decryption function to test the data output is the same
+     return myResult
+     }else{
+     free(buffer)
+     return nil
+     }
+     }
+     
+     
+     func myDecrypt(decryptData : NSData) -> NSData?{
+     
+     var mydata_len : Int = decryptData.length
+     var keyData : NSData = ("myEncryptionKey" as NSString).dataUsingEncoding(NSUTF8StringEncoding)!
+     
+     var buffer_size : size_t = mydata_len+kCCBlockSizeAES128
+     var buffer = UnsafeMutablePointer<NSData>.alloc(buffer_size)
+     var num_bytes_encrypted : size_t = 0
+     
+     var iv : [UInt8] = [56, 101, 63, 23, 96, 182, 209, 205]  // I didn't use
+     
+     let operation: CCOperation = UInt32(kCCDecrypt)
+     let algoritm:  CCAlgorithm = UInt32(kCCAlgorithm3DES)
+     let options:   CCOptions   = UInt32(kCCOptionECBMode + kCCOptionPKCS7Padding)
+     let keyLength        = size_t(kCCKeySize3DES)
+     
+     var decrypt_status : CCCryptorStatus = CCCrypt(operation, algoritm, options, keyData.bytes, keyLength, nil, decryptData.bytes, mydata_len, buffer, buffer_size, &num_bytes_encrypted)
+     
+     if UInt32(decrypt_status) == UInt32(kCCSuccess){
+     
+     var myResult : NSData = NSData(bytes: buffer, length: num_bytes_encrypted)
+     free(buffer)
+     println("decrypt \(myResult)")
+     
+     var stringResult = NSString(data: myResult, encoding:NSUTF8StringEncoding)
+     println("my decrypt string \(stringResult!)")
+     return myResult
+     }else{
+     free(buffer)
+     return nil
+     
+     }
+     }*/
 }

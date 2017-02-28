@@ -9,21 +9,41 @@
 import Foundation
 class ChatCommon{
     static var listContact : [UserContact] = [UserContact]()
-
     
-    /*
-    static func setImageFromURl(url: String) -> UIImage{
+    static func getContacts(){
+        listContact = [UserContact]()
+        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_Getcontacts/\(ChatHub.userID)"
+        ApiService.Get(url: apiUrl, callback: callbackGetContacts, errorCallBack: errorGetContacts)
+    }
 
-        if let url = NSURL(string: url) {
-            if let data = NSData(contentsOf: url as URL) {
-                return UIImage(data: data as Data)!
-            }
-            else{
-                return UIImage()
+    static func callbackGetContacts(data : Data) {
+        //let result = String(data: data, encoding: String.Encoding.utf8)
+        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        
+        if let dic = json as? [[String:Any]] {
+            for item in dic{
+                let contact = UserContact()
+                contact.ContactID =  item["ContactID"] as? Int
+                contact.TimeOfLatestMessage = Date(jsonDate: item["TimeOfLatestMessage"] as! String)
+                contact.LatestMessage = item["LatestMessage"] as? String
+                contact.LatestMessageID = item["LatestMessageID"] as? Int64
+                contact.LoginName = item["LoginName"] as? String
+                contact.Name = item["Name"] as? String
+                contact.NumberOfNewMessage = item["NumberOfNewMessage"] as? Int
+                contact.Online = item["Online"] as? Bool
+                contact.PictureUrl = item["PictureUrl"] as? String
+                contact.ReceiverOfMessage = item["ReceiverOfMessage"] as? Int
+                contact.SenderOfMessage = item["SenderOfMessage"] as? Int
+                contact.TypeOfContact = item["TypeOfContact"] as? Int
+                contact.TypeOfMessage = item["TypeOfMessage"] as? Int
+                
+                contact.setPicture()
+                listContact.append(contact)
             }
         }
-        else{
-            return UIImage()
-        }
-    }*/
+    }
+    
+    static func errorGetContacts(error : Error) {
+
+    }
 }

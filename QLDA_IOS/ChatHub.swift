@@ -15,6 +15,11 @@ class ChatHub {
     static var userID = 59
     static var userName = "demo2"
     
+    static func addChatHub(hub : Hub){
+        connection.addHub(hub)
+        connection.connect()
+    }
+    
     static func initChatHub(){
         connection = SignalR("http://harmonysoft.vn:8089/QLDA_Services/")
         //connection.useWKWebView = true
@@ -74,6 +79,29 @@ class ChatHub {
     }
     
     static func initEvent(){
+        chatHub.on("onConnected"){args in
+            let userID = args?[0] as? Int
+            ChatCommon.listContact.filter() {
+                let contact = $0 as UserContact
+                if contact.ContactID == userID && contact.TypeOfContact == 1{
+                    return true
+                }
+                return false
+            }.first?.Online = true
+            
+        }
+        
+        chatHub.on("onDisconnected"){args in
+            let userID = args?[0] as? Int
+            ChatCommon.listContact.filter() {
+                let contact = $0 as UserContact
+                if contact.ContactID == userID && contact.TypeOfContact == 1{
+                    return true
+                }
+                return false
+                }.first?.Online = false
+            
+        }
         
         chatHub.on("receivePrivateMessage") {args in
             let sender = args?[0] as? [Any]
@@ -129,7 +157,12 @@ class ChatHub {
             print(groupID, groupName, host, pictureUrl)
             let newContact : UserContact = UserContact()
             newContact.ContactID = groupID
-            newContact.LatestMessage = "Bạn vừa tạo nhóm"
+            if(host == ChatHub.userID){
+                newContact.LatestMessage = "Bạn vừa tạo nhóm"
+            }
+            else{
+                newContact.LatestMessage = "Bạn vừa được thêm vào nhóm"
+            }
             newContact.LatestMessageID = 0
             newContact.LoginName = ""
             newContact.Name = groupName
@@ -141,8 +174,7 @@ class ChatHub {
             newContact.TypeOfContact = 2
             newContact.TypeOfMessage = 0
             newContact.setPicture()
-            ChatCommon.listContact.append(newContact)
-
+            ChatCommon.listContact.insert(newContact, at: 0)
         }
     }
     static func changeDataWhenReciveMessage(inboxID : Int64, message : String, messageType : Int, senderID : Int, senderName : String,  receiverID : Int, receiverName : String, contactType : Int){
