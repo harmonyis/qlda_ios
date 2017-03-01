@@ -13,7 +13,6 @@
 		246015521E5D76AA000DD658 /* CustomCellDSDATableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246015511E5D76AA000DD658 /* CustomCellDSDATableViewCell.swift */; };
 		246015581E5D804C000DD658 /* ExtendtionUItableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246015571E5D804C000DD658 /* ExtendtionUItableViewCell.swift */; };
 		BA0DC4C91E657B03009DD019 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0DC4C81E657B03009DD019 /* PaddingLabel.swift */; };
-		BA0DC50D1E666AB2009DD019 /* ChatLog_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0DC50C1E666AB2009DD019 /* ChatLog_VC.swift */; };
 		BA0DC51A1E667039009DD019 /* SwiftR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA979F611E5D4C0A00FC6FA8 /* SwiftR.framework */; };
 		BA0DC51B1E667039009DD019 /* SwiftR.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA979F611E5D4C0A00FC6FA8 /* SwiftR.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BA0DC5201E66A3E6009DD019 /* Chat_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0DC51F1E66A3E6009DD019 /* Chat_VC.swift */; };
@@ -140,7 +139,6 @@
 		246015511E5D76AA000DD658 /* CustomCellDSDATableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellDSDATableViewCell.swift; sourceTree = "<group>"; };
 		246015571E5D804C000DD658 /* ExtendtionUItableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendtionUItableViewCell.swift; sourceTree = "<group>"; };
 		BA0DC4C81E657B03009DD019 /* PaddingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
-		BA0DC50C1E666AB2009DD019 /* ChatLog_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLog_VC.swift; sourceTree = "<group>"; };
 		BA0DC51F1E66A3E6009DD019 /* Chat_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat_VC.swift; sourceTree = "<group>"; };
 		BA4E53811E5A832400AF270E /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		BA4E53861E5A9DCF00AF270E /* DSDA_View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSDA_View.swift; sourceTree = "<group>"; };
@@ -390,7 +388,6 @@
 				BAE41E161E5B231300B89A8D /* MenuLeft_VC.swift */,
 				BA54E1B51E545CA500F83B91 /* BaseViewController.swift */,
 				BAE41E181E5B26F800B89A8D /* Base_VC.swift */,
-				BA0DC50C1E666AB2009DD019 /* ChatLog_VC.swift */,
 				BA0DC51F1E66A3E6009DD019 /* Chat_VC.swift */,
 			);
 			name = ViewController;
@@ -643,7 +640,6 @@
 				BA778AE81E559454000F934B /* BDNVDT_VC.swift in Sources */,
 				BAE41E1D1E5B3A2700B89A8D /* QLHinhAnh_VC.swift in Sources */,
 				BA54E1B81E545CA500F83B91 /* MenuViewController.swift in Sources */,
-				BA0DC50D1E666AB2009DD019 /* ChatLog_VC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

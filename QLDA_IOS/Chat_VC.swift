@@ -24,7 +24,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         ChatHub.addChatHub(hub: ChatHub.chatHub)
         self.initEnvetChatHub()
         collectionView.backgroundColor = UIColor.white
-        collectionView.register(Chat2_Cell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(Chat_Cell.self, forCellWithReuseIdentifier: cellId)
         getMessage()
     }
     
@@ -50,7 +50,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! Chat2_Cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! Chat_Cell
         let msg = messages[indexPath.item]
         
         cell.messageTextView.text = msg.Message
@@ -260,7 +260,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     }
 }
 
-class Chat2_Cell: BaseCell2 {
+class Chat_Cell: BaseCell {
     
     let messageTextView: UITextView = {
         let textView = UITextView()
@@ -286,7 +286,7 @@ class Chat2_Cell: BaseCell2 {
     
 }
 
-class BaseCell2: UICollectionViewCell {
+class BaseCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
