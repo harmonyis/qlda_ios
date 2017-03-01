@@ -13,6 +13,10 @@
 		246015521E5D76AA000DD658 /* CustomCellDSDATableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246015511E5D76AA000DD658 /* CustomCellDSDATableViewCell.swift */; };
 		246015581E5D804C000DD658 /* ExtendtionUItableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246015571E5D804C000DD658 /* ExtendtionUItableViewCell.swift */; };
 		BA0DC4C91E657B03009DD019 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0DC4C81E657B03009DD019 /* PaddingLabel.swift */; };
+		BA0DC50D1E666AB2009DD019 /* ChatLog_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0DC50C1E666AB2009DD019 /* ChatLog_VC.swift */; };
+		BA0DC51A1E667039009DD019 /* SwiftR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA979F611E5D4C0A00FC6FA8 /* SwiftR.framework */; };
+		BA0DC51B1E667039009DD019 /* SwiftR.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA979F611E5D4C0A00FC6FA8 /* SwiftR.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BA0DC5201E66A3E6009DD019 /* Chat_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0DC51F1E66A3E6009DD019 /* Chat_VC.swift */; };
 		BA4E53821E5A832400AF270E /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4E53811E5A832400AF270E /* View.xib */; };
 		BA4E53871E5A9DCF00AF270E /* DSDA_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E53861E5A9DCF00AF270E /* DSDA_View.swift */; };
 		BA4E53891E5A9E4C00AF270E /* DSDA_View.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4E53881E5A9E4C00AF270E /* DSDA_View.xib */; };
@@ -28,7 +32,6 @@
 		BA54E1BA1E54609400F83B91 /* BDTMDT_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA54E1B91E54609400F83B91 /* BDTMDT_VC.swift */; };
 		BA55B30F1E56B1B100E011B7 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55B30E1E56B1B100E011B7 /* Config.swift */; };
 		BA55B3131E56D52000E011B7 /* ChatMain_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55B3121E56D52000E011B7 /* ChatMain_VC.swift */; };
-		BA55B3151E56D84300E011B7 /* Chat_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55B3141E56D84300E011B7 /* Chat_VC.swift */; };
 		BA760BB71E5BEE50000A4694 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA760BB61E5BEE50000A4694 /* ApiService.swift */; };
 		BA760BC51E5C2ECA000A4694 /* UserContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA760BC41E5C2ECA000A4694 /* UserContact.swift */; };
 		BA760BDE1E5C48ED000A4694 /* ChatHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA760BDD1E5C48ED000A4694 /* ChatHub.swift */; };
@@ -51,6 +54,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		BA0DC51C1E667039009DD019 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BA979F571E5D4C0A00FC6FA8 /* SwiftR.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5B2F47941ADFFE6800416A1A;
+			remoteInfo = "SwiftR iOS";
+		};
 		BA54E1991E545C9600F83B91 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BA54E17C1E545C9600F83B91 /* Project object */;
@@ -109,6 +119,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		BA0DC51E1E667039009DD019 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BA0DC51B1E667039009DD019 /* SwiftR.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		246015421E5BF3DF000DD658 /* UrlPreFix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlPreFix.swift; sourceTree = "<group>"; };
 		246015451E5D407C000DD658 /* DuAn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuAn.swift; sourceTree = "<group>"; };
@@ -116,6 +140,8 @@
 		246015511E5D76AA000DD658 /* CustomCellDSDATableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellDSDATableViewCell.swift; sourceTree = "<group>"; };
 		246015571E5D804C000DD658 /* ExtendtionUItableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendtionUItableViewCell.swift; sourceTree = "<group>"; };
 		BA0DC4C81E657B03009DD019 /* PaddingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		BA0DC50C1E666AB2009DD019 /* ChatLog_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLog_VC.swift; sourceTree = "<group>"; };
+		BA0DC51F1E66A3E6009DD019 /* Chat_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat_VC.swift; sourceTree = "<group>"; };
 		BA4E53811E5A832400AF270E /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		BA4E53861E5A9DCF00AF270E /* DSDA_View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSDA_View.swift; sourceTree = "<group>"; };
 		BA4E53881E5A9E4C00AF270E /* DSDA_View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSDA_View.xib; sourceTree = "<group>"; };
@@ -137,7 +163,6 @@
 		BA54E1B91E54609400F83B91 /* BDTMDT_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDTMDT_VC.swift; sourceTree = "<group>"; };
 		BA55B30E1E56B1B100E011B7 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		BA55B3121E56D52000E011B7 /* ChatMain_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMain_VC.swift; sourceTree = "<group>"; };
-		BA55B3141E56D84300E011B7 /* Chat_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat_VC.swift; sourceTree = "<group>"; };
 		BA760BB61E5BEE50000A4694 /* ApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		BA760BC41E5C2ECA000A4694 /* UserContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserContact.swift; sourceTree = "<group>"; };
 		BA760BDD1E5C48ED000A4694 /* ChatHub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatHub.swift; sourceTree = "<group>"; };
@@ -167,6 +192,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA0DC51A1E667039009DD019 /* SwiftR.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,12 +385,13 @@
 				BAE41E1E1E5B3A5900B89A8D /* Lich_VC.swift */,
 				BA778AEB1E559C2C000F934B /* Login_VC.swift */,
 				BA55B3121E56D52000E011B7 /* ChatMain_VC.swift */,
-				BA55B3141E56D84300E011B7 /* Chat_VC.swift */,
 				BA979F6E1E5D980D00FC6FA8 /* ChatCreateGroup_VC.swift */,
 				BA54E1B61E545CA500F83B91 /* MenuViewController.swift */,
 				BAE41E161E5B231300B89A8D /* MenuLeft_VC.swift */,
 				BA54E1B51E545CA500F83B91 /* BaseViewController.swift */,
 				BAE41E181E5B26F800B89A8D /* Base_VC.swift */,
+				BA0DC50C1E666AB2009DD019 /* ChatLog_VC.swift */,
+				BA0DC51F1E66A3E6009DD019 /* Chat_VC.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -402,10 +429,12 @@
 				BA54E1801E545C9600F83B91 /* Sources */,
 				BA54E1811E545C9600F83B91 /* Frameworks */,
 				BA54E1821E545C9600F83B91 /* Resources */,
+				BA0DC51E1E667039009DD019 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				BA0DC51D1E667039009DD019 /* PBXTargetDependency */,
 			);
 			name = QLDA_IOS;
 			productName = QLDA_IOS;
@@ -605,8 +634,8 @@
 				BA778AE21E558F90000F934B /* DSDA_VC.swift in Sources */,
 				246015521E5D76AA000DD658 /* CustomCellDSDATableViewCell.swift in Sources */,
 				BAE41E1F1E5B3A5900B89A8D /* Lich_VC.swift in Sources */,
-				BA55B3151E56D84300E011B7 /* Chat_VC.swift in Sources */,
 				BA4E53CA1E5ACFA100AF270E /* UIColor.swift in Sources */,
+				BA0DC5201E66A3E6009DD019 /* Chat_VC.swift in Sources */,
 				BAE41E171E5B231300B89A8D /* MenuLeft_VC.swift in Sources */,
 				BA760BB71E5BEE50000A4694 /* ApiService.swift in Sources */,
 				BA778AEC1E559C2C000F934B /* Login_VC.swift in Sources */,
@@ -614,6 +643,7 @@
 				BA778AE81E559454000F934B /* BDNVDT_VC.swift in Sources */,
 				BAE41E1D1E5B3A2700B89A8D /* QLHinhAnh_VC.swift in Sources */,
 				BA54E1B81E545CA500F83B91 /* MenuViewController.swift in Sources */,
+				BA0DC50D1E666AB2009DD019 /* ChatLog_VC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -636,6 +666,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		BA0DC51D1E667039009DD019 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "SwiftR iOS";
+			targetProxy = BA0DC51C1E667039009DD019 /* PBXContainerItemProxy */;
+		};
 		BA54E19A1E545C9600F83B91 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BA54E1831E545C9600F83B91 /* QLDA_IOS */;
@@ -764,6 +799,7 @@
 		BA54E1AD1E545C9600F83B91 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = QLDA_IOS/Info.plist;
@@ -779,6 +815,7 @@
 		BA54E1AE1E545C9600F83B91 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = QLDA_IOS/Info.plist;

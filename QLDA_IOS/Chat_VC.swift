@@ -9,177 +9,110 @@
 import UIKit
 import SwiftR
 
-class Chat_Cell: UITableViewCell{
-    @IBOutlet weak var viewLeft: UIView!
-    @IBOutlet weak var viewRight: UIView!
-    @IBOutlet weak var lblContactName: UILabel!
-    @IBOutlet weak var lblMessage: UILabel!
-    
-    @IBOutlet weak var lblContactNameRight: UILabel!
-    @IBOutlet weak var lblMessageRight: UILabel!
-}
-
-
-class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
-    @IBOutlet weak var btnSend: UIButton!
+class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    fileprivate let cellId = "cellId"
     @IBOutlet weak var txtMessage: UITextField!
-    @IBOutlet weak var tblConversation: UITableView!
+    var messages: [ChatMessage] = [ChatMessage]()
     var contactID : Int!
     var contactType : Int!
     var contactName : String!
-    var service = ApiService()
-    var listMessage : [ChatMessage]? = [ChatMessage]()
+    @IBOutlet weak var collectionView: UICollectionView!
     
-    var listContact : [UserContact]? = [UserContact]()
-    //var chatHub: Hub = Hub("chatHub")
-    /*
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        listMessage = nil
-        var msg = listMessage?[0].Message
-        print(msg)
-        listContact = nil
-    }
-    */
     override func viewDidLoad() {
         super.viewDidLoad()
-        //getContacts()
         self.title = contactName
-
-        DispatchQueue.global(qos: .userInitiated).async {
-            DispatchQueue.main.async {
-                //ChatHub.initChatHub()
-                ChatHub.addChatHub(hub: ChatHub.chatHub)
-                self.initEnvetChatHub()
-            }
-        }
-        
-        //self.tblConversation.separatorStyle = UITableViewCellSeparatorStyle.none
-    }   
+        ChatHub.addChatHub(hub: ChatHub.chatHub)
+        self.initEnvetChatHub()
+        collectionView.backgroundColor = UIColor.white
+        collectionView.register(Chat2_Cell.self, forCellWithReuseIdentifier: cellId)
+        getMessage()
+    }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        collectionView.reloadData()
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getMessage()
-        self.tblConversation.allowsSelection = false
-        //self.tblConversation.reloadData()
-        //self.scrollToBottom()
-    }
-    
-    @IBAction func btnSendTouchUpInside(_ sender: UIButton) {
-        sendMessage()
-    }
-    
-    func sendMessage(){
-        do {
-            var funcName = "SendPrivateMessage"
-            if(contactType == 2){
-                funcName = "SendGroupMessage"
-            }
-            print(ChatHub.userID, ChatHub.userName, contactID, contactName, txtMessage.text!)
-            try ChatHub.chatHub.invoke(funcName, arguments: [ChatHub.userID, ChatHub.userName, contactID, contactName, txtMessage.text!])
-            txtMessage.text = ""
-        } catch {
-            print(error)
-        }
-        /*
-        if let hub = ChatHub.chatHub {
-            do {
-                var funcName = "SendPrivateMessage"
-                if(contactType == 2){
-                    funcName = "SendGroupMessage"
-                }
-                print(ChatHub.userID, ChatHub.userName, contactID, contactName, txtMessage.text!)
-                try hub.invoke(funcName, arguments: [ChatHub.userID, ChatHub.userName, contactID, contactName, txtMessage.text!])
-            } catch {
-                print(error)
-            }
-        }*/
-    }
-    
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell : Chat_Cell = tableView.dequeueReusableCell(withIdentifier: "cellChat") as! Chat_Cell
-        let msg : ChatMessage = listMessage![indexPath.row]
 
-        if(msg.IsMe!){
-            cell.viewLeft.isHidden = true
-            cell.viewRight.isHidden = false
-            cell.lblContactNameRight.text = msg.SenderName
-            cell.lblMessageRight.text = msg.Message
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+
+        return messages.count
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! Chat2_Cell
+        let msg = messages[indexPath.item]
+        
+        cell.messageTextView.text = msg.Message
+        //cell.profileImageView.image = #imageLiteral(resourceName: "ic_contactUser")
+        
+        if let messageText = msg.Message {
             
-            //cell.lblMessageRight.layer.backgroundColor = UIColor.green.cgColor
-            cell.lblMessageRight.layer.cornerRadius = 5
-            cell.lblMessageRight.layer.masksToBounds = true
-            //cell.lblMessageRight.sizeToFit()
-        }else{
-            cell.viewLeft.isHidden = false
-            cell.viewRight.isHidden = true
-            cell.lblContactName.text = msg.SenderName
-            cell.lblMessage.text = msg.Message
+            //cell.profileImageView.image = UIImage(named: profileImageName)
             
-             //cell.lblMessage.layer.backgroundColor = UIColor.yellow.cgColor
-            cell.lblMessage.layer.cornerRadius = 5
-            cell.lblMessage.layer.masksToBounds = true
-            //cell.lblMessage.sizeToFit()
+            let w : Int = Int(view.frame.width * 7 / 10)
+            let size = CGSize(width: w, height: 1000)
+            let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+            let estimatedFrame = NSString(string: messageText).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 16)], context: nil)
+            
+            if (msg.IsMe)!{
+                cell.messageTextView.frame = CGRect(x: view.frame.width - estimatedFrame.width - 8 - 8 - 8, y: 0, width: estimatedFrame.width + 16, height: estimatedFrame.height + 20)
+                
+                cell.textBubbleView.frame = CGRect(x: view.frame.width - estimatedFrame.width - 16 - 8 - 8, y: 0, width: estimatedFrame.width + 16 + 8, height: estimatedFrame.height + 20)
+                
+                //cell.profileImageView.isHidden = true
+                
+                cell.textBubbleView.backgroundColor = UIColor(red: 0, green: 137/255, blue: 249/255, alpha: 1)
+                //cell.bubbleImageView.image = ChatLogMessageCell.blueBubbleImage
+                //cell.bubbleImageView.tintColor = UIColor(red: 0, green: 137/255, blue: 249/255, alpha: 1)
+                cell.messageTextView.textColor = UIColor.white
+                
+            } else {
+                cell.messageTextView.frame = CGRect(x: 8 + 4, y: 0, width: estimatedFrame.width + 16, height: estimatedFrame.height + 20)
+                
+                cell.textBubbleView.frame = CGRect(x: 4, y: 0, width: estimatedFrame.width + 8 + 8 + 16, height: estimatedFrame.height + 20)
+                
+               // cell.profileImageView.isHidden = false
+                
+                cell.textBubbleView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+                //cell.bubbleImageView.image = ChatLogMessageCell.grayBubbleImage
+                //cell.bubbleImageView.tintColor = UIColor(white: 0.95, alpha: 1)
+                cell.messageTextView.textColor = UIColor.black
+            }
         }
         return cell
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {        
-        return listMessage!.count;
-    }
-    /*
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-         return UITableViewAutomaticDimension
-    }*/
-
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        //return UITableViewAutomaticDimension
-        
-        let cell : Chat_Cell = tableView.dequeueReusableCell(withIdentifier: "cellChat") as! Chat_Cell
-        let msg : ChatMessage = listMessage![indexPath.row]
-        let stringSizeAsText: CGSize = getStringSizeForFont(font: UIFont.systemFont(ofSize: 16), myText: msg.Message!)
-        
-        var labelWidth: CGFloat
-        if(msg.IsMe!){
-            labelWidth = cell.lblMessageRight.frame.width
+        let w : Int = Int(view.frame.width * 7 / 10)
+        if let messageText = messages[indexPath.item].Message {
+            let size = CGSize(width: w, height: 1000)
+            let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+            let estimatedFrame = NSString(string: messageText).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 16)], context: nil)
+            
+            return CGSize(width: view.frame.width, height: estimatedFrame.height + 20)
         }
-        else{
-            labelWidth = cell.lblMessage.frame.width
-        }        
         
-        //let originalLabelHeight: CGFloat = cell.lblMessage.frame.height
-        
-        let labelLines: CGFloat = CGFloat(ceil(Float(stringSizeAsText.width/labelWidth)))
-        
-        //let height =  tableView.rowHeight - originalLabelHeight + CGFloat(labelLines*stringSizeAsText.height)
-        let height = CGFloat(labelLines * (stringSizeAsText.height + 3))
-        return height + 17
- 
+        return CGSize(width: w, height: 100)
     }
- 
-    func getStringSizeForFont(font: UIFont, myText: String) -> CGSize {
-        let fontAttributes = [NSFontAttributeName: font]
-        let size = (myText as NSString).size(attributes: fontAttributes)
-        
-        return size
-        
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(8, 0, 0, 0)
     }
     
     func getMessage(){
-        //print("data: ", contactID, contactName, contactType)
+        print("data: ", contactID, contactName, contactType)
         if contactType == 1 {
             let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_GetPrivateMessage?senderID=\(ChatHub.userID)&receiverID=\(String(contactID))"
             ApiService.Get(url: apiUrl, callback: callbackGetMsg, errorCallBack: errorGetMsg)
@@ -213,16 +146,14 @@ class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
                         }
                         }.first?.Name
                 }
-                
                 msg.Created = Date(jsonDate: item["Created"] as! String)
-                
-                listMessage?.append(msg)
+                messages.append(msg)
             }
         }
         
         DispatchQueue.main.async() { () -> Void in
-            self.tblConversation.reloadData()
-            self.scrollToBottom()
+            self.collectionView.reloadData()
+            self.scrollToBottom(animate: false)
         }
     }
     
@@ -233,14 +164,22 @@ class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
         self.present(alert, animated: true, completion: nil)
     }
     
-    func scrollToBottom(){
-        DispatchQueue.global(qos: .background).async {
-            if(self.listMessage!.count > 0){
-                let indexPath = IndexPath(row: self.listMessage!.count-1, section: 0)
-                self.tblConversation.scrollToRow(at: indexPath, at: .bottom, animated: true)
+    func sendMessage(){
+        do {
+            var funcName = "SendPrivateMessage"
+            if(contactType == 2){
+                funcName = "SendGroupMessage"
             }
-            
+            //print(ChatHub.userID, ChatHub.userName, contactID, contactName, txtMessage.text!)
+            try ChatHub.chatHub.invoke(funcName, arguments: [ChatHub.userID, ChatHub.userName, contactID, contactName, txtMessage.text!])
+            txtMessage.text = ""
+        } catch {
+            print(error)
         }
+    }
+    
+    @IBAction func btnSendTouchUpInside(_ sender: UIButton) {
+         sendMessage()
     }
     
     func initEnvetChatHub(){
@@ -262,8 +201,8 @@ class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
                 
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {
-                        self.tblConversation.reloadData()
-                        self.scrollToBottom()
+                        self.collectionView.reloadData()
+                        self.scrollToBottom(animate: true)
                     }
                 }
             }
@@ -286,8 +225,8 @@ class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
                 
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {
-                        self.tblConversation.reloadData()
-                        self.scrollToBottom()
+                        self.collectionView.reloadData()
+                        self.scrollToBottom(animate: true)
                     }
                 }
             }
@@ -302,57 +241,61 @@ class Chat_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
             newChat.IsMe = true
         }
         else {
-           newChat.IsMe = false
+            newChat.IsMe = false
         }
         newChat.Message = message
         newChat.MessageType = messageType
         newChat.SenderID = senderID
         newChat.SenderName = senderName
-        listMessage?.append(newChat)
+        messages.append(newChat)
     }
     
     
-    ///////////
-    /*
-    func getContacts(){
-        listContact = [UserContact]()
-        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_Getcontacts/\(ChatHub.userID)"
-        ApiService.Get(url: apiUrl, callback: callbackGetContacts, errorCallBack: errorGetContacts)
-    }
-    
-    
-    func callbackGetContacts(data : Data) {
-        //let result = String(data: data, encoding: String.Encoding.utf8)
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
-        
-        if let dic = json as? [[String:Any]] {
-            for item in dic{
-                let contact = UserContact()
-                contact.ContactID =  item["ContactID"] as? Int
-                contact.TimeOfLatestMessage = Date(jsonDate: item["TimeOfLatestMessage"] as! String)
-                contact.LatestMessage = item["LatestMessage"] as? String
-                contact.LatestMessageID = item["LatestMessageID"] as? Int64
-                contact.LoginName = item["LoginName"] as? String
-                contact.Name = item["Name"] as? String
-                contact.NumberOfNewMessage = item["NumberOfNewMessage"] as? Int
-                contact.Online = item["Online"] as? Bool
-                contact.PictureUrl = item["PictureUrl"] as? String
-                contact.ReceiverOfMessage = item["ReceiverOfMessage"] as? Int
-                contact.SenderOfMessage = item["SenderOfMessage"] as? Int
-                contact.TypeOfContact = item["TypeOfContact"] as? Int
-                contact.TypeOfMessage = item["TypeOfMessage"] as? Int
-                
-                contact.setPicture()
-                listContact?.append(contact)
-            }
+    func scrollToBottom(animate : Bool){
+        if(self.messages.count > 0){
+            let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+            self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: animate)
+            //self.tblConversation.scrollToRow(at: indexPath, at: .bottom, animated: true)
         }
     }
+}
+
+class Chat2_Cell: BaseCell2 {
     
-    func errorGetContacts(error : Error) {
-        let message = error.localizedDescription
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+    let messageTextView: UITextView = {
+        let textView = UITextView()
+        textView.font = UIFont.systemFont(ofSize: 16)
+        textView.text = "Sample message"
+        textView.backgroundColor = UIColor.clear
+        return textView
+    }()
+    
+    let textBubbleView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        view.layer.cornerRadius = 15
+        view.layer.masksToBounds = true
+        return view
+    }()
+    
+    override func setupViews() {
+        super.setupViews()
+        addSubview(textBubbleView)
+        addSubview(messageTextView)
     }
-*/
+    
+}
+
+class BaseCell2: UICollectionViewCell {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupViews()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupViews() {
+    }
 }

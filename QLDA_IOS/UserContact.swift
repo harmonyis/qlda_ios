@@ -77,5 +77,7 @@ class UserContact{
         }
     }
     
-    
+    deinit{
+        print("Thông báo deinit")
+    }
 }
