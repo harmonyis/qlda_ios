@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftR
+import UserNotifications
 
 class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
     @IBOutlet weak var btnCreateGroup: UIButton!
@@ -41,6 +42,8 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         self.listContact = ChatCommon.listContact
         self.aivLoad.isHidden = true
         self.tblListContact.isHidden = false
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in})
     }
     
     override func didReceiveMemoryWarning() {

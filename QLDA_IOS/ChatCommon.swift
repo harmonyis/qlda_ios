@@ -47,7 +47,6 @@ class ChatCommon{
         }
     }
     
-    static func errorGetContacts(error : Error) {
-
+    static func errorGetContacts(error : Error) {        
     }
 }

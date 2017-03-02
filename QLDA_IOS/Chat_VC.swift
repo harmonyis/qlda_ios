@@ -9,6 +9,7 @@
 import UIKit
 import SwiftR
 
+
 class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     fileprivate let cellId = "cellId"
     @IBOutlet weak var txtMessage: UITextField!
@@ -79,6 +80,8 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
             let estimatedFrame = NSString(string: messageText).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 16)], context: nil)
             
+            cell.contactNameLabel.isHidden = true
+            cell.contactNameLabel.text = ""
             if (msg.IsMe)!{
                 cell.messageTextView.frame = CGRect(x: view.frame.width - estimatedFrame.width - 8 - 8 - 8, y: 0, width: estimatedFrame.width + 16, height: estimatedFrame.height + 20)
                 
@@ -94,7 +97,6 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             } else {
                 
                 if msg.ContactType == 1{
-                    cell.contactNameLabel.isHidden = true
                    
                     cell.messageTextView.frame = CGRect(x: 8 + 4, y: 0, width: estimatedFrame.width + 16, height: estimatedFrame.height + 20)
                     
@@ -302,6 +304,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             //self.tblConversation.scrollToRow(at: indexPath, at: .bottom, animated: true)
         }
     }
+    
 }
 
 class Chat_Cell: BaseCell {
@@ -337,6 +340,7 @@ class Chat_Cell: BaseCell {
         addSubview(messageTextView)
         
     }
+    
     
 }
 
