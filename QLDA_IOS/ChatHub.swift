@@ -227,4 +227,8 @@ class ChatHub {
         }
         ChatCommon.listContact.insert(newContact, at: 0)
     }
+    
+    static func notification(){
+        //let contain : UNMu
+    }
 }

@@ -8,6 +8,10 @@
 
 import Foundation
 class ChatCommon{
+    
+    static var currentChatID : Int?
+    static var currentChatType: Int?
+    
     static var listContact : [UserContact] = [UserContact]()
     
     static func getContacts(){
