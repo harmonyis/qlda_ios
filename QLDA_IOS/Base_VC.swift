@@ -80,6 +80,7 @@ class Base_VC: UIViewController {
         
         let btnMapMenu = UIButton(type: UIButtonType.system)
         btnMapMenu.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        btnMapMenu.addTarget(self, action: #selector(Base_VC.onMapBarPressesd(_:)), for: UIControlEvents.touchUpInside)
         btnMapMenu.setImage(UIImage(named: "ic_map"), for: UIControlState())
         btnMapMenu.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
         let customMapBarItem = UIBarButtonItem(customView: btnMapMenu)
@@ -93,6 +94,12 @@ class Base_VC: UIViewController {
     func onChatBarPressesd(_ sender : UIButton){
         Config.SelectMenuIndex = -1
         let vc = storyboard?.instantiateViewController(withIdentifier: "ChatMain") as! ChatMain_VC
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func onMapBarPressesd(_ sender : UIButton){
+        Config.SelectMenuIndex = -1
+        let vc = storyboard?.instantiateViewController(withIdentifier: "Map") as! Map_VC
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
