@@ -46,6 +46,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>You can select photos to attach to reports.</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 </dict>

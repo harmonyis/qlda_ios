@@ -12,6 +12,9 @@
 		246015481E5D40C3000DD658 /* NhomDA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246015471E5D40C3000DD658 /* NhomDA.swift */; };
 		246015521E5D76AA000DD658 /* CustomCellDSDATableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246015511E5D76AA000DD658 /* CustomCellDSDATableViewCell.swift */; };
 		246015581E5D804C000DD658 /* ExtendtionUItableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246015571E5D804C000DD658 /* ExtendtionUItableViewCell.swift */; };
+		7C850FBB1E67BA5D0002C84B /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C850FBA1E67BA5D0002C84B /* UIImageViewExtension.swift */; };
+		7C850FC21E67BA960002C84B /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C850FC11E67BA960002C84B /* Entity.swift */; };
+		7C850FC41E67BC170002C84B /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C850FC31E67BC170002C84B /* MyCollectionViewCell.swift */; };
 		BA0DC4C91E657B03009DD019 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0DC4C81E657B03009DD019 /* PaddingLabel.swift */; };
 		BA0DC51A1E667039009DD019 /* SwiftR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA979F611E5D4C0A00FC6FA8 /* SwiftR.framework */; };
 		BA0DC51B1E667039009DD019 /* SwiftR.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA979F611E5D4C0A00FC6FA8 /* SwiftR.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -138,6 +141,9 @@
 		246015471E5D40C3000DD658 /* NhomDA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NhomDA.swift; sourceTree = "<group>"; };
 		246015511E5D76AA000DD658 /* CustomCellDSDATableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellDSDATableViewCell.swift; sourceTree = "<group>"; };
 		246015571E5D804C000DD658 /* ExtendtionUItableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendtionUItableViewCell.swift; sourceTree = "<group>"; };
+		7C850FBA1E67BA5D0002C84B /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		7C850FC11E67BA960002C84B /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		7C850FC31E67BC170002C84B /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCollectionViewCell.swift; sourceTree = "<group>"; };
 		BA0DC4C81E657B03009DD019 /* PaddingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		BA0DC51F1E66A3E6009DD019 /* Chat_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat_VC.swift; sourceTree = "<group>"; };
 		BA4E53811E5A832400AF270E /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
@@ -253,6 +259,7 @@
 				BA979F6C1E5D845E00FC6FA8 /* UIImageView.swift */,
 				BA979FF51E6127EB00FC6FA8 /* Date.swift */,
 				BA0DC4C81E657B03009DD019 /* PaddingLabel.swift */,
+				7C850FBA1E67BA5D0002C84B /* UIImageViewExtension.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -357,6 +364,8 @@
 		BA760BC21E5C2E61000A4694 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
+				7C850FC11E67BA960002C84B /* Entity.swift */,
+				7C850FC31E67BC170002C84B /* MyCollectionViewCell.swift */,
 			);
 			name = Camera;
 			sourceTree = "<group>";
@@ -617,10 +626,12 @@
 				BAE41E191E5B26F800B89A8D /* Base_VC.swift in Sources */,
 				BA54E1B71E545CA500F83B91 /* BaseViewController.swift in Sources */,
 				246015581E5D804C000DD658 /* ExtendtionUItableViewCell.swift in Sources */,
+				7C850FC41E67BC170002C84B /* MyCollectionViewCell.swift in Sources */,
 				246015481E5D40C3000DD658 /* NhomDA.swift in Sources */,
 				BAE41E0E1E5AEAE600B89A8D /* SWRevealViewController.m in Sources */,
 				BAE41E211E5B3A8200B89A8D /* ThongTinCaNhan_VC.swift in Sources */,
 				246015431E5BF3DF000DD658 /* UrlPreFix.swift in Sources */,
+				7C850FBB1E67BA5D0002C84B /* UIImageViewExtension.swift in Sources */,
 				BA979F561E5D3EAD00FC6FA8 /* ChatCommon.swift in Sources */,
 				BA760BC51E5C2ECA000A4694 /* UserContact.swift in Sources */,
 				BA979FEE1E61200500FC6FA8 /* ChatMessage.swift in Sources */,
@@ -637,6 +648,7 @@
 				BA760BB71E5BEE50000A4694 /* ApiService.swift in Sources */,
 				BA778AEC1E559C2C000F934B /* Login_VC.swift in Sources */,
 				BA0DC4C91E657B03009DD019 /* PaddingLabel.swift in Sources */,
+				7C850FC21E67BA960002C84B /* Entity.swift in Sources */,
 				BA778AE81E559454000F934B /* BDNVDT_VC.swift in Sources */,
 				BAE41E1D1E5B3A2700B89A8D /* QLHinhAnh_VC.swift in Sources */,
 				BA54E1B81E545CA500F83B91 /* MenuViewController.swift in Sources */,
