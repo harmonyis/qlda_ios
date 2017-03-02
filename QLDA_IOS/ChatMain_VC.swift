@@ -25,6 +25,8 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     var passContactID:Int!
     var passContactType:Int!
     var passContactName:String!
+    var passIsRead : Bool!
+    var passLastInboxID : Int64!
     
     //var chatHub: Hub = Hub("chatHub")
     
@@ -104,8 +106,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cellContact")!
-        
+        let cell : ChatMain_Cell = tableView.dequeueReusableCell(withIdentifier: "cellContact") as! ChatMain_Cell
         //cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         
         var contact : UserContact
@@ -115,20 +116,17 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         else{
             contact = listContact[indexPath.row]
         }
-        
-        //cell.textLabel?.text = listContact[indexPath.row].Name
-        
-        let imgContact : UIImageView = cell.contentView.viewWithTag(100) as! UIImageView
-        let lblContactName : UILabel = cell.contentView.viewWithTag(101) as! UILabel
-        let lblLastMessage : UILabel = cell.contentView.viewWithTag(102) as! UILabel
-        let imgOnline : UIImageView = cell.contentView.viewWithTag(103) as! UIImageView
-        
-        
-        imgContact.maskCircle(anyImage: contact.Picture!)
-        lblContactName.text = contact.Name
-        lblLastMessage.text = contact.LatestMessage
+        let frame = CGRect(x: 25, y: 0, width: 15, height: 15)
+        //self.createBadge(parent: cell.viewImageContact, tag: indexPath.row, number: contact.NumberOfNewMessage!, frame: frame)
+        if(contact.NumberOfNewMessage! > 0){
+             cell.viewImageContact.createBadge(tag: indexPath.row, number: contact.NumberOfNewMessage!, frame: frame)
+        }
+       
+        cell.imgContact.maskCircle(anyImage: contact.Picture!)
+        cell.lblContactName.text = contact.Name
+        cell.lblLastMessage.text = contact.LatestMessage
         if(!contact.Online!){
-            imgOnline.isHidden = true
+            cell.imgOnline.isHidden = true
         }
         return cell
     }
@@ -139,6 +137,13 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         passContactID = contact.ContactID
         passContactType = contact.TypeOfContact
         passContactName = contact.Name
+        passLastInboxID = contact.LatestMessageID
+        if contact.NumberOfNewMessage! > 0{
+            passIsRead = false
+        }
+        else{
+            passIsRead = false
+        }
         
         performSegue(withIdentifier: "GoToChat", sender: self)
     }
@@ -160,6 +165,8 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
                 chatVC.contactID = passContactID
                 chatVC.contactType = passContactType
                 chatVC.contactName = passContactName
+                chatVC.isRead = passIsRead
+                chatVC.lastInboxID = passLastInboxID
             }
         }
     }
@@ -194,76 +201,14 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
             }
         }
     }
-    
-    /*
-     func myEncrypt(encryptData:String) -> NSData?{
-     
-     var myKeyData : NSData = ("myEncryptionKey" as NSString).data(using: String.Encoding.utf8.rawValue)! as NSData
-     var myRawData : NSData = encryptData.data(using: String.Encoding.utf8)! as NSData
-     var iv : [UInt8] = [56, 101, 63, 23, 96, 182, 209, 205]  // I didn't use
-     var buffer_size : size_t = myRawData.length + kCCBlockSize3DES
-     var buffer = UnsafeMutablePointer<NSData>.alloc(buffer_size)
-     var num_bytes_encrypted : size_t = 0
-     
-     let operation: CCOperation = UInt32(kCCEncrypt)
-     let algoritm:  CCAlgorithm = UInt32(kCCAlgorithm3DES)
-     let options:   CCOptions   = UInt32(kCCOptionECBMode + kCCOptionPKCS7Padding)
-     let keyLength        = size_t(kCCKeySize3DES)
-     
-     var Crypto_status: CCCryptorStatus = CCCrypt(operation, algoritm, options, myKeyData.bytes, keyLength, nil, myRawData.bytes, myRawData.length, buffer, buffer_size, &num_bytes_encrypted)
-     
-     if UInt32(Crypto_status) == UInt32(kCCSuccess){
-     
-     var myResult: NSData = NSData(bytes: buffer, length: num_bytes_encrypted)
-     
-     free(buffer)
-     println("my result \(myResult)") //This just prints the data
-     
-     let keyData: NSData = myResult
-     let hexString = keyData.toHexString()
-     println("hex result \(hexString)") // I needed a hex string output
-     
-     
-     myDecrypt(myResult) // sent straight to the decryption function to test the data output is the same
-     return myResult
-     }else{
-     free(buffer)
-     return nil
-     }
-     }
-     
-     
-     func myDecrypt(decryptData : NSData) -> NSData?{
-     
-     var mydata_len : Int = decryptData.length
-     var keyData : NSData = ("myEncryptionKey" as NSString).dataUsingEncoding(NSUTF8StringEncoding)!
-     
-     var buffer_size : size_t = mydata_len+kCCBlockSizeAES128
-     var buffer = UnsafeMutablePointer<NSData>.alloc(buffer_size)
-     var num_bytes_encrypted : size_t = 0
-     
-     var iv : [UInt8] = [56, 101, 63, 23, 96, 182, 209, 205]  // I didn't use
-     
-     let operation: CCOperation = UInt32(kCCDecrypt)
-     let algoritm:  CCAlgorithm = UInt32(kCCAlgorithm3DES)
-     let options:   CCOptions   = UInt32(kCCOptionECBMode + kCCOptionPKCS7Padding)
-     let keyLength        = size_t(kCCKeySize3DES)
-     
-     var decrypt_status : CCCryptorStatus = CCCrypt(operation, algoritm, options, keyData.bytes, keyLength, nil, decryptData.bytes, mydata_len, buffer, buffer_size, &num_bytes_encrypted)
-     
-     if UInt32(decrypt_status) == UInt32(kCCSuccess){
-     
-     var myResult : NSData = NSData(bytes: buffer, length: num_bytes_encrypted)
-     free(buffer)
-     println("decrypt \(myResult)")
-     
-     var stringResult = NSString(data: myResult, encoding:NSUTF8StringEncoding)
-     println("my decrypt string \(stringResult!)")
-     return myResult
-     }else{
-     free(buffer)
-     return nil
-     
-     }
-     }*/
 }
+
+class ChatMain_Cell: UITableViewCell{
+    
+    @IBOutlet weak var viewImageContact: UIView!
+    @IBOutlet weak var imgContact : UIImageView!
+    @IBOutlet weak var lblContactName : UILabel!
+    @IBOutlet weak var lblLastMessage : UILabel!
+    @IBOutlet weak var imgOnline : UIImageView!
+}
+

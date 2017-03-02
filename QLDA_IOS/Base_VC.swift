@@ -63,19 +63,9 @@ class Base_VC: UIViewController {
         btnChatMenu.addTarget(self, action: #selector(Base_VC.onChatBarPressesd(_:)), for: UIControlEvents.touchUpInside)
         btnChatMenu.setImage(UIImage(named: "HomeIcon"), for: UIControlState())
         btnChatMenu.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
-        
-        let label = UILabel(frame: CGRect(x: 18, y: -4, width: 15, height: 15))
-        label.layer.borderColor = UIColor.clear.cgColor
-        label.layer.borderWidth = 2
-        label.layer.cornerRadius = label.bounds.size.height / 2
-        label.textAlignment = .center
-        label.layer.masksToBounds = true
-        label.font = UIFont.systemFont(ofSize: 10)
-        label.textColor = .white
-        label.backgroundColor = .red
-        label.text = ""
-        //btnChatMenu.addSubview(label)
-        
+        let frame = CGRect(x: 18, y: -4, width: 15, height: 15)
+        createBadge(parent: btnChatMenu, tag: 200, number: 0, frame: frame)
+        //btnChatMenu.createBadge(tag: 200, number: 0, frame: frame)
         let customChatBarItem = UIBarButtonItem(customView: btnChatMenu)
         
         let btnMapMenu = UIButton(type: UIButtonType.system)
@@ -88,6 +78,8 @@ class Base_VC: UIViewController {
         
         //self.navigationItem.rightBarButtonItems = [customNotiBarItem, customChatBarItem, customMapBarItem]
         self.navigationItem.setRightBarButtonItems([customNotiBarItem, customChatBarItem, customMapBarItem], animated: true)
+        
+        updateBadgeChat()
         initEnvent()
     }
     
@@ -107,16 +99,61 @@ class Base_VC: UIViewController {
         //ChatHub.addChatHub(hub:  ChatHub.chatHub)
 
         ChatHub.chatHub.on("receivePrivateMessage") {args in
-            let btn = self.navigationItem.rightBarButtonItems?[1]
-            //let barge = btn?.customView as! UILabel
-            //barge.text = "1"
-            
+            self.updateBadgeChat()
         }
         ChatHub.chatHub.on("receiveGroupMessage") {args in
-            
+            self.updateBadgeChat()
         }
         ChatHub.chatHub.on("receiveChatGroup") {args in
-            
+            self.updateBadgeChat()
         }
+    }
+    
+    func updateBadgeChat(){
+        let btn : UIBarButtonItem = (self.navigationItem.rightBarButtonItems?[1])! as UIBarButtonItem
+    
+        let label : UILabel = btn.customView?.viewWithTag(200) as! UILabel
+        let count = getNumberBadgeChat()
+        if(count > 0){
+            label.text = String(count)
+            label.isHidden = false
+        }
+        else{
+            label.text = ""
+            label.isHidden = true
+        }
+    }
+    private func getNumberBadgeChat() -> Int{
+        let list = ChatCommon.listContact.filter(){
+            if $0.NumberOfNewMessage! > 0 {
+                return true
+            } else {
+                return false
+            }
+        }
+        return list.count
+    }
+    
+    func createBadge(parent : UIView, tag : Int, number : Int, frame : CGRect){
+        let label = UILabel(frame: frame)
+        label.layer.borderColor = UIColor.clear.cgColor
+        label.layer.borderWidth = 2
+        label.layer.cornerRadius = label.bounds.size.height / 2
+        label.textAlignment = .center
+        label.layer.masksToBounds = true
+        label.font = UIFont.systemFont(ofSize: 10)
+        label.textColor = .white
+        label.backgroundColor = .red
+        label.tag = tag
+        
+        if(number > 0){
+            label.text = String(number)
+            label.isHidden = false
+        }
+        else{
+            label.text = ""
+            label.isHidden = true
+        }
+        parent.addSubview(label)
     }
 }
