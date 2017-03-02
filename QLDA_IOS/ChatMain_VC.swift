@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftR
+import UserNotifications
 
 class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
     @IBOutlet weak var btnCreateGroup: UIButton!
@@ -33,6 +34,16 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         btnCreateGroup.layer.cornerRadius = 25
         btnCreateGroup.setImage(#imageLiteral(resourceName: "ic_createGroup"), for: UIControlState.normal)
         btnCreateGroup.imageEdgeInsets = UIEdgeInsetsMake(40,40,40,40)
+        
+        aivLoad.startAnimating()
+        tblListContact.isHidden = true
+        tblListContact.tableFooterView = UIView(frame: .zero)
+        
+        self.listContact = ChatCommon.listContact
+        self.aivLoad.isHidden = true
+        self.tblListContact.isHidden = false
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in})
     }
     
     override func didReceiveMemoryWarning() {
@@ -41,13 +52,6 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        aivLoad.startAnimating()
-        tblListContact.isHidden = true
-        tblListContact.tableFooterView = UIView(frame: .zero)
-
-        self.listContact = ChatCommon.listContact
-        self.aivLoad.isHidden = true
-        self.tblListContact.isHidden = false
         self.reloadData()
     }
     

@@ -63,6 +63,19 @@ class Base_VC: UIViewController {
         btnChatMenu.addTarget(self, action: #selector(Base_VC.onChatBarPressesd(_:)), for: UIControlEvents.touchUpInside)
         btnChatMenu.setImage(UIImage(named: "HomeIcon"), for: UIControlState())
         btnChatMenu.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
+        
+        let label = UILabel(frame: CGRect(x: 18, y: -4, width: 15, height: 15))
+        label.layer.borderColor = UIColor.clear.cgColor
+        label.layer.borderWidth = 2
+        label.layer.cornerRadius = label.bounds.size.height / 2
+        label.textAlignment = .center
+        label.layer.masksToBounds = true
+        label.font = UIFont.systemFont(ofSize: 10)
+        label.textColor = .white
+        label.backgroundColor = .red
+        label.text = ""
+        //btnChatMenu.addSubview(label)
+        
         let customChatBarItem = UIBarButtonItem(customView: btnChatMenu)
         
         let btnMapMenu = UIButton(type: UIButtonType.system)
@@ -71,12 +84,32 @@ class Base_VC: UIViewController {
         btnMapMenu.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
         let customMapBarItem = UIBarButtonItem(customView: btnMapMenu)
         
-        self.navigationItem.rightBarButtonItems = [customNotiBarItem, customChatBarItem, customMapBarItem]
+        
+        //self.navigationItem.rightBarButtonItems = [customNotiBarItem, customChatBarItem, customMapBarItem]
+        self.navigationItem.setRightBarButtonItems([customNotiBarItem, customChatBarItem, customMapBarItem], animated: true)
+        initEnvent()
     }
     
     func onChatBarPressesd(_ sender : UIButton){
         Config.SelectMenuIndex = -1
         let vc = storyboard?.instantiateViewController(withIdentifier: "ChatMain") as! ChatMain_VC
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func initEnvent(){
+        //ChatHub.addChatHub(hub:  ChatHub.chatHub)
+
+        ChatHub.chatHub.on("receivePrivateMessage") {args in
+            let btn = self.navigationItem.rightBarButtonItems?[1]
+            //let barge = btn?.customView as! UILabel
+            //barge.text = "1"
+            
+        }
+        ChatHub.chatHub.on("receiveGroupMessage") {args in
+            
+        }
+        ChatHub.chatHub.on("receiveChatGroup") {args in
+            
+        }
     }
 }

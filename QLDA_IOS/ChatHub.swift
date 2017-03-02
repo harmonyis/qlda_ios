@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftR
+import UserNotifications
 
 class ChatHub {
     static var chatHub: Hub!
@@ -226,5 +227,17 @@ class ChatHub {
             ChatCommon.listContact = ChatCommon.listContact.filter() { $0.ContactID != contactID || $0.TypeOfContact != contactType}
         }
         ChatCommon.listContact.insert(newContact, at: 0)
+        notification()
+    }
+    
+    static func notification(){
+        let content = UNMutableNotificationContent()
+        content.title = "Thông báo"
+        content.subtitle = "subsite"
+        content.body = "Đây là thông báo"
+        content.badge = 1
+        
+        let request = UNNotificationRequest(identifier: "test", content: content, trigger: nil)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 }

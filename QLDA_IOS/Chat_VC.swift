@@ -9,6 +9,7 @@
 import UIKit
 import SwiftR
 
+
 class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     fileprivate let cellId = "cellId"
     @IBOutlet weak var txtMessage: UITextField!
@@ -39,7 +40,21 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
+        ChatCommon.currentChatID = contactID
+        ChatCommon.currentChatType = contactType
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        ChatCommon.currentChatID = nil
+        ChatCommon.currentChatType = nil
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        ChatCommon.currentChatID = nil
+        ChatCommon.currentChatType = nil
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -65,6 +80,8 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
             let estimatedFrame = NSString(string: messageText).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 16)], context: nil)
             
+            cell.contactNameLabel.isHidden = true
+            cell.contactNameLabel.text = ""
             if (msg.IsMe)!{
                 cell.messageTextView.frame = CGRect(x: view.frame.width - estimatedFrame.width - 8 - 8 - 8, y: 0, width: estimatedFrame.width + 16, height: estimatedFrame.height + 20)
                 
@@ -78,11 +95,27 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                 cell.messageTextView.textColor = UIColor.white
                 
             } else {
-                cell.messageTextView.frame = CGRect(x: 8 + 4, y: 0, width: estimatedFrame.width + 16, height: estimatedFrame.height + 20)
                 
-                cell.textBubbleView.frame = CGRect(x: 4, y: 0, width: estimatedFrame.width + 8 + 8 + 16, height: estimatedFrame.height + 20)
+                if msg.ContactType == 1{
+                   
+                    cell.messageTextView.frame = CGRect(x: 8 + 4, y: 0, width: estimatedFrame.width + 16, height: estimatedFrame.height + 20)
+                    
+                    cell.textBubbleView.frame = CGRect(x: 4, y: 0, width: estimatedFrame.width + 8 + 8 + 16, height: estimatedFrame.height + 20)
+                }
+                else{
+                    cell.contactNameLabel.isHidden = false
+                    cell.contactNameLabel.text = msg.SenderName
+                    
+                    let estimatedFrameContactName = NSString(string: msg.SenderName!).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 10)], context: nil)
+                    
+                    cell.contactNameLabel.frame = CGRect(x: 4, y: 0, width: estimatedFrameContactName.width + 16, height: 10)
+                    
+                    cell.messageTextView.frame = CGRect(x: 8 + 4, y: 0 + 10, width: estimatedFrame.width + 16, height: estimatedFrame.height + 20)
+                    
+                    cell.textBubbleView.frame = CGRect(x: 4, y: 0 + 10, width: estimatedFrame.width + 8 + 8 + 16, height: estimatedFrame.height + 20)
+                }
                 
-               // cell.profileImageView.isHidden = false
+                //cell.profileImageView.isHidden = false
                 
                 cell.textBubbleView.backgroundColor = UIColor(white: 0.95, alpha: 1)
                 //cell.bubbleImageView.image = ChatLogMessageCell.grayBubbleImage
@@ -95,13 +128,26 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
+        let msg = messages[indexPath.item]
+        
         let w : Int = Int(view.frame.width * 7 / 10)
         if let messageText = messages[indexPath.item].Message {
             let size = CGSize(width: w, height: 1000)
             let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
             let estimatedFrame = NSString(string: messageText).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 16)], context: nil)
             
-            return CGSize(width: view.frame.width, height: estimatedFrame.height + 20)
+            if msg.IsMe!{
+                return CGSize(width: view.frame.width, height: estimatedFrame.height + 20)
+            }
+            else{
+                if msg.ContactType == 1{
+                    return CGSize(width: view.frame.width, height: estimatedFrame.height + 20)
+                }
+                else{
+                    return CGSize(width: view.frame.width, height: estimatedFrame.height + 20 + 10)
+                }
+            }
+            
         }
         
         return CGSize(width: w, height: 100)
@@ -139,7 +185,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                 else{
                     msg.IsMe = false
                     msg.SenderName = ChatCommon.listContact.filter(){
-                        if(msg.ContactType == $0.TypeOfContact && msg.SenderID == $0.ContactID){
+                        if($0.TypeOfContact == 1 && msg.SenderID == $0.ContactID){
                             return true
                         }else{
                             return false
@@ -258,6 +304,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             //self.tblConversation.scrollToRow(at: indexPath, at: .bottom, animated: true)
         }
     }
+    
 }
 
 class Chat_Cell: BaseCell {
@@ -278,11 +325,22 @@ class Chat_Cell: BaseCell {
         return view
     }()
     
+    let contactNameLabel : UILabel = {
+        let lbl = UILabel()
+        lbl.font = UIFont.systemFont(ofSize: 10)
+        lbl.text = ""
+        lbl.backgroundColor = UIColor.clear
+        return lbl
+    }()
+    
     override func setupViews() {
         super.setupViews()
+        addSubview(contactNameLabel)
         addSubview(textBubbleView)
         addSubview(messageTextView)
+        
     }
+    
     
 }
 
