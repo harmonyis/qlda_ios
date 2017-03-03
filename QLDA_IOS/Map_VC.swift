@@ -11,26 +11,20 @@ import GoogleMaps
 
 class Map_VC: UIViewController {
 
+    @IBOutlet weak var  UiMapView: GMSMapView!
+    
     var mapView : GMSMapView? = nil
     static var mapItems : [MapItem]? = nil
     var makers : [GMSMarker]? = nil
-    let PostionStart = GMSCameraPosition.camera(withLatitude: 21.101884872388879, longitude: 105.72625648970795, zoom: 6.0)
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: 21.101884872388879, longitude: 105.72625648970795, zoom: 6.0)
+         UiMapView.camera = camera
 
-        mapView = GMSMapView.map(withFrame: CGRect.zero, camera: PostionStart)
-        view = mapView
-        
-        
-        // Creates a marker in the center of the map.
-       
-
-        
         getData()
-        
-        
        
         // Do any additional setup after loading the view.
     }
@@ -110,7 +104,7 @@ class Map_VC: UIViewController {
                 let marker = GMSMarker(position: Position)
                 marker.title = item.TenDuAn
                 marker.snippet = item.DiaDiemXayDung
-                marker.map = self.mapView
+                marker.map = UiMapView
 
             }
         }
@@ -121,7 +115,8 @@ class Map_VC: UIViewController {
             TotalKinhDo = TotalKinhDo / Double(TotalDuAnCoViTri)
             TotalViDo = TotalViDo / Double(TotalDuAnCoViTri)
             let camera = GMSCameraUpdate.setCamera(GMSCameraPosition.camera(withLatitude: TotalViDo, longitude: TotalKinhDo, zoom: 6.0))
-            self.mapView?.moveCamera(camera)
+            UiMapView.moveCamera(camera)
+
         }
 
     }
@@ -145,5 +140,6 @@ class Map_VC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
 
 }

@@ -854,7 +854,6 @@
 				7BBDA2DB1E67F54B0019CF3A /* Map_VC.swift in Sources */,
 				BA778AEC1E559C2C000F934B /* Login_VC.swift in Sources */,
 				7B76D4171E6821CF008D6B5A /* MapItem.swift in Sources */,
-				BA0DC52D1E67DAEE009DD019 /* CAShapeLayer.swift in Sources */,
 				BA0DC4C91E657B03009DD019 /* PaddingLabel.swift in Sources */,
 				7C850FC21E67BA960002C84B /* Entity.swift in Sources */,
 				BA778AE81E559454000F934B /* BDNVDT_VC.swift in Sources */,

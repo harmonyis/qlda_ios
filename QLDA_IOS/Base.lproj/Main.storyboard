@@ -1251,9 +1251,32 @@
                     <view key="view" contentMode="scaleToFill" id="pja-q4-KDu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dGL-6E-cxf" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="64" width="320" height="253"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BTi-c5-sSf">
+                                <rect key="frame" x="0.0" y="334" width="320" height="234"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="dGL-6E-cxf" secondAttribute="trailing" constant="-16" id="2tL-Yk-R8I"/>
+                            <constraint firstItem="BTi-c5-sSf" firstAttribute="top" secondItem="dGL-6E-cxf" secondAttribute="bottom" constant="5" id="Sky-vw-NqF"/>
+                            <constraint firstItem="BTi-c5-sSf" firstAttribute="top" secondItem="Qfa-d0-QCE" secondAttribute="bottom" constant="270" id="btv-x8-FRP"/>
+                            <constraint firstItem="BTi-c5-sSf" firstAttribute="leading" secondItem="pja-q4-KDu" secondAttribute="leadingMargin" constant="-16" id="dPE-6b-V2Y"/>
+                            <constraint firstItem="QAa-VR-rq2" firstAttribute="top" secondItem="BTi-c5-sSf" secondAttribute="bottom" id="hWk-5i-pP2"/>
+                            <constraint firstItem="dGL-6E-cxf" firstAttribute="top" secondItem="Qfa-d0-QCE" secondAttribute="bottom" id="iXs-8Z-LDV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="BTi-c5-sSf" secondAttribute="trailing" constant="-16" id="jSW-y5-LbI"/>
+                            <constraint firstItem="dGL-6E-cxf" firstAttribute="leading" secondItem="pja-q4-KDu" secondAttribute="leadingMargin" constant="-16" id="l64-hL-S0R"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="RuK-zb-jYU"/>
+                    <connections>
+                        <outlet property="UiMapView" destination="dGL-6E-cxf" id="BeH-n6-Rco"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9D3-r6-ZHc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
