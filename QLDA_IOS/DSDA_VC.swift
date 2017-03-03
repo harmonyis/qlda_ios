@@ -8,11 +8,12 @@
 
 import UIKit
 
+
 class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
     
     @IBOutlet weak var tbDSDA: UITableView!
     
-    var DSDA = [NhomDA]()
+    var DSDA = [DanhSachDA]()
     var indexTrangThaiDuAnCha = Set<Int>()
     var indexGroupDuAnCon = Set<Int>()
     var indexTrangThaiDuAnCon = Set<String>()
@@ -23,12 +24,12 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         
         self.automaticallyAdjustsScrollViewInsets = false
         
-  //     self.tbDSDA.sectionHeaderHeight = UITableViewAutomaticDimension
-   //     self.tbDSDA.rowHeight = UITableViewAutomaticDimension
-  //     self.tbDSDA.estimatedRowHeight = 50
- //   self.tbDSDA.estimatedSectionHeaderHeight = 50
+        //     self.tbDSDA.sectionHeaderHeight = UITableViewAutomaticDimension
+        //     self.tbDSDA.rowHeight = UITableViewAutomaticDimension
+        //     self.tbDSDA.estimatedRowHeight = 50
+        //   self.tbDSDA.estimatedSectionHeaderHeight = 50
         
-    //    self.tbDSDA.alwaysBounceVertical = false
+        //    self.tbDSDA.alwaysBounceVertical = false
         
         //self.addSlideMenuButton()
     }
@@ -42,7 +43,7 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
                 for itemDA in arrDSDA {
                     
                     if itemDA[0] == itemDA[5] {
-                        let itemNhomDA = NhomDA()
+                        let itemNhomDA = DanhSachDA()
                         itemNhomDA.IdDA = itemDA[0] as String
                         itemNhomDA.TenDA = itemDA[1] as String
                         itemNhomDA.GiaiDoan = itemDA[4] as String
@@ -138,23 +139,23 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         }
     }
     
- 
-     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-     
-      let cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell") as! CustomCellDSDATableViewCell
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        let itemNhomDA :NhomDA = self.DSDA[indexPath.section]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell") as! CustomCellDSDATableViewCell
+        
+        let itemNhomDA :DanhSachDA = self.DSDA[indexPath.section]
         let itemDuAnCon :[DuAn] = itemNhomDA.DuAnCon!
         
         
         //  let label =  UILabel(frame: CGRect(x: 0, y: 0, width: 240, height: 60))
         // cell.lblTenDuAn=label
         let msg  = itemDuAnCon[indexPath.row].TenDA!
-
+        
         let stringSizeAsText: CGSize = getStringSizeForFont(font: UIFont.systemFont(ofSize: 13), myText: msg)
         
         let labelWidth = cell.lblTenDuAn.frame.width
-             let labelLines: CGFloat = CGFloat(ceil(Float(stringSizeAsText.width/labelWidth)))
+        let labelLines: CGFloat = CGFloat(ceil(Float(stringSizeAsText.width/labelWidth)))
         //let height =  tableView.rowHeight - originalLabelHeight + CGFloat(labelLines*stringSizeAsText.height)
         var height = CGFloat(labelLines * (stringSizeAsText.height + 3))
         if height<30
@@ -163,14 +164,14 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         }
         print(height)
         if !self.indexTrangThaiDuAnCon.contains((String)(indexPath.section)+"-"+(String)(indexPath.row)) {
-           
-                return height + 13
+            
+            return height + 13
             
         }
-         return   height + 150
-
-    }
+        return   height + 150
         
+    }
+    
     
     func getStringSizeForFont(font: UIFont, myText: String) -> CGSize {
         let fontAttributes = [NSFontAttributeName: font]
@@ -182,15 +183,15 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
     
     /*
      func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }
+     return UITableViewAutomaticDimension
+     }
      */
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell") as! CustomCellDSDATableViewCell
         
-        let itemNhomDA :NhomDA = self.DSDA[section]
+        let itemNhomDA :DanhSachDA = self.DSDA[section]
         let msg  = itemNhomDA.TenDA!
         
         let stringSizeAsText: CGSize = getStringSizeForFont(font: UIFont.systemFont(ofSize: 13), myText: msg)
@@ -199,30 +200,30 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         let labelLines: CGFloat = CGFloat(ceil(Float(stringSizeAsText.width/labelWidth)))
         //let height =  tableView.rowHeight - originalLabelHeight + CGFloat(labelLines*stringSizeAsText.height)
         var height = CGFloat(labelLines * (stringSizeAsText.height + 3))
-       
+        
         if height<30
         {
             height=30
         }
         
-      if !self.indexTrangThaiDuAnCha.contains(section) {
-     
-        return height + 13
-        
+        if !self.indexTrangThaiDuAnCha.contains(section) {
+            
+            return height + 13
+            
         }
-          return height + 150
+        return height + 150
     }
     
-     
-// */
+    
+    // */
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell") as! CustomCellDSDATableViewCell
-       // cell.ght = 60
+        // cell.ght = 60
         //  cell.scrollEnabled = false
-        let itemNhomDA :NhomDA = self.DSDA[section]
+        let itemNhomDA :DanhSachDA = self.DSDA[section]
         cell.lblTenDuAn.text = itemNhomDA.TenDA!
-         cell.lblTenDuAn.font = UIFont.boldSystemFont(ofSize: 13)
+        cell.lblTenDuAn.font = UIFont.boldSystemFont(ofSize: 13)
         cell.lblNhomDuAn.text = itemNhomDA.NhomDA!
         cell.lblGiaiDoan.text = itemNhomDA.GiaiDoan!
         cell.lblGiaTriGiaiNgan.text = itemNhomDA.GiaTriGiaiNgan!
@@ -238,20 +239,20 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
             
             if !self.indexGroupDuAnCon.contains(section)
             {
-               image  = UIImage(named:"ic_Group-Up")!
+                image  = UIImage(named:"ic_Group-Up")!
                 cell.imgGroup.image = image
                 
             }
             else
             {
-               image  = UIImage(named:"ic_Group-Down")!
+                image  = UIImage(named:"ic_Group-Down")!
                 cell.imgGroup.image = image
                 
             }
         }
-  
+        
         cell.imgGroup.image = image
-
+        
         //  cell.UIViewTieuDe.layer.borderWidth=1
         
         cell.UiViewTenDuAn.layer.borderColor = myColorBoder.cgColor
@@ -284,6 +285,15 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         eventClick.addTarget(self, action:  #selector(DSDA_VC.duAnChaClickGroup(sender: )))
         cell.imgGroup.addGestureRecognizer(eventClick)
         cell.imgGroup.isUserInteractionEnabled = true;
+        
+        eventClick = UITapGestureRecognizer()
+        
+        eventClick.addTarget(self, action:  #selector(DSDA_VC.ClickTenDuAn(sender:)))
+        cell.lblTenDuAn.tag = (Int)(itemNhomDA.IdDA!)!
+        cell.lblTenDuAn.accessibilityLabel = (itemNhomDA.TenDA!)
+        cell.lblTenDuAn.addGestureRecognizer(eventClick)
+        cell.lblTenDuAn.isUserInteractionEnabled = true;
+        
         
         cell.UIViewTieuDe.autoresizingMask = UIViewAutoresizing.flexibleTopMargin
         cell.UIViewTieuDe.autoresizingMask = UIViewAutoresizing.flexibleBottomMargin
@@ -325,8 +335,8 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
             self.indexTrangThaiDuAnCha.insert(value!)
             
         }
-         self.tbDSDA.beginUpdates()
-            self.tbDSDA.endUpdates()
+        self.tbDSDA.beginUpdates()
+        self.tbDSDA.endUpdates()
         self.tbDSDA.reloadData()
     }
     
@@ -342,29 +352,29 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell", for: indexPath) as! CustomCellDSDATableViewCell
-        let itemNhomDA :NhomDA = self.DSDA[indexPath.section]
-        let itemDuAnCon :[DuAn] = itemNhomDA.DuAnCon!
+        let itemNhomDA :DanhSachDA = self.DSDA[indexPath.section]
+        let itemDSDuAnCon :[DuAn] = itemNhomDA.DuAnCon!
+        let itemDuAnCon : DuAn = itemDSDuAnCon[indexPath.row]
         
-        
-      //  let label =  UILabel(frame: CGRect(x: 0, y: 0, width: 240, height: 60))
-       // cell.lblTenDuAn=label
-        cell.lblTenDuAn.text = itemDuAnCon[indexPath.row].TenDA!
+        //  let label =  UILabel(frame: CGRect(x: 0, y: 0, width: 240, height: 60))
+        // cell.lblTenDuAn=label
+        cell.lblTenDuAn.text = itemDuAnCon.TenDA!
         cell.lblTenDuAn.numberOfLines = 0
         cell.lblTenDuAn.font = UIFont.italicSystemFont(ofSize: 13)
-      //  cell.lblTenDuAn.lineBreakMode = wrap
+        //  cell.lblTenDuAn.lineBreakMode = wrap
         
-        cell.lblNhomDuAn.text = itemDuAnCon[indexPath.row].NhomDA!
-        cell.lblGiaiDoan.text = itemDuAnCon[indexPath.row].GiaiDoan!
-        cell.lblGiaTriGiaiNgan.text = itemDuAnCon[indexPath.row].GiaTriGiaiNgan!
-        cell.lblTongDauTu.text = itemDuAnCon[indexPath.row].TongMucDauTu!
-        cell.lblThoiGianThucHien.text = itemDuAnCon[indexPath.row].ThoiGianThucHien!
+        cell.lblNhomDuAn.text = itemDuAnCon.NhomDA!
+        cell.lblGiaiDoan.text = itemDuAnCon.GiaiDoan!
+        cell.lblGiaTriGiaiNgan.text = itemDuAnCon.GiaTriGiaiNgan!
+        cell.lblTongDauTu.text = itemDuAnCon.TongMucDauTu!
+        cell.lblThoiGianThucHien.text = itemDuAnCon.ThoiGianThucHien!
         
         cell.UiViewGroup.layer.borderColor = myColorBoder.cgColor
         cell.UiViewGroup.layer.borderWidth = 0.5
         
         cell.UiViewDetail.layer.borderColor = myColorBoder.cgColor
         cell.UiViewDetail.layer.borderWidth = 0.5
-       // if !cell.imgGroup.isHidden
+        // if !cell.imgGroup.isHidden
         cell.imgGroup.isHidden=true
         
         //  cell.UIViewTieuDe.layer.borderWidth=1
@@ -402,7 +412,7 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
          */
         
         // cell.imgDetail.addTarget(self, action: #selector(DSDA_VC.tappedMe()))
-        let eventClick = UITapGestureRecognizer()
+        var eventClick = UITapGestureRecognizer()
         let value=(String)(indexPath.section)+"-"+(String)(indexPath.row)
         cell.UiViewDetail.accessibilityLabel = value
         print(indexPath.row)
@@ -410,6 +420,14 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         
         cell.UiViewDetail.addGestureRecognizer(eventClick)
         cell.UiViewDetail.isUserInteractionEnabled = true;
+        
+        eventClick = UITapGestureRecognizer()
+        
+        eventClick.addTarget(self, action:  #selector(DSDA_VC.ClickTenDuAn(sender:)))
+        cell.lblTenDuAn.accessibilityLabel = (itemDuAnCon.TenDA!)
+        cell.lblTenDuAn.tag = (Int)(itemDuAnCon.IdDA!)!
+        cell.lblTenDuAn.addGestureRecognizer(eventClick)
+        cell.lblTenDuAn.isUserInteractionEnabled = true;
         
         cell.UiViewThongTinChiTiet.isHidden = !self.indexTrangThaiDuAnCon.contains(value)
         //  print("ssssss")
@@ -430,8 +448,17 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
             self.indexTrangThaiDuAnCon.insert(value)
             
         }
-         self.tbDSDA.beginUpdates()
-            self.tbDSDA.endUpdates()
+        self.tbDSDA.beginUpdates()
+        self.tbDSDA.endUpdates()
         self.tbDSDA.reloadData()
     }
+    func ClickTenDuAn(sender: UITapGestureRecognizer)
+    {
+        let value : String = (sender.view?.accessibilityLabel)!
+        variableConfig.m_szIdDuAn = (sender.view?.tag)!
+        variableConfig.m_szTenDuAn = value
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Tab_") as! Tab_
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }

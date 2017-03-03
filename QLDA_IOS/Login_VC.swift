@@ -18,11 +18,13 @@ class Login_VC: UIViewController {
         
         
     }
+    var szMatKhau : String = ""
+    var szTenDangNhap : String = ""
     @IBAction func Login(_ sender: Any) {
         let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/CheckUser"
         //let szUser=lblName.
-        let szMatKhau : String = (lblMatKhau.text)!
-        let szTenDangNhap : String = (lblTenDangNhap.text)!
+        szMatKhau = (lblMatKhau.text)!
+        szTenDangNhap = (lblTenDangNhap.text)!
         let params : String = "{\"szUsername\" : \""+szTenDangNhap+"\", \"szPassword\": \""+szMatKhau+"\"}"
         
         ApiService.Post(url: ApiUrl, params: params, callback: Alert, errorCallBack: AlertError)
@@ -39,6 +41,8 @@ class Login_VC: UIViewController {
                             ChatHub.initChatHub()
                             ChatHub.initEvent()
                             ChatCommon.getContacts()
+                            variableConfig.m_szUserName = self.szTenDangNhap
+                            variableConfig.m_szPassWord = self.szMatKhau
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "DSDA") as! DSDA_VC
                             self.navigationController?.pushViewController(vc, animated: true)
                         }
