@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class NhomDA{
+class DanhSachDA{
     
     init() {
         IdDA=""

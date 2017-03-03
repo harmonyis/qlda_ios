@@ -7,9 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		242CFC021E695AAE00716C04 /* variableConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242CFC011E695AAE00716C04 /* variableConfig.swift */; };
+		242CFC041E695AF100716C04 /* Tab_.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242CFC031E695AF100716C04 /* Tab_.swift */; };
+		242CFC051E695B4400716C04 /* XLPagerTabStrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242CFBFE1E6958B900716C04 /* XLPagerTabStrip.framework */; };
+		242CFC061E695B4400716C04 /* XLPagerTabStrip.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 242CFBFE1E6958B900716C04 /* XLPagerTabStrip.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		242CFC0A1E695BB200716C04 /* Tab_TTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242CFC091E695BB200716C04 /* Tab_TTC.swift */; };
 		246015431E5BF3DF000DD658 /* UrlPreFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246015421E5BF3DF000DD658 /* UrlPreFix.swift */; };
 		246015461E5D407C000DD658 /* DuAn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246015451E5D407C000DD658 /* DuAn.swift */; };
-		246015481E5D40C3000DD658 /* NhomDA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246015471E5D40C3000DD658 /* NhomDA.swift */; };
+		246015481E5D40C3000DD658 /* DanhSachDA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246015471E5D40C3000DD658 /* DanhSachDA.swift */; };
 		246015521E5D76AA000DD658 /* CustomCellDSDATableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246015511E5D76AA000DD658 /* CustomCellDSDATableViewCell.swift */; };
 		246015581E5D804C000DD658 /* ExtendtionUItableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246015571E5D804C000DD658 /* ExtendtionUItableViewCell.swift */; };
 		58704ED6382B0814369D35E9 /* Pods_QLDA_IOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 102807AE9330DF12CAD1DF4E /* Pods_QLDA_IOS.framework */; };
@@ -61,6 +66,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		242CFBFD1E6958B900716C04 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 242CFBF31E6958B900716C04 /* XLPagerTabStrip.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 28F8287D1C494B2C00330CF4;
+			remoteInfo = XLPagerTabStrip;
+		};
+		242CFBFF1E6958B900716C04 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 242CFBF31E6958B900716C04 /* XLPagerTabStrip.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 28F828871C494B2C00330CF4;
+			remoteInfo = XLPagerTabStripTests;
+		};
+		242CFC071E695B4400716C04 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 242CFBF31E6958B900716C04 /* XLPagerTabStrip.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 28F8287C1C494B2C00330CF4;
+			remoteInfo = XLPagerTabStrip;
+		};
 		BA0DC51C1E667039009DD019 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BA979F571E5D4C0A00FC6FA8 /* SwiftR.xcodeproj */;
@@ -134,6 +160,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				BA0DC51B1E667039009DD019 /* SwiftR.framework in Embed Frameworks */,
+				242CFC061E695B4400716C04 /* XLPagerTabStrip.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,9 +172,13 @@
 		1A840F5AD398E23B5B131B44 /* Pods-QLDA_IOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOSUITests/Pods-QLDA_IOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1BCF00870C0A6A33B3D1E379 /* Pods-QLDA_IOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOSUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOSUITests/Pods-QLDA_IOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		217CFA950E01C6D36321F53F /* Pods-QLDA_IOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOSTests/Pods-QLDA_IOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		242CFBF31E6958B900716C04 /* XLPagerTabStrip.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XLPagerTabStrip.xcodeproj; path = "XLPagerTabStrip-master/XLPagerTabStrip.xcodeproj"; sourceTree = "<group>"; };
+		242CFC011E695AAE00716C04 /* variableConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = variableConfig.swift; sourceTree = "<group>"; };
+		242CFC031E695AF100716C04 /* Tab_.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab_.swift; sourceTree = "<group>"; };
+		242CFC091E695BB200716C04 /* Tab_TTC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab_TTC.swift; sourceTree = "<group>"; };
 		246015421E5BF3DF000DD658 /* UrlPreFix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlPreFix.swift; sourceTree = "<group>"; };
 		246015451E5D407C000DD658 /* DuAn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuAn.swift; sourceTree = "<group>"; };
-		246015471E5D40C3000DD658 /* NhomDA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NhomDA.swift; sourceTree = "<group>"; };
+		246015471E5D40C3000DD658 /* DanhSachDA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanhSachDA.swift; sourceTree = "<group>"; };
 		246015511E5D76AA000DD658 /* CustomCellDSDATableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellDSDATableViewCell.swift; sourceTree = "<group>"; };
 		246015571E5D804C000DD658 /* ExtendtionUItableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendtionUItableViewCell.swift; sourceTree = "<group>"; };
 		29AE7141773F3BFAAFEEAA17 /* Pods_QLDA_IOSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QLDA_IOSUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -213,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA0DC51A1E667039009DD019 /* SwiftR.framework in Frameworks */,
+				242CFC051E695B4400716C04 /* XLPagerTabStrip.framework in Frameworks */,
 				58704ED6382B0814369D35E9 /* Pods_QLDA_IOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -236,10 +268,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		242CFBF41E6958B900716C04 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				242CFBFE1E6958B900716C04 /* XLPagerTabStrip.framework */,
+				242CFC001E6958B900716C04 /* XLPagerTabStripTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		246015411E5BF2A7000DD658 /* Config */ = {
 			isa = PBXGroup;
 			children = (
 				246015421E5BF3DF000DD658 /* UrlPreFix.swift */,
+				242CFC011E695AAE00716C04 /* variableConfig.swift */,
 			);
 			name = Config;
 			sourceTree = "<group>";
@@ -248,7 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				246015451E5D407C000DD658 /* DuAn.swift */,
-				246015471E5D40C3000DD658 /* NhomDA.swift */,
+				246015471E5D40C3000DD658 /* DanhSachDA.swift */,
 			);
 			name = Entity;
 			sourceTree = "<group>";
@@ -310,6 +352,7 @@
 		BA54E17B1E545C9600F83B91 = {
 			isa = PBXGroup;
 			children = (
+				242CFBF31E6958B900716C04 /* XLPagerTabStrip.xcodeproj */,
 				BA979F571E5D4C0A00FC6FA8 /* SwiftR.xcodeproj */,
 				BA54E1861E545C9600F83B91 /* QLDA_IOS */,
 				BA54E19B1E545C9600F83B91 /* QLDA_IOSTests */,
@@ -444,6 +487,8 @@
 				BAE41E181E5B26F800B89A8D /* Base_VC.swift */,
 				BA0DC51F1E66A3E6009DD019 /* Chat_VC.swift */,
 				7BBDA2DA1E67F54B0019CF3A /* Map_VC.swift */,
+				242CFC031E695AF100716C04 /* Tab_.swift */,
+				242CFC091E695BB200716C04 /* Tab_TTC.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -490,6 +535,7 @@
 			);
 			dependencies = (
 				BA0DC51D1E667039009DD019 /* PBXTargetDependency */,
+				242CFC081E695B4400716C04 /* PBXTargetDependency */,
 			);
 			name = QLDA_IOS;
 			productName = QLDA_IOS;
@@ -581,6 +627,10 @@
 					ProductGroup = BA979F581E5D4C0A00FC6FA8 /* Products */;
 					ProjectRef = BA979F571E5D4C0A00FC6FA8 /* SwiftR.xcodeproj */;
 				},
+				{
+					ProductGroup = 242CFBF41E6958B900716C04 /* Products */;
+					ProjectRef = 242CFBF31E6958B900716C04 /* XLPagerTabStrip.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -592,6 +642,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		242CFBFE1E6958B900716C04 /* XLPagerTabStrip.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = XLPagerTabStrip.framework;
+			remoteRef = 242CFBFD1E6958B900716C04 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		242CFC001E6958B900716C04 /* XLPagerTabStripTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = XLPagerTabStripTests.xctest;
+			remoteRef = 242CFBFF1E6958B900716C04 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		BA979F611E5D4C0A00FC6FA8 /* SwiftR.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -821,15 +885,17 @@
 				246015581E5D804C000DD658 /* ExtendtionUItableViewCell.swift in Sources */,
 				BA0DC5321E68117E009DD019 /* UIView.swift in Sources */,
 				7C850FC41E67BC170002C84B /* MyCollectionViewCell.swift in Sources */,
-				246015481E5D40C3000DD658 /* NhomDA.swift in Sources */,
+				246015481E5D40C3000DD658 /* DanhSachDA.swift in Sources */,
 				BAE41E0E1E5AEAE600B89A8D /* SWRevealViewController.m in Sources */,
 				BAE41E211E5B3A8200B89A8D /* ThongTinCaNhan_VC.swift in Sources */,
 				246015431E5BF3DF000DD658 /* UrlPreFix.swift in Sources */,
+				242CFC0A1E695BB200716C04 /* Tab_TTC.swift in Sources */,
 				7C850FBB1E67BA5D0002C84B /* UIImageViewExtension.swift in Sources */,
 				BA979F561E5D3EAD00FC6FA8 /* ChatCommon.swift in Sources */,
 				BA760BC51E5C2ECA000A4694 /* UserContact.swift in Sources */,
 				BA979FEE1E61200500FC6FA8 /* ChatMessage.swift in Sources */,
 				BA979F6D1E5D845E00FC6FA8 /* UIImageView.swift in Sources */,
+				242CFC041E695AF100716C04 /* Tab_.swift in Sources */,
 				BA979FF61E6127EB00FC6FA8 /* Date.swift in Sources */,
 				BA979F6F1E5D980D00FC6FA8 /* ChatCreateGroup_VC.swift in Sources */,
 				246015461E5D407C000DD658 /* DuAn.swift in Sources */,
@@ -843,6 +909,7 @@
 				7BBDA2DB1E67F54B0019CF3A /* Map_VC.swift in Sources */,
 				BA778AEC1E559C2C000F934B /* Login_VC.swift in Sources */,
 				BA0DC4C91E657B03009DD019 /* PaddingLabel.swift in Sources */,
+				242CFC021E695AAE00716C04 /* variableConfig.swift in Sources */,
 				7C850FC21E67BA960002C84B /* Entity.swift in Sources */,
 				BA778AE81E559454000F934B /* BDNVDT_VC.swift in Sources */,
 				BAE41E1D1E5B3A2700B89A8D /* QLHinhAnh_VC.swift in Sources */,
@@ -869,6 +936,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		242CFC081E695B4400716C04 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = XLPagerTabStrip;
+			targetProxy = 242CFC071E695B4400716C04 /* PBXContainerItemProxy */;
+		};
 		BA0DC51D1E667039009DD019 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "SwiftR iOS";
