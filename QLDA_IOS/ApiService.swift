@@ -52,6 +52,7 @@ class ApiService {
         //return resultJson
     }
     
+    
     static func Post (url : String, params: String,callback:@escaping (_ dataResult : Data) -> Void,
                errorCallBack:@escaping (_ error : Error) -> Void) -> Void {
         //var message :String  = ""
