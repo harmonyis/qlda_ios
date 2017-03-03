@@ -45,6 +45,7 @@ class ChatCommon{
                 listContact.append(contact)
             }
         }
+        
     }
     
     static func errorGetContacts(error : Error) {        

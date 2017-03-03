@@ -20,6 +20,7 @@ target 'QLDA_IOS' do
 
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+  pod 'ImageViewer'
 
 
 end

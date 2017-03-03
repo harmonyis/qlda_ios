@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ImageViewer
 
 class QLHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate{
     
@@ -202,22 +203,60 @@ class QLHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        //let myVC = storyboard?.instantiateViewController(withIdentifier: "ViewImageDetailViewController") as! ViewImageDetailViewController
-        //let myVC = storyboard?.instantiateViewController(withIdentifier: "DemoViewController") as! DemoViewController
+        let galleryViewController = GalleryViewController(startIndex: indexPath.row, itemsDatasource: self, displacedViewsDatasource: nil, configuration: galleryConfiguration())
         
-       // let imageName = items[indexPath.row].ImageName.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
-        
-        //let url = "http://harmonysoft.vn:8089/UploadFile/DuAn/\(items[indexPath.row].ItemId)/Image/\(imageName!)"
-        //print(url)
-        
-        //myVC.imageView.downloadImage(url: url)
-       // myVC.imageUrl = url
-        //navigationController?.pushViewController(myVC, animated: true)
-        //self.presentImageGallery()
-        // handle tap events
-        print("You selected cell #\(indexPath.item)!")
+        self.presentImageGallery(galleryViewController)
     }
-    
+    func galleryConfiguration() -> GalleryConfiguration {
+        
+        return [
+            
+            GalleryConfigurationItem.closeButtonMode(.builtIn),
+            
+            
+            GalleryConfigurationItem.pagingMode(.standard),
+            GalleryConfigurationItem.presentationStyle(.displacement),
+            GalleryConfigurationItem.hideDecorationViewsOnLaunch(false),
+            
+            //GalleryConfigurationItem.swipeToDismissMode(.vertical),
+            //GalleryConfigurationItem.toggleDecorationViewsBySingleTap(false),
+            
+            GalleryConfigurationItem.overlayColor(UIColor(white: 0.035, alpha: 1)),
+            GalleryConfigurationItem.overlayColorOpacity(1),
+            GalleryConfigurationItem.overlayBlurOpacity(1),
+            GalleryConfigurationItem.overlayBlurStyle(UIBlurEffectStyle.light),
+            
+            GalleryConfigurationItem.thumbnailsButtonMode(.none),
+            
+            GalleryConfigurationItem.maximumZoolScale(8),
+            GalleryConfigurationItem.swipeToDismissThresholdVelocity(500),
+            
+            GalleryConfigurationItem.doubleTapToZoomDuration(0.15),
+            
+            GalleryConfigurationItem.blurPresentDuration(0.5),
+            GalleryConfigurationItem.blurPresentDelay(0),
+            GalleryConfigurationItem.colorPresentDuration(0.25),
+            GalleryConfigurationItem.colorPresentDelay(0),
+            
+            GalleryConfigurationItem.blurDismissDuration(0.1),
+            GalleryConfigurationItem.blurDismissDelay(0.4),
+            GalleryConfigurationItem.colorDismissDuration(0.45),
+            GalleryConfigurationItem.colorDismissDelay(0),
+            
+            GalleryConfigurationItem.itemFadeDuration(0.3),
+            GalleryConfigurationItem.decorationViewsFadeDuration(0.15),
+            GalleryConfigurationItem.rotationDuration(0.15),
+            
+            GalleryConfigurationItem.displacementDuration(0.55),
+            GalleryConfigurationItem.reverseDisplacementDuration(0.25),
+            GalleryConfigurationItem.displacementTransitionStyle(.springBounce(0.7)),
+            GalleryConfigurationItem.displacementTimingCurve(.linear),
+            
+            GalleryConfigurationItem.statusBarHidden(true),
+            GalleryConfigurationItem.displacementKeepOriginalInPlace(false),
+            GalleryConfigurationItem.displacementInsetMargin(50)
+        ]
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -240,4 +279,25 @@ class QLHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDelegat
         // Dispose of any resources that can be recreated.
     }
     
+}
+
+extension QLHinhAnh_VC: GalleryItemsDatasource {
+    
+    func itemCount() -> Int {
+        
+        return items.count
+    }
+    
+    func provideGalleryItem(_ index: Int) -> GalleryItem {
+        let imageName = items[index].ImageName.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+        
+        let urlImage = "http://harmonysoft.vn:8089/UploadFile/DuAn/\(items[index].ItemId)/Image/\(imageName!)"
+        
+        //let urlImage : String = "http://harmonysoft.vn:8089/UploadFile/DuAn/93/Icon/Topic%20Images_Smokestack_a01gRms.jpg"
+        let url = URL(string: urlImage)
+        let data = try? Data(contentsOf: url!)
+        let image : UIImage? = UIImage(data: data!)
+        
+        return GalleryItem.image{$0(image)}
+    }
 }

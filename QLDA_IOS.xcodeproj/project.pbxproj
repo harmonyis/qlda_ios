@@ -22,8 +22,7 @@
 		BA0DC51A1E667039009DD019 /* SwiftR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA979F611E5D4C0A00FC6FA8 /* SwiftR.framework */; };
 		BA0DC51B1E667039009DD019 /* SwiftR.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA979F611E5D4C0A00FC6FA8 /* SwiftR.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BA0DC5201E66A3E6009DD019 /* Chat_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0DC51F1E66A3E6009DD019 /* Chat_VC.swift */; };
-		BA0DC5261E67DA7E009DD019 /* UIBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0DC5251E67DA7E009DD019 /* UIBarButtonItem.swift */; };
-		BA0DC52D1E67DAEE009DD019 /* CAShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0DC52C1E67DAEE009DD019 /* CAShapeLayer.swift */; };
+		BA0DC5321E68117E009DD019 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0DC5311E68117E009DD019 /* UIView.swift */; };
 		BA4E53821E5A832400AF270E /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4E53811E5A832400AF270E /* View.xib */; };
 		BA4E53871E5A9DCF00AF270E /* DSDA_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E53861E5A9DCF00AF270E /* DSDA_View.swift */; };
 		BA4E53891E5A9E4C00AF270E /* DSDA_View.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4E53881E5A9E4C00AF270E /* DSDA_View.xib */; };
@@ -164,8 +163,7 @@
 		7C850FC31E67BC170002C84B /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCollectionViewCell.swift; sourceTree = "<group>"; };
 		BA0DC4C81E657B03009DD019 /* PaddingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		BA0DC51F1E66A3E6009DD019 /* Chat_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat_VC.swift; sourceTree = "<group>"; };
-		BA0DC5251E67DA7E009DD019 /* UIBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBarButtonItem.swift; sourceTree = "<group>"; };
-		BA0DC52C1E67DAEE009DD019 /* CAShapeLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAShapeLayer.swift; sourceTree = "<group>"; };
+		BA0DC5311E68117E009DD019 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		BA4E53811E5A832400AF270E /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		BA4E53861E5A9DCF00AF270E /* DSDA_View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSDA_View.swift; sourceTree = "<group>"; };
 		BA4E53881E5A9E4C00AF270E /* DSDA_View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSDA_View.xib; sourceTree = "<group>"; };
@@ -314,8 +312,7 @@
 				BA979FF51E6127EB00FC6FA8 /* Date.swift */,
 				BA0DC4C81E657B03009DD019 /* PaddingLabel.swift */,
 				7C850FBA1E67BA5D0002C84B /* UIImageViewExtension.swift */,
-				BA0DC5251E67DA7E009DD019 /* UIBarButtonItem.swift */,
-				BA0DC52C1E67DAEE009DD019 /* CAShapeLayer.swift */,
+				BA0DC5311E68117E009DD019 /* UIView.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -833,13 +830,13 @@
 				BAE41E191E5B26F800B89A8D /* Base_VC.swift in Sources */,
 				BA54E1B71E545CA500F83B91 /* BaseViewController.swift in Sources */,
 				246015581E5D804C000DD658 /* ExtendtionUItableViewCell.swift in Sources */,
+				BA0DC5321E68117E009DD019 /* UIView.swift in Sources */,
 				7C850FC41E67BC170002C84B /* MyCollectionViewCell.swift in Sources */,
 				246015481E5D40C3000DD658 /* NhomDA.swift in Sources */,
 				BAE41E0E1E5AEAE600B89A8D /* SWRevealViewController.m in Sources */,
 				BAE41E211E5B3A8200B89A8D /* ThongTinCaNhan_VC.swift in Sources */,
 				246015431E5BF3DF000DD658 /* UrlPreFix.swift in Sources */,
 				7C850FBB1E67BA5D0002C84B /* UIImageViewExtension.swift in Sources */,
-				BA0DC5261E67DA7E009DD019 /* UIBarButtonItem.swift in Sources */,
 				BA979F561E5D3EAD00FC6FA8 /* ChatCommon.swift in Sources */,
 				BA760BC51E5C2ECA000A4694 /* UserContact.swift in Sources */,
 				BA979FEE1E61200500FC6FA8 /* ChatMessage.swift in Sources */,

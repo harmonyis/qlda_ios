@@ -17,16 +17,21 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     var contactID : Int!
     var contactType : Int!
     var contactName : String!
+    var isRead : Bool!
+    var lastInboxID : Int64!
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        makeReadMsg()
         self.title = contactName
         ChatHub.addChatHub(hub: ChatHub.chatHub)
         self.initEnvetChatHub()
         collectionView.backgroundColor = UIColor.white
         collectionView.register(Chat_Cell.self, forCellWithReuseIdentifier: cellId)
         getMessage()
+        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -225,7 +230,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     @IBAction func btnSendTouchUpInside(_ sender: UIButton) {
-         sendMessage()
+        sendMessage()
     }
     
     func initEnvetChatHub(){
@@ -302,6 +307,19 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
             self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: animate)
             //self.tblConversation.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        }
+    }
+    
+    func makeReadMsg(){
+        if !isRead{
+            do {
+                print(ChatHub.userID, contactID, contactType, lastInboxID)
+                try ChatHub.chatHub.invoke("MakeReadMessage", arguments: [ChatHub.userID, contactID, contactType, lastInboxID])
+            } catch {
+                print(error)
+            }
+
+            isRead = true;
         }
     }
     

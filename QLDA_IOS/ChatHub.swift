@@ -217,12 +217,14 @@ class ChatHub {
             newContact.SenderOfMessage = senderID;
             newContact.ReceiverOfMessage = receiverID
             newContact.TypeOfMessage = messageType;
+            newContact.NumberOfNewMessage = newContact.NumberOfNewMessage! + 1
+            /*
             if senderID == ChatHub.userID{
                 newContact.NumberOfNewMessage = 0;
             }
             else{
                 newContact.NumberOfNewMessage = 0;
-            }
+            }*/
             newContact.LatestMessageID = inboxID;
             ChatCommon.listContact = ChatCommon.listContact.filter() { $0.ContactID != contactID || $0.TypeOfContact != contactType}
         }
